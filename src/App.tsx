@@ -1,12 +1,27 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import SharedLayout from './pages/dashboard/SharedLayout'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Error, ForgotPassword, Login, Register, ProtectedRoutes, Verification } from './pages'
 
 function App() {
 
   return (
-    <>
-      <h1>
-        Hi
-      </h1>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+              <SharedLayout />
+          } />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/reset-password' element={<ForgotPassword />} />
+        <Route path='/email-verification' element={<Verification />} />
+        <Route path='*'  element={<Error />}/>
+      </Routes>
+      <ToastContainer position="top-center" />
+    </BrowserRouter>
   )
 }
 
