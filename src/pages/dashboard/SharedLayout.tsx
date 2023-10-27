@@ -3,17 +3,18 @@ import { Navbar, AddsSection, PostsSection, SearchBar } from "../../components"
 
 const SharedLayout = () => {
   return (
-    <main className="md:w-full lg:max-w-screen-2xl lg:center-div-lg bg-gray-200 overflow-y-hidden">
-      <div className="pt-10">
+    <main className="h-screen md:w-full lg:max-w-screen-2xl lg:center-div-lg bg-gray-200 flex flex-col">
+      <div className="pt-10 grow-0">
         <SearchBar />
       </div>
-      <div className="flex justify-between pt-10 mx-5">
+      {/* container */}
+      <div className="flex justify-between mt-10 mx-5 overflow-y-auto ">
 {/* Navbar for desktop version */}
           <div className="hidden md:flex">
             <Navbar />
           </div>
 {/* Posts section visible for both desktop and mobile */}
-          <div className="w-full">
+          <div className="w-full grow">
             <PostsSection />
           </div>
 {/* Adds Section visible only for desktop version */}
