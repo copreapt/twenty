@@ -3,7 +3,7 @@ import ForgotPassword from "./ForgotPassword";
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoutes from "./ProtectedRoutes";
-import Verification from "./verification";
+import Verification from "./Verification";
 
 export {
     Error,

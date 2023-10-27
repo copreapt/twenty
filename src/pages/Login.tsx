@@ -10,15 +10,15 @@ const Login = () => {
       <div className="flex flex-col align-center items-center">
         <h1 className="text-2xl text-black text-center">Twenty</h1>
         <form className="pt-10 flex flex-col px-10 gap-10">
-          {/* name */}
-          <div className="gap-3 flex flex-col ">
-            <label htmlFor="name" className="text-lg">Name</label>
-            <input type="text" id="name" className="border border-gray-700 p-1 px-2" />
-          </div>
           {/* email */}
-          <div className="gap-3 flex flex-col">
+          <div className="gap-3 flex flex-col ">
             <label htmlFor="email" className="text-lg">Email</label>
-            <input type="email" id="email" className="border border-gray-700 p-1 px-2" />
+            <input type="text" id="email" className="border border-gray-700 p-1 px-2" />
+          </div>
+          {/* password */}
+          <div className="gap-3 flex flex-col">
+            <label htmlFor="password" className="text-lg">Password</label>
+            <input type="password" id="password" className="border border-gray-700 p-1 px-2" />
           </div>
           {/* submit button */}
           <div className="text-center">
@@ -36,7 +36,7 @@ const Login = () => {
         </div>
         {/* forgot password */}
         <div>
-          <a>Forgot Password?</a>
+          <span>Forgot Password?</span> <Link to={'/reset-password'} className="font-medium text-cyan-700 hover:text-cyan-400 ease-in-out duration-700">Reset Password</Link>
         </div>
       </div>
       </div>

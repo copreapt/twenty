@@ -1,6 +1,8 @@
+import { PostCard } from "."
+
 const PostsSection = () => {
   return (
-    <div>PostsSection</div>
+    <PostCard />
   )
 }
 
