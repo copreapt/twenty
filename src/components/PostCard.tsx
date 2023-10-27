@@ -1,6 +1,60 @@
 const PostCard = () => {
   return (
-    <div>PostCard</div>
+    <>
+      <div className="bg-green-500">
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+    </div>
+    <div className="bg-green-500">
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+    </div>
+    <div className="bg-green-500">
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+    </div>
+    <div className="bg-green-500">
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+      <h1>PostCard</h1>
+    </div>
+    </>
+    
   )
 }
 
