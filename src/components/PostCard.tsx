@@ -1,7 +1,7 @@
 const PostCard = () => {
   return (
     <>
-      <div className="bg-green-500">
+      <div className="bg-black">
       <h1>PostCard</h1>
       <h1>PostCard</h1>
       <h1>PostCard</h1>
@@ -14,7 +14,7 @@ const PostCard = () => {
       <h1>PostCard</h1>
       <h1>PostCard</h1>
     </div>
-    <div className="bg-green-500">
+    <div className="bg-blue-500">
       <h1>PostCard</h1>
       <h1>PostCard</h1>
       <h1>PostCard</h1>
@@ -27,7 +27,7 @@ const PostCard = () => {
       <h1>PostCard</h1>
       <h1>PostCard</h1>
     </div>
-    <div className="bg-green-500">
+    <div className="bg-gray-200">
       <h1>PostCard</h1>
       <h1>PostCard</h1>
       <h1>PostCard</h1>
@@ -40,7 +40,7 @@ const PostCard = () => {
       <h1>PostCard</h1>
       <h1>PostCard</h1>
     </div>
-    <div className="bg-green-500">
+    <div className="bg-gray-200">
       <h1>PostCard</h1>
       <h1>PostCard</h1>
       <h1>PostCard</h1>

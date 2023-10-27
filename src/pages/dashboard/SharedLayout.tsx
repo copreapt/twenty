@@ -8,7 +8,7 @@ const SharedLayout = () => {
         <SearchBar />
       </div>
       {/* container */}
-      <div className="flex justify-between mt-10 mx-5 overflow-y-auto ">
+      <div className="flex justify-between mt-10 mx-3 overflow-y-auto ">
 {/* Navbar for desktop version */}
           <div className="hidden md:flex">
             <Navbar />
@@ -23,7 +23,7 @@ const SharedLayout = () => {
           </div>
       </div>
 {/* Navbar for mobile version */}
-      <div className="md:hidden mx-5 flex items-center justify-center py-3 mt-10 bg-white rounded-md shadow-sm shadow-white">
+      <div className="md:hidden mx-5 flex items-center justify-center py-3 mt-10 bg-white rounded-md shadow-sm shadow-white mb-3">
         <Navbar />
       </div>
     </main>
