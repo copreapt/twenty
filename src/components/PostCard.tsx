@@ -27,7 +27,7 @@ const PostCard = () => {
           </div>
           {/* image/photo */}
           <div>
-            <img src="/public/assets/testimg.jpg" alt="image" className='w-full' />
+            <img src="https://plus.unsplash.com/premium_photo-1675827055694-010aef2cf08f?auto=format&fit=crop&q=80&w=1912&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="image" className='w-full' />
           </div>
         </div>
         {/* bottom div - like, comment, share */}
