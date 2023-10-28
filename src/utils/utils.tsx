@@ -1,6 +1,7 @@
 import {FaUserFriends, FaImages} from "react-icons/fa"
-import {BsNewspaper} from "react-icons/bs"
+import {BsNewspaper, BsSearch} from "react-icons/bs"
 import {CgProfile} from "react-icons/cg"
+
 
 export const navbarLinks = [
     {
@@ -15,12 +16,17 @@ export const navbarLinks = [
     },
     {
         id:3,
-        icon:<BsNewspaper />,
-        name:"news",
+        icon:<BsSearch />,
+        name:"search",
     },
     {
         id:4,
         icon:<CgProfile />,
         name:"profile",
+    },
+    {
+        id:5,
+        icon:<BsNewspaper />,
+        name:"news",
     },
 ]
