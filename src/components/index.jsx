@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import PostCard from "./PostCard";
 import PostsSection from "./PostsSection";
 import SearchBar from "./SearchBar";
+import FormRow from "./FormRow";
 
 
 export {
@@ -11,4 +12,5 @@ export {
     PostCard,
     PostsSection,
     SearchBar,
+    FormRow,
 }

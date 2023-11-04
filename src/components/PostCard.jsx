@@ -13,7 +13,7 @@ const PostCard = () => {
           {/* img and name */}
           <div className='flex gap-2'>
             <div className='flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden'>
-              <img src="/public/assets/me2 (1).jpeg" alt="person image" className='grow' />
+              <img src="/assets/me2 (1).jpeg" alt="person image" className='grow' />
             </div>
               <div className='flex flex-col items-center'>
                 <span className='text-[0.80rem]'>Rox</span>
@@ -75,7 +75,7 @@ const PostCard = () => {
           </div>
           {/* image/photo */}
           <div>
-            <img src="/public/assets/testimg.jpg" alt="image" className='w-full' />
+            <img src="/assets/testimg.jpg" alt="image" className='w-full' />
           </div>
         </div>
         {/* bottom div - like, comment, share */}
