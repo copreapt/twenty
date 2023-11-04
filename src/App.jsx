@@ -17,7 +17,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/reset-password' element={<ForgotPassword />} />
-        <Route path='/email-verification' element={<Verification />} />
+        <Route path='/verify-email' element={<Verification />} />
         <Route path='*'  element={<Error />}/>
       </Routes>
       <ToastContainer position="top-center" />
