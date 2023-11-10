@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUserThunk, loginUserThunk } from './userThunk';
+import { registerUserThunk, loginUserThunk, updateUserPasswordThunk } from './userThunk';
 
 
 const initialState = {
@@ -18,6 +18,10 @@ export const loginUser = createAsyncThunk(
         return loginUserThunk('/auth/login', user, thunkAPI)
     }
 );
+
+export const updateUserPassword = createAsyncThunk("user/updateUserPassword", async(user, thunkAPI) => {
+    return updateUserPasswordThunk('/users/updateUserPassword', user, thunkAPI)
+});
 
 
 
@@ -46,14 +50,18 @@ const userSlice = createSlice({
             state.isLoading = true;
         })
         .addCase(loginUser.fulfilled, (state, {payload}) => {
-            const {msg, tokenUser} = payload;
+            const {user} = payload;
             state.isLoading = false;
-            state.user = tokenUser;
-            toast.success(msg)
+            state.user = user;
+            toast.success(`Hello ${user.fullName}`)
         })
         .addCase(loginUser.rejected, (state, {payload}) => {
             state.isLoading = false;
             toast.error(payload);
+        })
+        .addCase(updateUserPassword.fulfilled, (state, {payload}) => {
+            const { msg } = payload;
+            toast.success(msg);
         })
     },
 })
