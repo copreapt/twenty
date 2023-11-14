@@ -1,11 +1,12 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUserThunk, loginUserThunk, updateUserPasswordThunk } from './userThunk';
+import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk} from './userThunk';
 
 
 const initialState = {
     isLoading: false,
     user: null,
+    error: '',
 }
 
 
@@ -13,8 +14,7 @@ export const registerUser = createAsyncThunk('user/registerUser', async(user, th
     return registerUserThunk('/auth/register', user, thunkAPI)
 });
 
-export const loginUser = createAsyncThunk(
-    "user/loginUser", async (user, thunkAPI) => {
+export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAPI) => {
         return loginUserThunk('/auth/login', user, thunkAPI)
     }
 );
@@ -23,6 +23,9 @@ export const updateUserPassword = createAsyncThunk("user/updateUserPassword", as
     return updateUserPasswordThunk('/users/updateUserPassword', user, thunkAPI)
 });
 
+export const verifyEmail = createAsyncThunk('/user/verify-email', async(user, thunkAPI) => {
+    return verifyUserEmailThunk('/auth/verify-email', user, thunkAPI)
+});
 
 
 const userSlice = createSlice({
@@ -37,10 +40,9 @@ const userSlice = createSlice({
             state.isLoading = true;
         })
         .addCase(registerUser.fulfilled, (state, {payload}) => {
-            const user = {payload};
+            const {msg} = payload;
             state.isLoading = false;
-            state.user = user;
-            toast.success(`Hello there ${user.fullName}`);
+            toast.success(msg);
         })
         .addCase(registerUser.rejected, (state, {payload}) => {
             state.isLoading = false;
@@ -62,6 +64,19 @@ const userSlice = createSlice({
         .addCase(updateUserPassword.fulfilled, (state, {payload}) => {
             const { msg } = payload;
             toast.success(msg);
+        })
+        .addCase(verifyEmail.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(verifyEmail.fulfilled, (state, {payload}) => {
+            const {msg} = payload;
+            state.isLoading = false;
+            toast.success(msg);
+        })
+        .addCase(verifyEmail.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            state.error = payload;
+            toast.error(payload);
         })
     },
 })
