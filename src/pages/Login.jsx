@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser} from "../features/user/userSlice";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
 
 
@@ -19,7 +19,7 @@ const [values, setValues] = useState(initialState);
 
 const { user, isLoading } = useSelector((store) => store.user);
 const dispatch = useDispatch();
-const navigate = useNavigate();
+// const navigate = useNavigate();
 
 const handleChange = (e) => {
   const name = e.target.name;
