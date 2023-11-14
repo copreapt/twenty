@@ -41,9 +41,9 @@ const onSubmit = (e) => {
 useEffect(() => {
   if (user) {
     console.log(user)
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    // setTimeout(() => {
+    //   navigate("/");
+    // }, 2000);
   }
 }, [user]);
 
