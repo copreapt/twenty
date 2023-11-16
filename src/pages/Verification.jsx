@@ -12,15 +12,43 @@ const Verification = () => {
   const query = useQuery();
 
   useEffect(() => {
-    dispatch(verifyEmail({verificationToken: query.get('token'), email: query.get('email')}))
+      dispatch(
+        verifyEmail({
+          verificationToken: query.get("token"),
+          email: query.get("email"),
+        })
+      );
   },[])
 
-if(isLoading) return <h1>Loading...</h1>
-if(error !== '') return <h1>There was an error, please check your verification link</h1>
+if(isLoading) return (
+  <>
+    <div className="flex justify-center items-center align-center h-screen">
+      <h1 className="text-3xl">Loading...</h1>
+    </div>
+  </>
+);
+if(error !== '') return (
+  <>
+    <div>
+      <div className="flex justify-center items-center align-center h-screen">
+        <h1 className="text-3xl">{error}</h1>
+      </div>
+    </div>
+  </>
+);
   return (
     <>
-      <h1>Account Confirmed</h1>
-      <Link to="/login">Login</Link>
+      <div>
+        <div className="flex justify-center items-center align-center h-screen flex-col space-y-20">
+          <h1 className="text-3xl">Account Confirmed</h1>
+          <Link
+            to="/login"
+            className="text-xl bg-cyan-400 text-white py-2 px-10 cursor-pointer hover:bg-cyan-700 ease-in-out duration-500"
+          >
+            Login
+          </Link>
+        </div>
+      </div>
     </>
   );
 }

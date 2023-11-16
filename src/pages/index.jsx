@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Verification from "./Verification";
+import ResetPassword from "./ResetPassword";
 
 export {
     Error,
@@ -11,5 +12,6 @@ export {
     Login,
     Register,
     ProtectedRoutes,
-    Verification
+    Verification,
+    ResetPassword,
 }

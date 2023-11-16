@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser} from "../features/user/userSlice";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
 
 
@@ -19,7 +19,7 @@ const [values, setValues] = useState(initialState);
 
 const { user, isLoading } = useSelector((store) => store.user);
 const dispatch = useDispatch();
-// const navigate = useNavigate();
+const navigate = useNavigate();
 
 const handleChange = (e) => {
   const name = e.target.name;
@@ -41,9 +41,9 @@ const onSubmit = (e) => {
 useEffect(() => {
   if (user) {
     console.log(user)
-    // setTimeout(() => {
-    //   navigate("/");
-    // }, 2000);
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   }
 }, [user]);
 
@@ -101,7 +101,7 @@ useEffect(() => {
             <div>
               <span>Forgot Password?</span>{" "}
               <Link
-                to={"/reset-password"}
+                to={"/forgot-password"}
                 className="font-medium text-cyan-700 hover:text-cyan-400 ease-in-out duration-700"
               >
                 Reset Password
