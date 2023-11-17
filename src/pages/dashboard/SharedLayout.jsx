@@ -1,33 +1,31 @@
-import { Navbar, AddsSection, PostsSection, SearchBar } from "../../components"
-import { useSelector } from "react-redux";
+import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost } from "../../components"
 
 
 const SharedLayout = () => {
 
-  const { isSidebarOpen } = useSelector((store) => store.user);
-
   return (
-    <main className="md:w-full lg:max-w-screen-2xl lg:center-div-lg bg-gray-200 flex flex-col">
+    <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col">
       {/* Search Bar for Desktop */}
-      <div className="pt-2 flex-end hidden">
+      <div className="hidden md:flex bg-white overflow-hidden fixed top-0 w-full">
         <SearchBar />
       </div>
       {/* top div for mobile version */}
-      <div className="border-b border-gray-300 p-2 bg-white text-center text-cyan-700 fixed top-0 w-full">
+      <div className="border-b border-gray-300 p-2 bg-white text-center text-cyan-700 fixed top-0 w-full md:hidden lg:hidden">
         <h1 className="text-xl font-light">Twenty</h1>
       </div>
       {/* container */}
-      <div className="flex justify-between overflow-auto grow py-11">
-        {/* Navbar for desktop version */}
-        <div className="hidden md:flex">
-          <Navbar />
+      <div className="flex justify-between overflow-auto grow py-11 md:grid md:grid-cols-12 md:gap-10 md:max-w-3xl md:mx-auto lg:max-w-screen-lg lg:gap-20 xl:max-w-screen-xl md:mt-10">
+        {/* user info panel */}
+        <div className="hidden md:grid md:col-span-3 h-fit">
+          <UserInfo />
         </div>
         {/* Posts section visible for both desktop and mobile */}
-        <div className="w-full grow">
+        <div className="w-full grow md:col-span-6 space-y-10">
+          <CreatePost className="hidden md:grid" />
           <PostsSection />
         </div>
         {/* Adds Section visible only for desktop version */}
-        <div className="hidden md:flex">
+        <div className="hidden md:grid col-span-3 h-fit">
           <AddsSection />
         </div>
       </div>

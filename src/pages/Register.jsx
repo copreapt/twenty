@@ -42,7 +42,11 @@ const Register = () => {
     <>
       <main>
         {/* container */}
-        <div className="center-div border border-gray-400 py-20">
+        <div
+          className={`${
+            formSubmitted ? "center-div py-20" : "center-div border border-gray-400 py-20"
+          }`}
+        >
           <div className="flex flex-col align-center items-center">
             <h1 className="text-2xl text-black text-center">
               {formSubmitted

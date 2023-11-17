@@ -4,6 +4,8 @@ import PostCard from "./PostCard";
 import PostsSection from "./PostsSection";
 import SearchBar from "./SearchBar";
 import FormRow from "./FormRow";
+import UserInfo from "./UserInfo";
+import CreatePost from "./CreatePost";
 
 
 export {
@@ -13,4 +15,6 @@ export {
     PostsSection,
     SearchBar,
     FormRow,
+    UserInfo,
+    CreatePost,
 }

@@ -1,7 +1,10 @@
 import {FaUserFriends, FaImages} from "react-icons/fa"
 import {BsNewspaper, BsSearch} from "react-icons/bs"
 import {CgProfile} from "react-icons/cg"
-import { IoSettingsSharp } from "react-icons/io5";
+import { MdWbSunny } from "react-icons/md";
+import { BiMessageSquareDetail } from "react-icons/bi";
+import { FaBell } from "react-icons/fa";
+
 
 
 
@@ -30,5 +33,23 @@ export const navbarLinks = [
     id: 5,
     icon: <BsNewspaper />,
     name: "news",
+  },
+];
+
+export const navbarDesktop = [
+  {
+    id: 1,
+    icon: <MdWbSunny />,
+    name: "darkMode",
+  },
+  {
+    id: 2,
+    icon: <BiMessageSquareDetail />,
+    name: "messages",
+  },
+  {
+    id: 3,
+    icon: <FaBell />,
+    name: "notifications",
   },
 ];
