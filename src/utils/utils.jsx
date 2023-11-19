@@ -3,7 +3,8 @@ import {BsNewspaper, BsSearch} from "react-icons/bs"
 import {CgProfile} from "react-icons/cg"
 import { MdWbSunny } from "react-icons/md";
 import { BiMessageSquareDetail } from "react-icons/bi";
-import { FaBell } from "react-icons/fa";
+import { FaBell, FaVideo } from "react-icons/fa";
+import { CgAttachment } from "react-icons/cg";
 
 
 
@@ -51,5 +52,23 @@ export const navbarDesktop = [
     id: 3,
     icon: <FaBell />,
     name: "notifications",
+  },
+];
+
+export const createPostLinks = [
+  {
+    id: 1,
+    icon: <FaImages />,
+    name: "image",
+  },
+  {
+    id: 2,
+    icon: <FaVideo />,
+    name: "video",
+  },
+  {
+    id: 3,
+    icon: <CgAttachment />,
+    name: "attachments",
   },
 ];

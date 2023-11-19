@@ -1,4 +1,4 @@
-import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost } from "../../components"
+import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 
 
 const SharedLayout = () => {
@@ -25,8 +25,10 @@ const SharedLayout = () => {
           <PostsSection />
         </div>
         {/* Adds Section visible only for desktop version */}
-        <div className="hidden md:grid col-span-3 h-fit">
+        <div className="hidden md:grid col-span-3 h-fit space-y-10">
           <AddsSection />
+          <FriendList />
+
         </div>
       </div>
       {/* Navbar for mobile version */}

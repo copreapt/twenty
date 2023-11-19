@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar";
 import FormRow from "./FormRow";
 import UserInfo from "./UserInfo";
 import CreatePost from "./CreatePost";
+import FriendList from "./FriendList";
 
 
 export {
@@ -17,4 +18,5 @@ export {
     FormRow,
     UserInfo,
     CreatePost,
+    FriendList,
 }
