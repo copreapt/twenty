@@ -8,7 +8,7 @@ const AddsSection = () => {
       </div>
       {/* img */}
       <div>
-        <img src="/public/assets/testimg.jpg" alt="test img" className="rounded-md" />
+        <img src="/assets/testimg.jpg" alt="test img" className="rounded-md" />
       </div>
       {/* description */}
       <div className="space-y-3">

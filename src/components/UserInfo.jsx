@@ -3,8 +3,12 @@ import { FaUserCog } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { GiSuitcase } from "react-icons/gi";
 import { FaXTwitter } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 const UserInfo = () => {
+
+  const { user } = useSelector((store) => store.user);
+
   return (
     <div className="bg-white rounded-md py-2 shadow-sm shadow-white px-3">
       {/* photo,name and profile*/}
@@ -19,7 +23,7 @@ const UserInfo = () => {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-md font-light">Oprea Catalin</span>
+            <span className="text-md font-light">{user?.fullName}</span>
             <span className="text-sm text-gray-300 font-light">0 friends</span>
           </div>
         </div>

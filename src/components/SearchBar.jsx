@@ -1,15 +1,20 @@
 import {BsSearch} from 'react-icons/bs';
 import { navbarDesktop } from '../utils/utils';
 import { IoIosArrowDown } from "react-icons/io";
+import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const SearchBar = () => {
+
+  const { user } = useSelector((store) => store.user);
+
   return (
     <section className="w-full">
       <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
         {/* navbar logo and search */}
         <div className="flex gap-4">
           <div className="">
-            <h1 className="text-3xl text-cyan-500">Twenty</h1>
+            <Link to='/' className="text-3xl text-cyan-500">Twenty</Link>
           </div>
           <div className="flex items-center justify-center border-2 rounded-md  bg-gray-200">
             <input
@@ -34,7 +39,7 @@ const SearchBar = () => {
           </div>
           {/* username */}
           <div className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4">
-            <h1>Catalin</h1>
+            <h1>{user?.fullName}</h1>
             <IoIosArrowDown />
           </div>
         </div>
