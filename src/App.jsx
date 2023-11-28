@@ -12,10 +12,10 @@ function App() {
         <Route
           path="/"
           element={
-            // <ProtectedRoutes>
-            //   <SharedLayout />
-            // </ProtectedRoutes>
-            <SharedLayout />
+            <ProtectedRoutes>
+              <SharedLayout />
+            </ProtectedRoutes>
+            // <SharedLayout />
           }
         />
         <Route path="/login" element={<Login />} />
