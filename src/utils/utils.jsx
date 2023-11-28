@@ -61,14 +61,14 @@ export const createPostLinks = [
     icon: <FaImages />,
     name: "image",
   },
-  {
-    id: 2,
-    icon: <FaVideo />,
-    name: "video",
-  },
-  {
-    id: 3,
-    icon: <CgAttachment />,
-    name: "attachments",
-  },
+  // {
+  //   id: 2,
+  //   icon: <FaVideo />,
+  //   name: "video",
+  // },
+  // {
+  //   id: 3,
+  //   icon: <CgAttachment />,
+  //   name: "attachments",
+  // },
 ];

@@ -1,7 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { createPostLinks } from '../utils/utils';
+import {useSelector, useDispatch} from "react-redux";
+import { uploadImage } from '../features/posts/postSlice';
+import {createPost} from "../features/posts/postSlice";
+
+
+const initialState = {
+  description: '',
+}
 
 function CreatePost() {
+
+  const [values, setValues] = useState(initialState);
+
+  const {postImage, isLoading} = useSelector((store) => store.posts)
+  const dispatch = useDispatch()
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const imageFile = e.target.files[0];
+    if(imageFile){
+      dispatch(uploadImage({image: imageFile}))
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const {description} = values
+    dispatch(createPost({description, image:postImage}));
+    window.location.reload(true);
+  }
+
+  const handleDescription = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+  };
+
   return (
     <div className='bg-white rounded-md py-2 shadow-sm shadow-white px-3"'>
       {/* what's on your mind */}
@@ -19,28 +54,59 @@ function CreatePost() {
           <div className="flex items-center align-center w-full">
             <input
               type="text"
-              name="post-text"
-              id="post-text"
-              className="w-full py-2 px-4 text-sm placeholder:text-sm rounded-full bg-gray-200 focus:shadow-none focus:outline-none focus:ring-transparent" placeholder="What's on your mind..."
+              name="description"
+              className="w-full py-2 px-4 text-sm placeholder:text-sm rounded-full bg-gray-200 focus:shadow-none focus:outline-none focus:ring-transparent"
+              placeholder="What's on your mind..."
+              value={values.name}
+              onChange={handleDescription}
             />
           </div>
         </div>
       </div>
       {/* load img, clip, attachment */}
-      <div className='flex justify-between mx-6 mt-2'>
+      <form
+        className="flex justify-between mx-6 mt-2"
+        action="submit"
+        onSubmit={handleSubmit}
+      >
         {createPostLinks.map((link) => {
           return (
-            <div key={link.id} className="flex items-center gap-3 cursor-pointer ease-in-out duration-500 hover:text-cyan-300">
-              <span className=''>{link.icon}</span>
-              <span className='text-sm capitalize'>{link.name}</span>
+            <div
+              key={link.id}
+              className="flex items-center gap-3 cursor-pointer ease-in-out duration-500 hover:text-cyan-300"
+            >
+              <label htmlFor="uploadImage">
+                <span className="">{link.icon}</span>
+              </label>
+              <input
+                type="file"
+                id="uploadImage"
+                className="custom-file-input"
+                accept="image/*"
+                onChange={handleChange}
+              />
             </div>
           );
         })}
         {/* post button */}
         <div>
-          <button className='bg-cyan-300 text-gray-700 rounded-full py-2 px-4 ease-in-out duration-500  hover:bg-cyan-700 hover:text-white'>Post</button>
+          <button
+            type="submit"
+            className="bg-cyan-300 text-gray-700 rounded-full py-2 px-4 ease-in-out duration-500  hover:bg-cyan-700 hover:text-white"
+            disabled={isLoading}
+          >
+            Post
+          </button>
         </div>
-      </div>
+      </form>
+      {/* post */}
+      {postImage ? (
+        <div className="px-5 py-5">
+          <img src={postImage} alt="post image" />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

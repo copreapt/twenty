@@ -37,9 +37,9 @@ export const verifyUserEmailThunk = async (url, user, thunkAPI) => {
     }
 }
 
-export const logoutUserThunk = async (url, user, thunkAPI) => {
+export const logoutUserThunk = async (url, thunkAPI) => {
     try {
-        const resp = await customFetch.delete(url, user);
+        const resp = await customFetch.delete(url);
         return resp.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg);

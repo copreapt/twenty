@@ -4,20 +4,11 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import {IoIosShareAlt} from 'react-icons/io'
-import { useSelector, useDispatch } from "react-redux";
-import { getAllPosts } from '../features/posts/postSlice';
+import { useSelector } from "react-redux";
 
 const PostCard = () => {
 
-  const  posts  = useSelector((store) => store.posts);
-
-  const dispatch = useDispatch()
-
-
-useEffect(() => {
-  dispatch(getAllPosts());
-},[])
-
+  const  {posts}  = useSelector((store) => store.posts);
 
   return (
     <>

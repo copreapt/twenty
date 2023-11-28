@@ -1,7 +1,16 @@
+import { useEffect } from "react";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
+import { useDispatch } from "react-redux";
+import { getAllPosts } from "../../features/posts/postSlice";
 
 
 const SharedLayout = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, []);
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col">

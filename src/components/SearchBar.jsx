@@ -2,12 +2,18 @@ import {BsSearch} from 'react-icons/bs';
 import { navbarDesktop } from '../utils/utils';
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from '../features/user/userSlice';
 
 const SearchBar = () => {
 
   const { user } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
+  const logoutUserFunction = () => {
+    dispatch(logoutUser());
+  }
+  
   return (
     <section className="w-full">
       <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
@@ -40,7 +46,8 @@ const SearchBar = () => {
           {/* username */}
           <div className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4">
             <h1>{user?.fullName}</h1>
-            <IoIosArrowDown />
+            <IoIosArrowDown/>
+            <h1 onClick={logoutUserFunction}>Logout</h1>
           </div>
         </div>
       </div>

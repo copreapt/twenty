@@ -9,6 +9,7 @@ const initialState = {
   user: null,
   error: "",
   formSubmitted: false,
+  openModal:false,
 };
 
 
@@ -29,8 +30,8 @@ export const verifyEmail = createAsyncThunk('/user/verify-email', async(user, th
     return verifyUserEmailThunk('/auth/verify-email', user, thunkAPI)
 });
 
-export const logoutUser = createAsyncThunk('/user/logout', async(user, thunkAPI) => {
-    return logoutUserThunk('/auth/logout', user, thunkAPI)
+export const logoutUser = createAsyncThunk('/user/logout', async(thunkAPI) => {
+    return logoutUserThunk('/auth/logout', thunkAPI)
 });
 
 export const forgotPassword = createAsyncThunk('/user/forgotPassword', async (user, thunkAPI) => {
@@ -48,6 +49,9 @@ const userSlice = createSlice({
     reducers:{
         toggleSidebar: (state)  => {
             state.isSidebarOpen = !state.isSidebarOpen;
+        },
+        toggleOpenModal: (state) => {
+            state.openModal = !state.openModal;
         },
     },
     extraReducers: (builder) => {
@@ -70,7 +74,7 @@ const userSlice = createSlice({
             const {user} = payload;
             state.isLoading = false;
             state.user = user;
-            toast.success(`Hello ${user.fullName}`)
+            toast.success(`Hello ${user?.fullName}`)
         })
         .addCase(loginUser.rejected, (state, {payload}) => {
             state.isLoading = false;
@@ -133,5 +137,5 @@ const userSlice = createSlice({
 })
 
 
-export const { toggleSidebar } = userSlice.actions;
+export const { toggleSidebar, toggleOpenModal } = userSlice.actions;
 export default userSlice.reducer;
