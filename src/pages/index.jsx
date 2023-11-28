@@ -5,7 +5,7 @@ import Register from "./Register";
 import ProtectedRoutes from "./ProtectedRoutes";
 import Verification from "./Verification";
 import ResetPassword from "./ResetPassword";
-import UpdateProfile from "./updateProfile";
+import UpdateProfile from "./UpdateProfile";
 
 export {
     Error,
