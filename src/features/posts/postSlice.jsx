@@ -18,7 +18,7 @@ export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (thunkAPI
 );
 
 export const uploadImage = createAsyncThunk(
-  "user/loginUser",
+  "posts/uploadImage",
   async (image, thunkAPI) => {
     return uploadImageThunk("/posts/uploadImage", image, thunkAPI);
   }
