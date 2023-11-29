@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser} from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
+import { useCookies } from "react-cookie";
 
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
 
 
 const Login = () => {
-
+const [cookies, setCookie] = useCookies(['refreshToken']);
 const [values, setValues] = useState(initialState);
 
 const { user, isLoading } = useSelector((store) => store.user);
@@ -46,6 +47,10 @@ useEffect(() => {
     }, 2000);
   }
 }, [user]);
+
+useEffect(() => {
+  console.log(cookies)
+},[])
 
   return (
     <>
