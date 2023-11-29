@@ -10,6 +10,8 @@ const SharedLayout = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
+    const getUserFromLocalStorage = localStorage.getItem("userData");
+    console.log("data: ", getUserFromLocalStorage);
   }, []);
 
   return (

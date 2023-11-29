@@ -39,6 +39,11 @@ const onSubmit = (e) => {
 
 useEffect(() => {
   if (user) {
+    const previousData = localStorage.getItem("userData");
+    if(previousData){
+      localStorage.removeItem("userData");
+    }
+    localStorage.setItem("userData", JSON.stringify(user));
     console.log(user)
     setTimeout(() => {
       navigate("/");
