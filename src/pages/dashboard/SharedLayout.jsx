@@ -2,18 +2,22 @@ import { useEffect } from "react";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
+import Cookie from "js-cookie";
 
 
 const SharedLayout = () => {
 
   const dispatch = useDispatch();
-
-  const cookieValue = document.cookie
-    .find((row) => row.startsWith("refreshToken"));
+  const getCookie = (cookieName) => {
+    return Cookie.get(cookieName);
+  }
 
   useEffect(() => {
     dispatch(getAllPosts());
-    console.log(cookieValue);
+    const token = getCookie('refreshToken');
+    if(token){
+      console.log(token);
+    }
   }, []);
 
   return (
