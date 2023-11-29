@@ -46,10 +46,6 @@ useEffect(() => {
   }
 }, [user]);
 
-useEffect(() => {
-  console.log(cookies)
-},[])
-
   return (
     <>
       <main>
