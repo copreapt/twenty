@@ -9,9 +9,7 @@ const SharedLayout = () => {
   const dispatch = useDispatch();
 
   const cookieValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("refreshToken"))
-    ?.split("=")[1];
+    .find((row) => row.startsWith("refreshToken"));
 
   useEffect(() => {
     dispatch(getAllPosts());
