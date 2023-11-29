@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser} from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
+import {setUserLocalStorage} from "../features/user/userSlice";
 
 
 const initialState = {
@@ -39,11 +40,7 @@ const onSubmit = (e) => {
 
 useEffect(() => {
   if (user) {
-    const previousData = localStorage.getItem("userData");
-    if(previousData){
-      localStorage.removeItem("userData");
-    }
-    localStorage.setItem("userData", JSON.stringify(user));
+    setUserLocalStorage(user);
     console.log(user)
     setTimeout(() => {
       navigate("/");

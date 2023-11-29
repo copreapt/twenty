@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
+import { getUserLocalStorage } from "../../features/user/userSlice";
 
 
 const SharedLayout = () => {
@@ -10,8 +11,7 @@ const SharedLayout = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-    const getUserFromLocalStorage = localStorage.getItem("userData");
-    console.log("data: ", getUserFromLocalStorage);
+    getUserLocalStorage();
   }, []);
 
   return (

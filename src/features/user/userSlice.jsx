@@ -53,6 +53,16 @@ const userSlice = createSlice({
         toggleOpenModal: (state) => {
             state.openModal = !state.openModal;
         },
+        setUserLocalStorage: (user) => {
+            const previousData = localStorage.getItem("userData");
+            if (previousData) {
+                localStorage.removeItem("userData");
+            }
+            localStorage.setItem("userData", JSON.stringify(user));
+        },
+        getUserLocalStorage: (state) => {
+            state.user = localStorage.getItem("userData");
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -71,9 +81,8 @@ const userSlice = createSlice({
             state.isLoading = true;
         })
         .addCase(loginUser.fulfilled, (state, {payload}) => {
-            const {user} = payload;
+            const {user} = payload
             state.isLoading = false;
-            state.user = user;
             toast.success(`Hello ${user?.fullName}`);
         })
         .addCase(loginUser.rejected, (state, {payload}) => {
@@ -137,5 +146,5 @@ const userSlice = createSlice({
 })
 
 
-export const { toggleSidebar, toggleOpenModal } = userSlice.actions;
+export const { toggleSidebar, toggleOpenModal, setUserLocalStorage, getUserLocalStorage } = userSlice.actions;
 export default userSlice.reducer;
