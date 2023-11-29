@@ -16,8 +16,7 @@ function CreatePost() {
   const {postImage, isLoading} = useSelector((store) => store.posts)
   const dispatch = useDispatch()
 
-  const handleChange = (e) => {
-    e.preventDefault();
+  const selectAndUploadImage = (e) => {
     const imageFile = e.target.files[0];
     if(imageFile){
       dispatch(uploadImage({image: imageFile}))
@@ -83,7 +82,7 @@ function CreatePost() {
                 id="uploadImage"
                 className="custom-file-input"
                 accept="image/*"
-                onChange={handleChange}
+                onChange={selectAndUploadImage}
               />
             </div>
           );
