@@ -54,9 +54,6 @@ const userSlice = createSlice({
         toggleOpenModal: (state) => {
             state.openModal = !state.openModal;
         },
-        getUserLocalStorage: (state) => {
-            state.userFromLocalStorage = localStorage.getItem("userData");
-        },
     },
     extraReducers: (builder) => {
         builder
@@ -141,5 +138,5 @@ const userSlice = createSlice({
 })
 
 
-export const { toggleSidebar, toggleOpenModal, getUserLocalStorage } = userSlice.actions;
+export const { toggleSidebar, toggleOpenModal } = userSlice.actions;
 export default userSlice.reducer;

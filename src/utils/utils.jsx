@@ -80,3 +80,7 @@ export const setUserLocalStorage = (user) => {
             }
             localStorage.setItem("userData", JSON.stringify(user));
 };
+
+export const getUserLocalStorage = () => {
+          localStorage.getItem("userData");
+        };
