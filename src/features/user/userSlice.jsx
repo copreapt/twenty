@@ -81,8 +81,9 @@ const userSlice = createSlice({
             state.isLoading = true;
         })
         .addCase(loginUser.fulfilled, (state, {payload}) => {
-            const {user} = payload
+            const {user} = payload;
             state.isLoading = false;
+            state.user = user;
             toast.success(`Hello ${user?.fullName}`);
         })
         .addCase(loginUser.rejected, (state, {payload}) => {
