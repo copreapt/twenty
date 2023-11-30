@@ -6,6 +6,7 @@ import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserE
 const initialState = {
   isLoading: false,
   isSidebarOpen: false,
+  userFromLocalStorage:null,
   user: null,
   error: "",
   formSubmitted: false,
@@ -61,7 +62,7 @@ const userSlice = createSlice({
             localStorage.setItem("userData", JSON.stringify(user));
         },
         getUserLocalStorage: (state) => {
-            state.user = localStorage.getItem("userData");
+            state.userFromLocalStorage = localStorage.getItem("userData");
         },
     },
     extraReducers: (builder) => {

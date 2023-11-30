@@ -7,7 +7,7 @@ import { logoutUser } from '../features/user/userSlice';
 
 const SearchBar = () => {
 
-  const { user } = useSelector((store) => store.user);
+  const { userFromLocalStorage } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const logoutUserFunction = () => {
@@ -45,7 +45,7 @@ const SearchBar = () => {
           </div>
           {/* username */}
           <div className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4">
-            <h1>{user?.fullName}</h1>
+            <h1>{userFromLocalStorage?.fullName}</h1>
             <IoIosArrowDown/>
             <h1 onClick={logoutUserFunction}>Logout</h1>
           </div>
