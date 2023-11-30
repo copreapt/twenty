@@ -10,9 +10,12 @@ const SharedLayout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if(userLocalStorage){
+      console.log(userLocalStorage);
+      setUserLocalStorage(getUserLocalStorage());
+    }
     dispatch(getAllPosts());
-    setUserLocalStorage(getUserLocalStorage());
-  }, []);
+  }, [userLocalStorage]);
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col">
