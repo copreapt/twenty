@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser} from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
-import {setUserLocalStorage} from "../features/user/userSlice";
+
+import { setUserLocalStorage } from "../utils/utils";
 
 
 const initialState = {

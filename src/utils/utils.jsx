@@ -72,3 +72,11 @@ export const createPostLinks = [
   //   name: "attachments",
   // },
 ];
+
+export const setUserLocalStorage = (user) => {
+  const previousData = localStorage.getItem("userData");
+            if (previousData) {
+                localStorage.removeItem("userData");
+            }
+            localStorage.setItem("userData", JSON.stringify(user));
+};
