@@ -13,7 +13,7 @@ const PostCard = () => {
   return (
     <>
       {posts?.map((post, index) => {
-        const {description, image} = post;
+        const {description, image, name, profilePicture, location} = post;
         return (
           <div className="bg-white mb-4 flex flex-col space-y-2 p-3 rounded-md" key={index}>
             {/* top div */}
@@ -22,14 +22,14 @@ const PostCard = () => {
               <div className="flex gap-2">
                 <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
                   <img
-                    src="/assets/defaultProfilePicture.jpg"
+                    src={profilePicture}
                     alt="person image"
                     className="grow"
                   />
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="text-[0.80rem]">Rox</span>
-                  <span className="text-[0.60rem] text-gray-500">Location</span>
+                  <span className="text-[0.80rem]">{name}</span>
+                  <span className="text-[0.60rem] text-gray-500">{location}</span>
                 </div>
               </div>
               {/* add friend icon */}

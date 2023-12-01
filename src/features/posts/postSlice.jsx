@@ -3,13 +3,13 @@ import { toast } from "react-toastify";
 import {
   getAllPostsThunk,
   uploadImageThunk,
-  createPostThunk
+  createPostThunk,
 } from "./postThunk";
 
 const initialState = {
   isLoading:false,
   posts:null,
-  postImage:'',
+  currentUser:null,
 };
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (thunkAPI) => {

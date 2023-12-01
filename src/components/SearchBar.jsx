@@ -4,14 +4,21 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from '../features/user/userSlice';
+import { useEffect, useState } from 'react';
 
-const SearchBar = ({userLocalStorage}) => {
+const SearchBar = () => {
 
+  const [data, setData] = useState(null)
   const dispatch = useDispatch();
 
   const logoutUserFunction = () => {
     dispatch(logoutUser());
   }
+
+  useEffect(() => {
+     const data = JSON.parse(localStorage.getItem("userData"));
+     setData(data);
+  },[])
   
   return (
     <section className="w-full">
@@ -44,7 +51,7 @@ const SearchBar = ({userLocalStorage}) => {
           </div>
           {/* username */}
           <div className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4">
-            <h1>{userLocalStorage?.username}</h1>
+            <h1>{data?.fullName}</h1>
             <IoIosArrowDown/>
             <h1 onClick={logoutUserFunction}>Logout</h1>
           </div>

@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk, logoutUserThunk, forgotUserPasswordThunk, resetUserPasswordThunk} from './userThunk';
+import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk, logoutUserThunk, forgotUserPasswordThunk, resetUserPasswordThunk, getCurrentUserThunk} from './userThunk';
 
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
   isSidebarOpen: false,
   userFromLocalStorage:null,
   user: null,
+  currentUser:null,
   error: "",
   formSubmitted: false,
   openModal:false,
@@ -43,6 +44,10 @@ export const resetPassword = createAsyncThunk('/user/resetPassword', async (user
     return resetUserPasswordThunk('auth/reset-password', user, thunkAPI)
 });
 
+export const getCurrentUser = createAsyncThunk("/users/getCurrentUser", async(thunkAPI) => {
+    return getCurrentUserThunk("users/showMe", thunkAPI)
+});
+
 
 const userSlice = createSlice({
     name:'user',
@@ -57,83 +62,94 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-        .addCase(registerUser.pending, (state) => {
+          .addCase(registerUser.pending, (state) => {
             state.isLoading = true;
-        })
-        .addCase(registerUser.fulfilled, (state) => {
+          })
+          .addCase(registerUser.fulfilled, (state) => {
             state.isLoading = false;
             state.formSubmitted = true;
-        })
-        .addCase(registerUser.rejected, (state, {payload}) => {
+          })
+          .addCase(registerUser.rejected, (state, { payload }) => {
             state.isLoading = false;
             toast.error(payload);
-        })
-        .addCase(loginUser.pending, (state) => {
+          })
+          .addCase(loginUser.pending, (state) => {
             state.isLoading = true;
-        })
-        .addCase(loginUser.fulfilled, (state, {payload}) => {
-            const {user} = payload;
+          })
+          .addCase(loginUser.fulfilled, (state, { payload }) => {
+            const { user } = payload;
             state.isLoading = false;
             state.user = user;
             toast.success(`Hello ${user?.fullName}`);
-        })
-        .addCase(loginUser.rejected, (state, {payload}) => {
+          })
+          .addCase(loginUser.rejected, (state, { payload }) => {
             state.isLoading = false;
             toast.error(payload);
-        })
-        .addCase(updateUserPassword.fulfilled, (state, {payload}) => {
+          })
+          .addCase(updateUserPassword.fulfilled, (state, { payload }) => {
             const { msg } = payload;
             toast.success(msg);
-        })
-        .addCase(verifyEmail.pending, (state) => {
+          })
+          .addCase(verifyEmail.pending, (state) => {
             state.isLoading = true;
-        })
-        .addCase(verifyEmail.fulfilled, (state, {payload}) => {
-            const {msg} = payload;
+          })
+          .addCase(verifyEmail.fulfilled, (state, { payload }) => {
+            const { msg } = payload;
             state.isLoading = false;
             toast.success(msg);
-        })
-        .addCase(verifyEmail.rejected, (state, {payload}) => {
+          })
+          .addCase(verifyEmail.rejected, (state, { payload }) => {
             state.isLoading = false;
             state.error = payload;
             toast.error(payload);
-        })
-        .addCase(logoutUser.pending, (state) => {
+          })
+          .addCase(logoutUser.pending, (state) => {
             state.isLoading = true;
-        })
-        .addCase(logoutUser.fulfilled, (state, {payload}) => {
-            const {msg} = payload;
+          })
+          .addCase(logoutUser.fulfilled, (state, { payload }) => {
+            const { msg } = payload;
             state.isLoading = false;
             state.user = null;
-            toast.success(msg)
-        })
-        .addCase(logoutUser.rejected, (state, {payload}) => {
+            toast.success(msg);
+          })
+          .addCase(logoutUser.rejected, (state, { payload }) => {
             state.isLoading = false;
             toast.error(payload);
-        })
-        .addCase(forgotPassword.pending, (state) => {
+          })
+          .addCase(forgotPassword.pending, (state) => {
             state.isLoading = true;
-        })
-        .addCase(forgotPassword.fulfilled , (state) => {
+          })
+          .addCase(forgotPassword.fulfilled, (state) => {
             state.isLoading = false;
             state.formSubmitted = true;
-        })
-        .addCase(forgotPassword.rejected, (state, {payload}) => {
+          })
+          .addCase(forgotPassword.rejected, (state, { payload }) => {
             state.isLoading = false;
             state.error = payload;
-        })
-        .addCase(resetPassword.pending, (state) => {
+          })
+          .addCase(resetPassword.pending, (state) => {
             state.isLoading = true;
-        })
-        .addCase(resetPassword.fulfilled, (state, {payload}) => {
+          })
+          .addCase(resetPassword.fulfilled, (state, { payload }) => {
             state.isLoading = false;
             state.formSubmitted = true;
             toast.success(payload.msg);
-        })
-        .addCase(resetPassword.rejected, (state, {payload}) => {
+          })
+          .addCase(resetPassword.rejected, (state, { payload }) => {
             state.isLoading = false;
             toast.error(payload.msg);
-        })
+          })
+          .addCase(getCurrentUser.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+            state.isLoading = false;
+            toast.success(payload.msg)
+          })
+          .addCase(getCurrentUser.rejected, (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload;
+          });
     },
 })
 

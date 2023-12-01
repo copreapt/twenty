@@ -64,3 +64,12 @@ export const resetUserPasswordThunk = async (url, user, thunkAPI) => {
         return thunkAPI.rejectWithValue(error.response.data.msg);
     }
 }
+
+export const getCurrentUserThunk = async (url, thunkAPI) => {
+  try {
+    const resp = await customFetch.get(url);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};

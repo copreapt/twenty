@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
-import { getUserLocalStorage } from "../../utils/utils";
+
 
 
 const SharedLayout = () => {
-  const [userLocalStorage, setUserLocalStorage] = useState(null);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(userLocalStorage){
-      console.log(userLocalStorage);
-      setUserLocalStorage(getUserLocalStorage());
-    }
     dispatch(getAllPosts());
-  }, [userLocalStorage]);
+  }, []);
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col">
       {/* Search Bar for Desktop */}
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 w-full">
-        <SearchBar userLocalStorage = {userLocalStorage} />
+        <SearchBar />
       </div>
       {/* top div for mobile version */}
       <div className="border-b border-gray-300 p-2 bg-white text-center text-cyan-700 fixed top-0 w-full md:hidden lg:hidden">

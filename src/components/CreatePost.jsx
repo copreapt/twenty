@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { createPostLinks } from '../utils/utils';
 import {useSelector, useDispatch} from "react-redux";
-import { uploadImage } from '../features/posts/postSlice';
-import {createPost} from "../features/posts/postSlice";
+import { uploadImage, createPost } from '../features/posts/postSlice';
+import { getCurrentUser } from '../features/user/userSlice';
 
 
 const initialState = {
@@ -12,8 +12,8 @@ const initialState = {
 function CreatePost() {
 
   const [values, setValues] = useState(initialState);
-
-  const {postImage, isLoading} = useSelector((store) => store.posts)
+  const {currentUser} = useSelector((store) => store.user);
+  const {postImage, isLoading} = useSelector((store) => store.posts);
   const dispatch = useDispatch()
 
   const selectAndUploadImage = (e) => {
@@ -21,12 +21,14 @@ function CreatePost() {
     if(imageFile){
       dispatch(uploadImage({image: imageFile}))
     }
+    // fetch currentUser to set image, name and location on the post
+    dispatch(getCurrentUser());
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const {description} = values
-    dispatch(createPost({description, image:postImage}));
+    dispatch(createPost({description, image:postImage, profilePicture: currentUser.profilePicture,name: currentUser.fullName}));
     window.location.reload(true);
   }
 
