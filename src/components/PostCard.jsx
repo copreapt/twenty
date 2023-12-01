@@ -1,9 +1,6 @@
-import { useEffect } from 'react'
-
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
-import {IoIosShareAlt} from 'react-icons/io'
 import { useSelector } from "react-redux";
 
 const PostCard = () => {
@@ -27,7 +24,7 @@ const PostCard = () => {
                     className="grow"
                   />
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center text-left">
                   <span className="text-[0.80rem]">{name}</span>
                   <span className="text-[0.60rem] text-gray-500">{location}</span>
                 </div>
@@ -57,7 +54,6 @@ const PostCard = () => {
               <div className="flex gap-5 text-2xl text-cyan-700">
                 <AiFillHeart />
                 <FaRegCommentDots />
-                <IoIosShareAlt />
               </div>
               <span className="text-sm font-semibold">
                 Liked by <span className="text-md text-cyan-600">Catalin</span>{" "}
