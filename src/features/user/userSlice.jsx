@@ -144,7 +144,7 @@ const userSlice = createSlice({
           })
           .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
             state.isLoading = false;
-            toast.success(payload.msg)
+            state.currentUser = payload;
           })
           .addCase(getCurrentUser.rejected, (state, { payload }) => {
             state.isLoading = false;
