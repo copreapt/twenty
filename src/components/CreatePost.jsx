@@ -25,7 +25,7 @@ function CreatePost() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {description} = values
-    dispatch(createPost({description, image:postImage, profilePicture: currentUser?.profilePicture,name: currentUser?.fullName}));
+    dispatch(createPost({description, image:postImage, profilePicture: currentUser.profilePicture,name: currentUser.fullName}));
     window.location.reload(true);
   }
 
