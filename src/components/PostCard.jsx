@@ -11,14 +11,12 @@ const PostCard = () => {
   const dispatch = useDispatch();
 
   const likePostOnClick = () => { 
-    if(postId){
       dispatch(
         createLike({
           name: currentUser?.fullName,
           profilePicture: currentUser?.profilePicture,
         })
       );
-    }
   }
 
   return (
