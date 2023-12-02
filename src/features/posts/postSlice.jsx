@@ -31,7 +31,7 @@ export const createPost = createAsyncThunk("/posts/createPost", async (post, thu
 });
 
 export const likePost = createAsyncThunk("/posts/likePost", async(post,thunkAPI) => {
-  return likePostThunk("/likes", post, thunkAPI);
+  return likePostThunk("/posts", post, thunkAPI);
 });
 
 const postsSlice = createSlice({
