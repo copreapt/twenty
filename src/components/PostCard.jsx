@@ -10,9 +10,10 @@ const PostCard = () => {
   const {currentUser, isLoading} = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  const likePostOnClick = () => { 
+  const likePostOnClick = (postId) => { 
       dispatch(
         createLike({
+          post: postId,
           name: currentUser?.fullName,
           profilePicture: currentUser?.profilePicture,
         })
@@ -65,7 +66,7 @@ const PostCard = () => {
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
               <div className="flex gap-5 text-2xl text-cyan-700">
-                <button>
+                <button disabled={isLoading} onClick={likePostOnClick(_id)}>
                   <AiFillHeart />
                 </button>
                 <button>
