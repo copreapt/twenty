@@ -1,6 +1,6 @@
 import customFetch from "../../utils/axios";
 
-export const likePostThunk = async (url, likeData, thunkAPI) => {
+export const createLikeThunk = async (url, likeData, thunkAPI) => {
   try {
     const resp = await customFetch.post(url, likeData);
     return resp.data;
