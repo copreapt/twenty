@@ -22,12 +22,12 @@ const PostCard = () => {
 
   return (
     <>
-      {posts?.map((post, index) => {
+      {posts?.map((post) => {
         const {description, image, name, profilePicture, location, _id} = post;
         return (
           <div
             className="bg-white mb-4 flex flex-col space-y-2 p-3 rounded-md"
-            key={index}
+            key={_id}
           >
             {/* top div */}
             <div className="flex justify-between">
