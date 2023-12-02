@@ -30,7 +30,7 @@ export const createPost = createAsyncThunk("/posts/createPost", async (post, thu
   return createPostThunk("/posts", post, thunkAPI);
 });
 
-export const likePost = createAsyncThunk("/posts/likePost", async([post,thunkAPI]) => {
+export const likePost = createAsyncThunk("/posts/likePost", async(post,thunkAPI) => {
   return likePostThunk("/likes", post, thunkAPI);
 });
 
