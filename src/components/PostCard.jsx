@@ -10,17 +10,16 @@ const PostCard = () => {
   const {currentUser, isLoading} = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
-  // const likePostOnClick = (postId) => { 
-  //   if(postId){
-  //     dispatch(
-  //       createLike({
-  //         post: postId,
-  //         name: currentUser?.fullName,
-  //         profilePicture: currentUser?.profilePicture,
-  //       })
-  //     );
-  //   }
-  // }
+  const likePostOnClick = () => { 
+    if(postId){
+      dispatch(
+        createLike({
+          name: currentUser?.fullName,
+          profilePicture: currentUser?.profilePicture,
+        })
+      );
+    }
+  }
 
   return (
     <>
