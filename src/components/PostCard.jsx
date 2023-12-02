@@ -2,25 +2,25 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
-import { createLike} from '../features/likes/likesSlice';
+// import { createLike} from '../features/likes/likesSlice';
 
 const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
-  const {currentUser, isLoading} = useSelector((store) => store.user);
-  const dispatch = useDispatch();
+  // const {currentUser, isLoading} = useSelector((store) => store.user);
+  // const dispatch = useDispatch();
 
-  const likePostOnClick = (postId) => { 
-    if(postId){
-      dispatch(
-        createLike({
-          post: postId,
-          name: currentUser?.fullName,
-          profilePicture: currentUser?.profilePicture,
-        })
-      );
-    }
-  }
+  // const likePostOnClick = (postId) => { 
+  //   if(postId){
+  //     dispatch(
+  //       createLike({
+  //         post: postId,
+  //         name: currentUser?.fullName,
+  //         profilePicture: currentUser?.profilePicture,
+  //       })
+  //     );
+  //   }
+  // }
 
   return (
     <>
@@ -68,7 +68,7 @@ const PostCard = () => {
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
               <div className="flex gap-5 text-2xl text-cyan-700">
-                <button disabled={isLoading}>
+                <button>
                   <AiFillHeart />
                 </button>
                 <button>
