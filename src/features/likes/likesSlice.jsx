@@ -16,7 +16,7 @@ export const createLike = createAsyncThunk(
 );
 
 const likesSlice = createSlice({
-  name: "likes",
+  name: "posts",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -24,10 +24,11 @@ const likesSlice = createSlice({
       .addCase(createLike.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createLike.fulfilled, (state) => {
+      .addCase(createLike.fulfilled,(state, {payload}) => {
         state.isLoading = false;
+        toast.success = payload.msg;
       })
-      .addCase(createLike.rejected, (state, { payload }) => {
+      .addCase(createLike.rejected, (state, {payload}) => {
         state.isLoading = false;
         toast.error(payload);
       });
