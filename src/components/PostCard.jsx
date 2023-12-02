@@ -1,18 +1,27 @@
 import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
+  const {currentUser, isLoading} = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
+  const likePost = (postId) => {
+    dispatch({post: postId, name: currentUser.fullName, profilePicture: currentUser.profilePicture});
+  }
 
   return (
     <>
       {posts?.map((post, index) => {
-        const {description, image, name, profilePicture, location} = post;
+        const {description, image, name, profilePicture, location, _id} = post;
         return (
-          <div className="bg-white mb-4 flex flex-col space-y-2 p-3 rounded-md" key={index}>
+          <div
+            className="bg-white mb-4 flex flex-col space-y-2 p-3 rounded-md"
+            key={index}
+          >
             {/* top div */}
             <div className="flex justify-between">
               {/* img and name */}
@@ -26,7 +35,9 @@ const PostCard = () => {
                 </div>
                 <div className="flex flex-col items-center">
                   <span className="text-[0.80rem]">{name}</span>
-                  <span className="text-[0.60rem] text-gray-500">{location}</span>
+                  <span className="text-[0.60rem] text-gray-500">
+                    {location}
+                  </span>
                 </div>
               </div>
               {/* add friend icon */}
@@ -42,18 +53,18 @@ const PostCard = () => {
               </div>
               {/* image/photo */}
               <div>
-                <img
-                  src={image}
-                  alt="image"
-                  className="w-full"
-                />
+                <img src={image} alt="image" className="w-full" />
               </div>
             </div>
-            {/* bottom div - like, comment, share */}
+            {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
               <div className="flex gap-5 text-2xl text-cyan-700">
-                <AiFillHeart />
-                <FaRegCommentDots />
+                <button disabled={isLoading} onClick={likePost(_id)}>
+                  <AiFillHeart />
+                </button>
+                <button>
+                  <FaRegCommentDots />
+                </button>
               </div>
               <span className="text-sm font-semibold">
                 Liked by <span className="text-md text-cyan-600">Catalin</span>{" "}
