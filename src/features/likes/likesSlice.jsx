@@ -8,10 +8,10 @@ const initialState = {
   likes: null,
 };
 
-export const likePost = createAsyncThunk(
-  "/likes/likePost",
-  async (data, thunkAPI) => {
-    return likePostThunk("/likes", data, thunkAPI);
+export const createLike = createAsyncThunk(
+  "/likes/createLike",
+  async (likeData, thunkAPI) => {
+    return likePostThunk("/likes", likeData, thunkAPI);
   }
 );
 
@@ -21,13 +21,13 @@ const likesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(likePost.pending, (state) => {
+      .addCase(createLike.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(likePost.fulfilled, (state) => {
+      .addCase(createLike.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(likePost.rejected, (state, { payload }) => {
+      .addCase(createLike.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       });
