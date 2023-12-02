@@ -2,6 +2,7 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
+import { likePost } from '../features/likes/likesSlice';
 
 const PostCard = () => {
 
@@ -10,7 +11,7 @@ const PostCard = () => {
   const dispatch = useDispatch();
 
   const likePost = (postId) => {
-    dispatch({post: postId, name: currentUser.fullName, profilePicture: currentUser.profilePicture});
+    dispatch(likePost({post: postId, name: currentUser.fullName, profilePicture: currentUser.profilePicture}));
   }
 
   return (

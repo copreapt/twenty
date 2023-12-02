@@ -27,4 +27,4 @@ export const createPostThunk = async (url, post, thunkAPI) => {
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
-}
+};
