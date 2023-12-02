@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { likePostThunk } from "./likesThunk";
+import { likesPostThunk } from "./likesThunk";
 
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 export const createLike = createAsyncThunk(
   "/likes/createLike",
   async (likeData, thunkAPI) => {
-    return likePostThunk("/likes", likeData, thunkAPI);
+    return likesPostThunk("/likes", likeData, thunkAPI);
   }
 );
 
