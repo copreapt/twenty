@@ -16,7 +16,7 @@ export const createLike = createAsyncThunk(
 );
 
 const likesSlice = createSlice({
-  name: "posts",
+  name: "likes",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
