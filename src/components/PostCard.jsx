@@ -2,13 +2,13 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
-// import { createLike} from '../features/likes/likesSlice';
+import { createLike} from '../features/likes/likesSlice';
 
 const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
-  // const {currentUser, isLoading} = useSelector((store) => store.user);
-  // const dispatch = useDispatch();
+  const {currentUser, isLoading} = useSelector((store) => store.user);
+  const dispatch = useDispatch();
 
   // const likePostOnClick = (postId) => { 
   //   if(postId){
