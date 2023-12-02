@@ -14,8 +14,8 @@ const PostCard = () => {
       dispatch(
         likePost({
           post: postId,
-          name: currentUser.fullName,
-          profilePicture: currentUser.profilePicture,
+          name: currentUser?.fullName,
+          profilePicture: currentUser?.profilePicture,
         })
       );
   }
