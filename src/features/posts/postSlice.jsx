@@ -4,8 +4,8 @@ import {
   getAllPostsThunk,
   uploadImageThunk,
   createPostThunk,
-  likePostThunk,
 } from "./postThunk";
+import { likePostThunk } from "./postThunk";
 
 const initialState = {
   isLoading:false,
