@@ -24,7 +24,7 @@ const PostCard = () => {
                     className="grow"
                   />
                 </div>
-                <div className="flex flex-col items-center text-left">
+                <div className="flex flex-col items-center">
                   <span className="text-[0.80rem]">{name}</span>
                   <span className="text-[0.60rem] text-gray-500">{location}</span>
                 </div>
