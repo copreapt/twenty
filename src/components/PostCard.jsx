@@ -75,7 +75,7 @@ const PostCard = () => {
                   disabled={isLoading}
                   onClick={(e) => likePostOnClick(_id)}
                 >
-                  <AiFillHeart className={`${currentUserLikes?.filter((likedPost) => likedPost.post === _id ? "text-3xl" : "text-blue-500")}`}/>
+                  <AiFillHeart className={`${currentUserLikes?.filter((likedPost) => likedPost.post === _id ? "hidden" : "text-blue-500")}`}/>
                 </button>
                 <button>
                   <FaRegCommentDots />
