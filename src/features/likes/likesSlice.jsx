@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createLikeThunk, getLikesThunk } from "./likesThunk";
+import { createLikeThunk, getLikesThunk, getCurrentUserLikesThunk } from "./likesThunk";
 
 
 const initialState = {
@@ -23,6 +23,13 @@ export const getLikes = createAsyncThunk(
   }
 );
 
+export const getCurrentUserLikes = createAsyncThunk(
+  "/likes/getCurrentUserLikes",
+  async (thunkAPI) => {
+    return getCurrentUserLikesThunk("/likes/currentUserLikes", thunkAPI);
+  }
+);
+
 const likesSlice = createSlice({
   name: "likes",
   initialState,
@@ -32,24 +39,35 @@ const likesSlice = createSlice({
       .addCase(createLike.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createLike.fulfilled,(state, {payload}) => {
+      .addCase(createLike.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         toast.success = payload.msg;
       })
-      .addCase(createLike.rejected, (state, {payload}) => {
+      .addCase(createLike.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       })
       .addCase(getLikes.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getLikes.fulfilled, (state, {payload}) => {
-        const {currentUserLikes, allLikes} = payload;
+      .addCase(getLikes.fulfilled, (state, { payload }) => {
+        const { allLikes } = payload;
         state.isLoading = false;
-        state.currentUserLikes = currentUserLikes;
         state.likes = allLikes;
       })
-      .addCase(getLikes.rejected, (state, {payload}) => {
+      .addCase(getLikes.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(getCurrentUserLikes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCurrentUserLikes.fulfilled, (state, { payload }) => {
+        const { currentUserLikes } = payload;
+        state.isLoading = false;
+        state.currentUserLikes = currentUserLikes;
+      })
+      .addCase(getCurrentUserLikes.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       });
