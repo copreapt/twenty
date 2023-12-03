@@ -3,11 +3,16 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike } from '../features/likes/likesSlice';
+import { useEffect, useState } from 'react';
 
 const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
   const {currentUser, isLoading} = useSelector((store) => store.user);
+  const {currentUserLikes} = useSelector((store) => store.likes);
+
+  const [likedPosts, setLikedPosts] = useState(null)
+
   const dispatch = useDispatch();
 
   const likePostOnClick = (postId) => { 
@@ -19,6 +24,15 @@ const PostCard = () => {
         })
       );
   }
+
+  const findLikedPosts = () => {
+    const intersection = posts.filter((element) => currentUserLikes.includes(element));
+    console.log(intersection);
+  }
+
+  useEffect(() => {
+    findLikedPosts()
+  },[likedPosts])
 
   return (
     <>
