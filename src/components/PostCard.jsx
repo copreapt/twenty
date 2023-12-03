@@ -25,15 +25,6 @@ const PostCard = () => {
       );
   }
 
-  const findLikedPosts = () => {
-    const intersection = posts?.filter((element) => currentUserLikes?.includes(element));
-    console.log(intersection);
-  }
-
-  useEffect(() => {
-    findLikedPosts()
-  },[likedPosts])
-
   return (
     <>
       {posts?.map((post) => {
@@ -84,7 +75,7 @@ const PostCard = () => {
                   disabled={isLoading}
                   onClick={(e) => likePostOnClick(_id)}
                 >
-                  <AiFillHeart />
+                  <AiFillHeart className={`${currentUserLikes?.filter((likedPost) => likedPost.post === _id ? "text-3xl" : "text-blue-500")}`}/>
                 </button>
                 <button>
                   <FaRegCommentDots />
