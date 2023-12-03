@@ -42,6 +42,11 @@ const PostCard = () => {
     }
   },[currentUserLikes])
 
+  useEffect(() => {
+    if(likedPosts){
+      console.log(likedPosts)
+    }
+  },[likedPosts])
   return (
     <>
       {posts?.map((post) => {
