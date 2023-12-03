@@ -3,7 +3,7 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike } from '../features/likes/likesSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const PostCard = () => {
