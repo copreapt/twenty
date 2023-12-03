@@ -1,17 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createLikeThunk } from "./likesThunk";
+import { createLikeThunk, getLikesThunk } from "./likesThunk";
 
 
 const initialState = {
   isLoading: false,
   likes: null,
+  currentUserLikes: null,
 };
 
 export const createLike = createAsyncThunk(
   "/likes/createLike",
   async (likeData, thunkAPI) => {
     return createLikeThunk("/likes", likeData, thunkAPI);
+  }
+);
+
+export const getLikes = createAsyncThunk(
+  "/likes/getLikes",
+  async (thunkAPI) => {
+    return getLikesThunk("/likes", thunkAPI);
   }
 );
 
@@ -29,6 +37,19 @@ const likesSlice = createSlice({
         toast.success = payload.msg;
       })
       .addCase(createLike.rejected, (state, {payload}) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(getLikes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getLikes.fulfilled, (state, {payload}) => {
+        const {currentUserLikes, allLikes} = payload;
+        state.isLoading = false;
+        state.currentUserLikes = currentUserLikes;
+        state.likes = allLikes;
+      })
+      .addCase(getLikes.rejected, (state, {payload}) => {
         state.isLoading = false;
         toast.error(payload);
       });

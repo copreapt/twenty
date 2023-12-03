@@ -3,6 +3,7 @@ import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, Fri
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
+import { getLikes } from "../../features/likes/likesSlice";
 
 
 
@@ -13,6 +14,7 @@ const SharedLayout = () => {
   useEffect(() => {
     dispatch(getAllPosts());
     dispatch(getCurrentUser());
+    dispatch(getLikes());
   }, []);
 
   return (
