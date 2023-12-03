@@ -5,7 +5,7 @@ const customFetch = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 export const imageFetch = axios.create({
@@ -13,7 +13,7 @@ export const imageFetch = axios.create({
   headers: {
     "Content-Type": "multipart/form-data",
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 export default customFetch;
