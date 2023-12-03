@@ -3,7 +3,8 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike } from '../features/likes/likesSlice';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
 
 const PostCard = () => {
 
@@ -24,6 +25,22 @@ const PostCard = () => {
         })
       );
   }
+
+  const findLikedPosts = () => {
+    const currentUserLikedPosts = currentUserLikes?.map((like) => {
+      const {post} = like;
+      return post;
+    })
+    if(currentUserLikedPosts){
+      setLikedPosts(currentUserLikedPosts);
+    }
+  }
+
+  useEffect(() => {
+    if(currentUserLikes){
+      findLikedPosts()
+    }
+  },[currentUserLikes])
 
   return (
     <>
@@ -75,7 +92,7 @@ const PostCard = () => {
                   disabled={isLoading}
                   onClick={(e) => likePostOnClick(_id)}
                 >
-                  <AiFillHeart className={`${currentUserLikes?.filter((likedPost) => likedPost.post === _id ? "hidden" : "text-blue-500")}`}/>
+                  <AiFillHeart/>
                 </button>
                 <button>
                   <FaRegCommentDots />
