@@ -26,7 +26,7 @@ const PostCard = () => {
   }
 
   const findLikedPosts = () => {
-    const intersection = posts.filter((element) => currentUserLikes.includes(element));
+    const intersection = posts?.filter((element) => currentUserLikes?.includes(element));
     console.log(intersection);
   }
 
