@@ -28,7 +28,7 @@ const PostCard = () => {
         })
       )
       // else if like doesn't exist in liked posts and user presses like button, we add back in the post id and we dispatch createLike again which will handle on it's own adding or removing the like from database
-    } else {
+    } else if(!likedPosts.includes(postId)) {
       likedPosts.push(postId)
       dispatch(
         createLike({
@@ -52,7 +52,7 @@ const PostCard = () => {
 
   useEffect(() => {
       findLikedPosts()
-  },[currentUserLikes, likePostOnClick, findLikedPosts])
+  },[currentUserLikesw])
 
   useEffect(() => {
       console.log(likedPosts)
