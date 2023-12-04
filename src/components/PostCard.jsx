@@ -16,7 +16,7 @@ const PostCard = () => {
 
   const dispatch = useDispatch();
 
-  const likePostOnClick = (postId) => { 
+  const likePostOnClick = (postId) => {
        dispatch(
          createLike({
            post: postId,
@@ -24,6 +24,7 @@ const PostCard = () => {
            profilePicture: currentUser?.profilePicture,
          })
        );
+       getCurrentUserLikes();
   }
 
   const findLikedPosts = () => {
@@ -100,7 +101,7 @@ const PostCard = () => {
                   <AiFillHeart className={`ease-in-out duration-400 ${likedPosts?.includes(_id)? "text-red-500" : ""}`}/>
                 </button>
                 <button>
-                  <FaRegCommentDots onClick={(e) => getCurrentUserLikes()} />
+                  <FaRegCommentDots />
                 </button>
               </div>
               <span className="text-sm font-semibold">
