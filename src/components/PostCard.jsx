@@ -10,7 +10,7 @@ const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
   const {currentUser, isLoading} = useSelector((store) => store.user);
-  const {currentUserLikes} = useSelector((store) => store.likes);
+  const {currentUserLikes, isLoadingLikes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
 
@@ -27,20 +27,9 @@ const PostCard = () => {
   }, [currentUserLikes]);
 
   const likePostOnClick =(postId) => {
-    // if like already exists and user presses like again, we remove the postId from liked post and we dispatch createLike which will handle add or removing the like from database
-    if(likedPosts.includes(postId)){
-      const index = likedPosts.indexOf(postId);
-      likedPosts.splice(index,1);
-      dispatch(
-        createLike({
-          post: postId,
-          name: currentUser?.fullName,
-          profilePicture: currentUser?.profilePicture,
-        })
-      )
-      // else if like doesn't exist in liked posts and user presses like button, we add back in the post id and we dispatch createLike again which will handle on it's own adding or removing the like from database
-    } else if(!likedPosts.includes(postId)) {
-      likedPosts.push(postId)
+    if (isLoadingLikes) {
+      return;
+    } else {
       dispatch(
         createLike({
           post: postId,
@@ -48,8 +37,16 @@ const PostCard = () => {
           profilePicture: currentUser?.profilePicture,
         })
       );
+      // if like already exists and user presses like again, we remove the postId from state
+      if (likedPosts.includes(postId)) {
+        const index = likedPosts.indexOf(postId);
+        likedPosts.splice(index, 1);
+        // else if like doesn't exist in liked posts and user presses like button, we add back in the state
+      } else if (!likedPosts.includes(postId)) {
+        likedPosts.push(postId);
+      }
     }
-  };
+  }
 
 
   useEffect(() => {

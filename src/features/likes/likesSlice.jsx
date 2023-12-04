@@ -4,7 +4,7 @@ import { createLikeThunk, getLikesThunk, getCurrentUserLikesThunk } from "./like
 
 
 const initialState = {
-  isLoading: false,
+  isLoadingLikes: false,
   likes: null,
   currentUserLikes: null,
 };
@@ -37,38 +37,38 @@ const likesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createLike.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingLikes = true;
       })
       .addCase(createLike.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingLikes = false;
         toast.success = payload.msg;
       })
       .addCase(createLike.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingLikes = false;
         toast.error(payload);
       })
       .addCase(getLikes.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingLikes = true;
       })
       .addCase(getLikes.fulfilled, (state, { payload }) => {
         const { allLikes } = payload;
-        state.isLoading = false;
+        state.isLoadingLikes = false;
         state.likes = allLikes;
       })
       .addCase(getLikes.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingLikes = false;
         toast.error(payload);
       })
       .addCase(getCurrentUserLikes.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingLikes = true;
       })
       .addCase(getCurrentUserLikes.fulfilled, (state, { payload }) => {
         const { currentUserLikes } = payload;
-        state.isLoading = false;
+        state.isLoadingLikes = false;
         state.currentUserLikes = currentUserLikes;
       })
       .addCase(getCurrentUserLikes.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingLikes = false;
         toast.error(payload);
       });
   },
