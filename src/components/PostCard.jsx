@@ -3,7 +3,7 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentUserLikes } from '../features/likes/likesSlice';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 
 const PostCard = () => {
@@ -16,7 +16,7 @@ const PostCard = () => {
 
   const dispatch = useDispatch();
 
-  const likePostOnClick = (postId) => {
+  const likePostOnClick = useCallback( (postId) => {
        dispatch(
          createLike({
            post: postId,
@@ -24,10 +24,9 @@ const PostCard = () => {
            profilePicture: currentUser?.profilePicture,
          })
        );
-       getCurrentUserLikes();
-  }
+  }, [currentUser?.fullName, currentUser?.profilePicture, dispatch])
 
-  const findLikedPosts = () => {
+  const findLikedPosts = useCallback( () => {
     const currentUserLikedPosts = currentUserLikes?.map((like) => {
       const {post} = like;
       return post;
@@ -35,15 +34,19 @@ const PostCard = () => {
     if(currentUserLikedPosts){
       setLikedPosts(currentUserLikedPosts);
     }
-  }
+  },[currentUserLikes])
 
   useEffect(() => {
       findLikedPosts()
-  },[currentUserLikes])
+  },[currentUserLikes, findLikedPosts])
 
   useEffect(() => {
       console.log(likedPosts)
   },[likedPosts])
+
+  useEffect(() => {
+    getCurrentUserLikes();
+  },[likePostOnClick])
 
 
   return (
