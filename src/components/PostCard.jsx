@@ -45,8 +45,8 @@ const PostCard = () => {
   },[likedPosts])
 
   useEffect(() => {
-    getCurrentUserLikes();
-  },[likePostOnClick])
+    dispatch(getCurrentUserLikes());
+  },[likePostOnClick, dispatch])
 
 
   return (
