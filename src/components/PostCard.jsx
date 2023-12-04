@@ -27,7 +27,7 @@ const PostCard = () => {
       );
     }
       dispatch(getCurrentUserLikes());
-  },[currentUser?.fullName, currentUser.profilePicture, dispatch])
+  },[currentUser?.fullName, currentUser?.profilePicture, dispatch])
 
   const findLikedPosts = useCallback( () => {
     const currentUserLikedPosts = currentUserLikes?.map((like) => {
