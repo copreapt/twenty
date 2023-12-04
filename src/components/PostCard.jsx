@@ -17,14 +17,17 @@ const PostCard = () => {
   const dispatch = useDispatch();
 
   const likePostOnClick = useCallback( (postId) => {
-       dispatch(
-         createLike({
-           post: postId,
-           name: currentUser?.fullName,
-           profilePicture: currentUser?.profilePicture,
-         })
-       );
-  }, [currentUser?.fullName, currentUser?.profilePicture, dispatch])
+    if(postId){
+      dispatch(
+        createLike({
+          post: postId,
+          name: currentUser?.fullName,
+          profilePicture: currentUser?.profilePicture,
+        })
+      );
+    }
+      dispatch(getCurrentUserLikes());
+  },[currentUser?.fullName, currentUser.profilePicture, dispatch])
 
   const findLikedPosts = useCallback( () => {
     const currentUserLikedPosts = currentUserLikes?.map((like) => {
@@ -38,15 +41,15 @@ const PostCard = () => {
 
   useEffect(() => {
       findLikedPosts()
-  },[currentUserLikes, findLikedPosts])
+  },[currentUserLikes, likePostOnClick, findLikedPosts])
 
   useEffect(() => {
       console.log(likedPosts)
   },[likedPosts])
 
-  useEffect(() => {
-    dispatch(getCurrentUserLikes());
-  },[likePostOnClick, dispatch])
+  // useEffect(() => {
+  //   dispatch(getCurrentUserLikes());
+  // },[likePostOnClick, dispatch])
 
 
   return (
