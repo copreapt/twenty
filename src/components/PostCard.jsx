@@ -26,7 +26,6 @@ const PostCard = () => {
         })
       );
     }
-      dispatch(getCurrentUserLikes());
   },[currentUser?.fullName, currentUser?.profilePicture, dispatch])
 
   const findLikedPosts = useCallback( () => {
@@ -47,9 +46,9 @@ const PostCard = () => {
       console.log(likedPosts)
   },[likedPosts])
 
-  // useEffect(() => {
-  //   dispatch(getCurrentUserLikes());
-  // },[likePostOnClick, dispatch])
+  useEffect(() => {
+    dispatch(getCurrentUserLikes());
+  },[likePostOnClick])
 
 
   return (
