@@ -122,7 +122,7 @@ const PostCard = () => {
                 </button>
               </div>
               <span className="text-sm font-semibold">
-                Liked by <span className="text-md text-cyan-600">{likes.map((like) => {
+                Liked by <span className="text-md text-cyan-600">{likes?.map((like) => {
                   let likesForThisPost = [];
                   let randomLike;
                   if(like.post === _id){
