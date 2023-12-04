@@ -98,7 +98,7 @@ const PostCard = () => {
                   disabled={isLoading}
                   onClick={(e) => likePostOnClick(_id)}
                 >
-                  <AiFillHeart className={`ease-in-out duration-400 ${likedPosts?.includes(_id)? "text-red-500" : ""}`}/>
+                  <AiFillHeart className={`ease-in-out duration-400 ${likedPosts?.includes(_id)? "text-red-500" : "text-cyan-700"}`}/>
                 </button>
                 <button>
                   <FaRegCommentDots />
