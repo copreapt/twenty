@@ -38,7 +38,8 @@ const PostCard = () => {
         })
       );
     }
-  },[currentUser?.fullName, currentUser?.profilePicture, likedPosts, dispatch])
+    findLikedPosts();
+  },[currentUser?.fullName, currentUser?.profilePicture, likedPosts, dispatch, findLikedPosts])
 
   const findLikedPosts = useCallback( () => {
     const currentUserLikedPosts = currentUserLikes?.map((like) => {
