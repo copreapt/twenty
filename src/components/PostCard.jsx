@@ -29,8 +29,8 @@ const PostCard = () => {
   const likePostOnClick = useCallback( (postId) => {
     // if like already exists and user presses like again, we remove the postId from liked post and we dispatch createLike which will handle add or removing the like from database
     if(likedPosts.includes(postId)){
-      const newLikedPosts = likedPosts.filter((item) => item !== postId);
-      setLikedPosts(newLikedPosts)
+      const index = likedPosts.indexOf(postId);
+      likedPosts.splice(index,1);
       dispatch(
         createLike({
           post: postId,
