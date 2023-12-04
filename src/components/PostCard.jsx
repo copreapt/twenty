@@ -17,7 +17,19 @@ const PostCard = () => {
   const dispatch = useDispatch();
 
   const likePostOnClick = useCallback( (postId) => {
-    if(postId){
+    // if like already exists and user presses like again, we remove the postId from liked post and we dispatch createLike which will handle add or removing the like from database
+    if(likedPosts.includes(postId)){
+      likedPosts.filter((item) => item !== postId);
+      dispatch(
+        createLike({
+          post: postId,
+          name: currentUser?.fullName,
+          profilePicture: currentUser?.profilePicture,
+        })
+      )
+      // else if like doesn't exist in liked posts and user presses like button, we add back in the post id and we dispatch createLike again which will handle on it's own adding or removing the like from database
+    } else {
+      likedPosts.push(postId)
       dispatch(
         createLike({
           post: postId,
@@ -26,7 +38,7 @@ const PostCard = () => {
         })
       );
     }
-  },[currentUser?.fullName, currentUser?.profilePicture, dispatch])
+  },[currentUser?.fullName, currentUser?.profilePicture, likedPosts, dispatch])
 
   const findLikedPosts = useCallback( () => {
     const currentUserLikedPosts = currentUserLikes?.map((like) => {
@@ -45,10 +57,6 @@ const PostCard = () => {
   useEffect(() => {
       console.log(likedPosts)
   },[likedPosts])
-
-  useEffect(() => {
-    dispatch(getCurrentUserLikes());
-  },[dispatch,likePostOnClick])
 
 
   return (
