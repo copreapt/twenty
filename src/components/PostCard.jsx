@@ -26,7 +26,7 @@ const PostCard = () => {
     }
   }, [currentUserLikes]);
 
-  const likePostOnClick = useCallback( (postId) => {
+  const likePostOnClick =(postId) => {
     // if like already exists and user presses like again, we remove the postId from liked post and we dispatch createLike which will handle add or removing the like from database
     if(likedPosts.includes(postId)){
       const index = likedPosts.indexOf(postId);
@@ -49,8 +49,7 @@ const PostCard = () => {
         })
       );
     }
-    findLikedPosts();
-  },[currentUser?.fullName, currentUser?.profilePicture, likedPosts, dispatch, findLikedPosts])
+  };
 
 
   useEffect(() => {
