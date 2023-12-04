@@ -27,6 +27,7 @@ const PostCard = () => {
   }, [currentUserLikes]);
 
   const likePostOnClick =(postId) => {
+    //  to prevent from spamming like button, we first wait for the request to fulfill then the user can send again
     if (isLoadingLikes) {
       return;
     } else {
@@ -105,10 +106,10 @@ const PostCard = () => {
             <div className="flex flex-col gap-1 px-1">
               <div className="flex gap-5 text-2xl text-cyan-700">
                 <button
-                  disabled={isLoading}
+                  disabled={isLoadingLikes}
                   onClick={(e) => likePostOnClick(_id)}
                 >
-                  <AiFillHeart className={`ease-in-out duration-400 ${likedPosts?.includes(_id)? "text-red-500" : "text-cyan-700"}`}/>
+                  <AiFillHeart className={`ease-in-out duration-600 ${likedPosts?.includes(_id)? "text-red-500 text-3xl" : "text-cyan-700"}`}/>
                 </button>
                 <button>
                   <FaRegCommentDots />
