@@ -2,7 +2,7 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
-import { createLike } from '../features/likes/likesSlice';
+import { createLike, getCurrentUserLikes } from '../features/likes/likesSlice';
 import { useEffect, useState } from 'react';
 
 
@@ -17,13 +17,16 @@ const PostCard = () => {
   const dispatch = useDispatch();
 
   const likePostOnClick = (postId) => { 
-      dispatch(
-        createLike({
-          post: postId,
-          name: currentUser?.fullName,
-          profilePicture: currentUser?.profilePicture,
-        })
-      );
+    if(postId){
+       dispatch(
+         createLike({
+           post: postId,
+           name: currentUser?.fullName,
+           profilePicture: currentUser?.profilePicture,
+         })
+       );
+    }
+      getCurrentUserLikes();
   }
 
   const findLikedPosts = () => {
@@ -47,6 +50,8 @@ const PostCard = () => {
       console.log(likedPosts)
     }
   },[likedPosts])
+
+
   return (
     <>
       {posts?.map((post) => {
@@ -97,7 +102,7 @@ const PostCard = () => {
                   disabled={isLoading}
                   onClick={(e) => likePostOnClick(_id)}
                 >
-                  <AiFillHeart className={`${likedPosts?.includes(_id)? "text-green-500" : "text-red-500"}`}/>
+                  <AiFillHeart className={`ease-in-out duration-400 ${likedPosts?.includes(_id)? "text-red-500" : ""}`}/>
                 </button>
                 <button>
                   <FaRegCommentDots />
