@@ -2,7 +2,7 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
-import { createLike, getCurrentUserLikes } from '../features/likes/likesSlice';
+import { createLike } from '../features/likes/likesSlice';
 import { useCallback, useEffect, useState } from 'react';
 
 
@@ -29,7 +29,8 @@ const PostCard = () => {
   const likePostOnClick = useCallback( (postId) => {
     // if like already exists and user presses like again, we remove the postId from liked post and we dispatch createLike which will handle add or removing the like from database
     if(likedPosts.includes(postId)){
-      likedPosts.filter((item) => item !== postId);
+      const newLikedPosts = likedPosts.filter((item) => item !== postId);
+      setLikedPosts(newLikedPosts)
       dispatch(
         createLike({
           post: postId,
