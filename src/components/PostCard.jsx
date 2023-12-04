@@ -9,8 +9,8 @@ import { useCallback, useEffect, useState } from 'react';
 const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
-  const {currentUser, isLoading} = useSelector((store) => store.user);
-  const {currentUserLikes, isLoadingLikes} = useSelector((store) => store.likes);
+  const {currentUser} = useSelector((store) => store.user);
+  const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
 
@@ -104,7 +104,7 @@ const PostCard = () => {
             </div>
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
-              <div className="ease-in-out duration-800 flex gap-5 text-2xl text-cyan-700">
+              <div className="flex gap-5 text-2xl text-cyan-700">
                 <button
                   disabled={isLoadingLikes}
                   onClick={(e) => likePostOnClick(_id)}
@@ -122,7 +122,18 @@ const PostCard = () => {
                 </button>
               </div>
               <span className="text-sm font-semibold">
-                Liked by <span className="text-md text-cyan-600">Catalin</span>{" "}
+                Liked by <span className="text-md text-cyan-600">{likes.map((like) => {
+                  let likesForThisPost = [];
+                  let randomLike;
+                  if(like.post === _id){
+                    likesForThisPost.push(like)
+                  }
+                  if(likesForThisPost){
+                    const random = Math.floor(Math.random() * likesForThisPost.length);
+                    randomLike = likedPosts[random];
+                    return randomLike.name;
+                  }
+                })}</span>{" "}
                 and <span className="text-md text-cyan-600">Others</span>
               </span>
               {/* last comment */}
