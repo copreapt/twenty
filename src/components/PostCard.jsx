@@ -104,16 +104,16 @@ const PostCard = () => {
             </div>
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
-              <div className="flex gap-5 text-2xl text-cyan-700">
+              <div className="ease-in-out duration-800 flex gap-5 text-2xl text-cyan-700">
                 <button
                   disabled={isLoadingLikes}
                   onClick={(e) => likePostOnClick(_id)}
                 >
                   <AiFillHeart
-                    className={`${
+                    className={`ease-in-out duration-800 ${
                       likedPosts?.includes(_id)
-                        ? "text-red-500 text-3xl ease-in-out duration-600"
-                        : "text-cyan-700 ease-in-out duration-600"
+                        ? "text-red-500 text-3xl"
+                        : "text-cyan-700"
                     }`}
                   />
                 </button>
