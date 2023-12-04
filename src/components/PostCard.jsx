@@ -52,7 +52,7 @@ const PostCard = () => {
 
   useEffect(() => {
       findLikedPosts()
-  },[currentUserLikes,likePostOnClick,findLikedPosts])
+  },[currentUserLikes,findLikedPosts])
 
   useEffect(() => {
       console.log(likedPosts)
