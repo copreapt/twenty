@@ -127,7 +127,7 @@ const PostCard = () => {
                 and <span className="text-md text-cyan-600">Others</span>
               </span>
               {/* last comment */}
-              <span className="text-xl">Last comment here</span>
+              <span className="text-xl font-semibold">Last comment here</span>
               {/* comment input */}
               <input
                 type="text"
