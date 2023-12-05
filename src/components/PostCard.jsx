@@ -104,7 +104,7 @@ const PostCard = () => {
             </div>
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
-              <div className="flex gap-5 text-2xl text-cyan-700 items-center">
+              <div className="flex gap-5 text-2xl text-cyan-700 items-center align-center justify-center">
                 <button
                   disabled={isLoadingLikes}
                   onClick={(e) => likePostOnClick(_id)}
@@ -117,7 +117,7 @@ const PostCard = () => {
                     }`}
                   />
                 </button>
-                <span className='text-sm'>{likes?.filter((item) => item.post === _id).length}</span>
+                <span className='text-xl font-semibold'>{likes?.filter((item) => item.post === _id).length}</span>
                 <button>
                   <FaRegCommentDots />
                 </button>
@@ -127,7 +127,7 @@ const PostCard = () => {
                 and <span className="text-md text-cyan-600">Others</span>
               </span>
               {/* last comment */}
-              <span className="text-xl font-semibold">Last comment here</span>
+              <span className="text-md">Last comment here</span>
               {/* comment input */}
               <input
                 type="text"
