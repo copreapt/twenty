@@ -13,6 +13,7 @@ const PostCard = () => {
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
+  const [randomValue, setRandomValue] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -57,6 +58,12 @@ const PostCard = () => {
   useEffect(() => {
       console.log(likedPosts)
   },[likedPosts])
+
+  useEffect(() => {
+    if(likes){
+      const random = Math.floor(Math.random() * likes.length);
+    }
+  },[])
 
 
   return (
@@ -122,18 +129,7 @@ const PostCard = () => {
                 </button>
               </div>
               <span className="text-sm font-semibold">
-                Liked by <span className="text-md text-cyan-600">{likes?.map((like) => {
-                  let likesForThisPost = [];
-                  let randomLike;
-                  if(like.post === _id){
-                    likesForThisPost.push(like)
-                  }
-                  if(likesForThisPost){
-                    const random = Math.floor(Math.random() * likesForThisPost.length);
-                    randomLike = likedPosts[random];
-                    return randomLike.name;
-                  }
-                })}</span>{" "}
+                Liked by <span className="text-md text-cyan-600">Catalin</span>{" "}
                 and <span className="text-md text-cyan-600">Others</span>
               </span>
               {/* last comment */}
