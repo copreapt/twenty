@@ -59,12 +59,6 @@ const PostCard = () => {
       console.log(likedPosts)
   },[likedPosts])
 
-  useEffect(() => {
-    if(likes){
-      const random = Math.floor(Math.random() * likes.length);
-    }
-  },[])
-
 
   return (
     <>
@@ -124,6 +118,7 @@ const PostCard = () => {
                     }`}
                   />
                 </button>
+                <span>{likes?.filter((item) => item.post === _id).length}</span>
                 <button>
                   <FaRegCommentDots />
                 </button>
