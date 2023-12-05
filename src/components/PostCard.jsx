@@ -130,7 +130,7 @@ const PostCard = () => {
                   {
                     likes?.filter((item) => item.post === _id)[
                       Math.floor(Math.random() * likes.length)
-                    ].name
+                    ]?.name
                   }
                 </span>{" "}
                 and <span className="text-md text-cyan-600">Others</span>
