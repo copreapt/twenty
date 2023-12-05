@@ -104,7 +104,7 @@ const PostCard = () => {
             </div>
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
-              <div className="flex gap-5 text-2xl text-cyan-700 items-center align-center justify-center">
+              <div className="flex gap-5 text-2xl text-cyan-700 items-center">
                 <button
                   disabled={isLoadingLikes}
                   onClick={(e) => likePostOnClick(_id)}
