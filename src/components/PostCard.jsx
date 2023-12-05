@@ -117,13 +117,22 @@ const PostCard = () => {
                     }`}
                   />
                 </button>
-                <span className='text-xl font-semibold'>{likes?.filter((item) => item.post === _id).length}</span>
+                <span className="text-xl font-semibold">
+                  {likes?.filter((item) => item.post === _id).length}
+                </span>
                 <button>
                   <FaRegCommentDots />
                 </button>
               </div>
               <span className="text-sm font-semibold">
-                Liked by <span className="text-md text-cyan-600">{likes?.filter((item) => item.post === _id)[Math.floor(Math.random() * likes.length).name]}</span>{" "}
+                Liked by{" "}
+                <span className="text-md text-cyan-600">
+                  {
+                    likes?.filter((item) => item.post === _id)[
+                      Math.floor(Math.random() * likes.length)
+                    ].name
+                  }
+                </span>{" "}
                 and <span className="text-md text-cyan-600">Others</span>
               </span>
               {/* last comment */}
