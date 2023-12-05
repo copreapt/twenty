@@ -13,7 +13,6 @@ const PostCard = () => {
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
-  const [randomValue, setRandomValue] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -118,7 +117,7 @@ const PostCard = () => {
                     }`}
                   />
                 </button>
-                <span>{likes?.filter((item) => item.post === _id).length}</span>
+                <span className='text-sm'>{likes?.filter((item) => item.post === _id).length}</span>
                 <button>
                   <FaRegCommentDots />
                 </button>
