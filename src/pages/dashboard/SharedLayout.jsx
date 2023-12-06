@@ -29,13 +29,13 @@ const SharedLayout = () => {
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
       {/* likes container */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-black/80 justify-center items-center z-20 ${openCurrentPostLikes? "flex" : "hidden"}`}
+        className={`fixed top-0 left-0 w-full h-full bg-black/80 justify-center items-center z-20 ease-in-out duration-700 ${openCurrentPostLikes? "flex" : "hidden"}`}
       >
         <div className="bg-cyan-700 text-white max-h-[30rem] overflow-y-auto">
           {/* likes and close button */}
           <div className="text-center border-b border-white mb-5 pb-2 relative p-2 pt-4">
             <IoClose
-              className="text-2xl absolute right-2 top-2"
+              className="text-2xl absolute right-2 top-2 hover:cursor-pointer"
               onClick={toggle}
             />
             <h1>Likes</h1>
