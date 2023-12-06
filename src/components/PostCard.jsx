@@ -49,10 +49,9 @@ const PostCard = () => {
     }
   }
 
-  const fetchCurrentPostLikes = (id) => {
-    dispatch(getCurrentPostLikes({post: id}))
-    toggleOpenCurrentPostLikes();
-  }
+  // const fetchCurrentPostLikes = (id) => {
+  //   dispatch(getCurrentPostLikes({post: id}))
+  // }
 
 
   useEffect(() => {
@@ -138,7 +137,7 @@ const PostCard = () => {
                     ]?.name
                   }
                 </span>{" "}
-                and <span className="text-md text-cyan-600 hover:cursor-pointer" onClick={(e) => fetchCurrentPostLikes(_id)}>Others</span>
+                and <span className="text-md text-cyan-600 hover:cursor-pointer" onClick={(e) => dispatch(getCurrentPostLikes({post: _id}))}>Others</span>
               </span>
               {/* last comment */}
               <span className="text-md">Last comment here</span>
