@@ -26,7 +26,7 @@ const SharedLayout = () => {
       // onClick={() => dispatch(toggleCloseCurrentPostLikes())}
     >
       {/* likes container */}
-      <div className={`"fixed  flex top-[20%]" ${openCurrentPostLikes? "" : "hidden"}`}>
+      <div className={`"fixed  flex top-[20%]" ${openCurrentPostLikes === true? "" : "hidden"}`}>
         <div className="bg-cyan-700 text-white max-h-[30rem] overflow-y-auto">
           {/* likes and close button */}
           <div className="flex flex-col items-center border-b border-white px-40 mb-5 pb-2">
