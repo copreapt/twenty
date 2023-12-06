@@ -8,7 +8,9 @@ import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../.
 
 
 const SharedLayout = () => {
-  const {currentPostLikes} = useSelector((store) => store.likes)
+  const { currentPostLikes, openCurrentPostLikes } = useSelector(
+    (store) => store.likes
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,9 +21,12 @@ const SharedLayout = () => {
   }, []);
 
   return (
-    <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center" onClick={() => toggleCloseCurrentPostLikes()}>
+    <main
+      className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center"
+      onClick={() => toggleCloseCurrentPostLikes()}
+    >
       {/* likes container */}
-      <div className="fixed  flex top-[20%]">
+      <div className={`"fixed  flex top-[20%]" ${openCurrentPostLikes? "" : "hidden"}`}>
         <div className="bg-cyan-700 text-white max-h-[30rem] overflow-y-auto">
           {/* likes and close button */}
           <div className="flex flex-col items-center border-b border-white px-40 mb-5 pb-2">
