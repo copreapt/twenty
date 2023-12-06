@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { IoClose } from "react-icons/io5";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
@@ -13,6 +14,10 @@ const SharedLayout = () => {
   );
   const dispatch = useDispatch();
 
+  const toggle = () => {
+    dispatch(toggleCloseCurrentPostLikes())
+  }
+
   useEffect(() => {
     dispatch(getAllPosts());
     dispatch(getCurrentUser());
@@ -23,21 +28,22 @@ const SharedLayout = () => {
   return (
     <main
       className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center"
-      onClick={() => dispatch(toggleCloseCurrentPostLikes())}
     >
       {/* likes container */}
-      <div className={`"fixed  flex top-[20%]" ${openCurrentPostLikes === true? "" : "hidden"}`}>
+      <div className="fixed top-0 left-0 w-full h-full flex bg-black/80 justify-center items-center z-20">
         <div className="bg-cyan-700 text-white max-h-[30rem] overflow-y-auto">
           {/* likes and close button */}
-          <div className="flex flex-col items-center border-b border-white px-40 mb-5 pb-2">
-            <div className="pt-2 flex items-center justify-between w-full">
-              <h1>Likes</h1>
-            </div>
+          <div className="text-center border-b border-white mb-5 pb-2 relative p-2 pt-4">
+            <IoClose className="text-2xl absolute right-2 top-2" onClick={toggle} />
+            <h1>Likes</h1>
           </div>
           {/* userInfo */}
           {currentPostLikes?.map((like) => {
             return (
-              <div className="flex justify-between px-5 mb-5" key={like._id}>
+              <div
+                className="flex justify-between gap-20 px-2 mb-5"
+                key={like._id}
+              >
                 {/* image and name */}
                 <div className="flex gap-4 items-center">
                   <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
