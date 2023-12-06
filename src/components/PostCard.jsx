@@ -50,7 +50,6 @@ const PostCard = () => {
   }
 
   const fetchCurrentPostLikes = (id) => {
-    toggleOpenCurrentPostLikes()
     dispatch(getCurrentPostLikes({post: id}))
   }
 
@@ -93,7 +92,9 @@ const PostCard = () => {
               </div>
               {/* add friend icon */}
               <div className="flex items-center text-cyan-700">
-                <HiOutlineUserAdd />
+                <HiOutlineUserAdd
+                  onClick={(e) => toggleOpenCurrentPostLikes()}
+                />
               </div>
             </div>
             {/* img/photo div */}
@@ -138,7 +139,13 @@ const PostCard = () => {
                     ]?.name
                   }
                 </span>{" "}
-                and <span className="text-md text-cyan-600 hover:cursor-pointer" onClick={() => fetchCurrentPostLikes(_id)}>Others</span>
+                and{" "}
+                <span
+                  className="text-md text-cyan-600 hover:cursor-pointer"
+                  onClick={() => fetchCurrentPostLikes(_id)}
+                >
+                  Others
+                </span>
               </span>
               {/* last comment */}
               <span className="text-md">Last comment here</span>
