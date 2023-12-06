@@ -50,6 +50,7 @@ const PostCard = () => {
   }
 
   const fetchCurrentPostLikes = (id) => {
+    dispatch(toggleOpenCurrentPostLikes())
     dispatch(getCurrentPostLikes({post: id}))
   }
 
@@ -93,7 +94,6 @@ const PostCard = () => {
               {/* add friend icon */}
               <div className="flex items-center text-cyan-700">
                 <HiOutlineUserAdd
-                  onClick={(e) => toggleOpenCurrentPostLikes()}
                 />
               </div>
             </div>
