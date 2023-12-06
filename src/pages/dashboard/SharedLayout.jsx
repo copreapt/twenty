@@ -23,7 +23,7 @@ const SharedLayout = () => {
   return (
     <main
       className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center"
-      // onClick={() => dispatch(toggleCloseCurrentPostLikes())}
+      onClick={() => dispatch(toggleCloseCurrentPostLikes())}
     >
       {/* likes container */}
       <div className={`"fixed  flex top-[20%]" ${openCurrentPostLikes === true? "" : "hidden"}`}>
