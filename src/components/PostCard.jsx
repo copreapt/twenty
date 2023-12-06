@@ -51,11 +51,12 @@ const PostCard = () => {
 
   const fetchCurrentPostLikes = (id) => {
     dispatch(getCurrentPostLikes({post: id}))
-  }
-
-  const toggle = () => {
     dispatch(toggleOpenCurrentPostLikes());
   }
+
+  // const toggle = () => {
+
+  // }
 
 
   useEffect(() => {
