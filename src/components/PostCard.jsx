@@ -97,7 +97,7 @@ const PostCard = () => {
               </div>
               {/* add friend icon */}
               <div className="flex items-center text-cyan-700">
-                <HiOutlineUserAdd onClick={toggle}
+                <HiOutlineUserAdd
                 />
               </div>
             </div>
