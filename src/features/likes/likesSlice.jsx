@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createLikeThunk, getLikesThunk, getCurrentUserLikesThunk } from "./likesThunk";
+import { createLikeThunk, getLikesThunk, getCurrentUserLikesThunk, getCurrentPostLikesThunk } from "./likesThunk";
 
 
 const initialState = {
   isLoadingLikes: false,
   likes: null,
   currentUserLikes: null,
+  currentPostLikes: null,
+  openCurrentPostLikes: false,
 };
 
 export const createLike = createAsyncThunk(
@@ -30,10 +32,24 @@ export const getCurrentUserLikes = createAsyncThunk(
   }
 );
 
+export const getCurrentPostLikes = createAsyncThunk(
+  "/likes/getCurrentPostLikes",
+  async (postId, thunkAPI) => {
+    return getCurrentPostLikesThunk("/likes/currentPostLikes", postId, thunkAPI);
+  }
+);
+
 const likesSlice = createSlice({
   name: "likes",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleOpenCurrentPostLikes: (state) => {
+      state.openCurrentPostLikes = true;
+    },
+    toggleCloseCurrentPostLikes: (state) => {
+      state.openCurrentPostLikes = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createLike.pending, (state) => {
@@ -70,8 +86,21 @@ const likesSlice = createSlice({
       .addCase(getCurrentUserLikes.rejected, (state, { payload }) => {
         state.isLoadingLikes = false;
         toast.error(payload);
+      })
+      .addCase(getCurrentPostLikes.pending, (state) => {
+        state.isLoadingLikes = true;
+      })
+      .addCase(getCurrentPostLikes.fulfilled, (state, { payload }) => {
+        const { currentPostLikes } = payload;
+        state.isLoadingLikes = false;
+        state.currentPostLikes = currentPostLikes;
+      })
+      .addCase(getCurrentPostLikes.rejected, (state, { payload }) => {
+        state.isLoadingLikes = false;
+        toast.error(payload);
       });
   },
 });
 
+export const { toggleOpenCurrentPostLikes, toggleCloseCurrentPostLikes } = likesSlice.actions;
 export default likesSlice.reducer;

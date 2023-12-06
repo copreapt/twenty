@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
-import { getLikes, getCurrentUserLikes } from "../../features/likes/likesSlice";
+import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
 
 
 
 const SharedLayout = () => {
-  
+  const {currentPostLikes} = useSelector((store) => store.likes)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,44 @@ const SharedLayout = () => {
   }, []);
 
   return (
-    <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col">
+    <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center" onClick={() => toggleCloseCurrentPostLikes()}>
+      {/* likes container */}
+      <div className="fixed  flex top-[20%]">
+        <div className="bg-cyan-700 text-white max-h-[30rem] overflow-y-auto">
+          {/* likes and close button */}
+          <div className="flex flex-col items-center border-b border-white px-40 mb-5 pb-2">
+            <div className="pt-2 flex items-center justify-between w-full">
+              <h1>Likes</h1>
+            </div>
+          </div>
+          {/* userInfo */}
+          {currentPostLikes?.map((like) => {
+            return (
+              <div className="flex justify-between px-5 mb-5" key={like._id}>
+                {/* image and name */}
+                <div className="flex gap-4 items-center">
+                  <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
+                    <img
+                      src={like.profilePicture}
+                      alt="profile picture"
+                      className="grow"
+                    />
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <h1>{like.name}</h1>
+                  </div>
+                </div>
+                {/* add friend button */}
+                <div className="flex items-center">
+                  <button className="rounded-md bg-cyan-400 px-2 py-1">
+                    Add Friend
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
       {/* Search Bar for Desktop */}
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 w-full">
         <SearchBar />
@@ -43,7 +80,6 @@ const SharedLayout = () => {
         <div className="hidden md:grid col-span-3 h-fit space-y-10">
           <AddsSection />
           <FriendList />
-
         </div>
       </div>
       {/* Navbar for mobile version */}

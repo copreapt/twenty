@@ -2,7 +2,7 @@ import {HiOutlineUserAdd} from 'react-icons/hi'
 import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
-import { createLike } from '../features/likes/likesSlice';
+import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
 import { useCallback, useEffect, useState } from 'react';
 
 
@@ -133,7 +133,7 @@ const PostCard = () => {
                     ]?.name
                   }
                 </span>{" "}
-                and <span className="text-md text-cyan-600">Others</span>
+                and <span className="text-md text-cyan-600" onClick={() => {dispatch(getCurrentPostLikes({_id})); toggleOpenCurrentPostLikes()}}>Others</span>
               </span>
               {/* last comment */}
               <span className="text-md">Last comment here</span>

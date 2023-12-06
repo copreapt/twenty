@@ -28,3 +28,12 @@ export const getCurrentUserLikesThunk = async (url, thunkAPI) => {
   }
 };
 
+export const getCurrentPostLikesThunk = async (url, postId, thunkAPI) => {
+  try {
+    const resp = await customFetch.get(url, postId);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};
+
