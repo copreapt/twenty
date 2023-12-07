@@ -144,7 +144,7 @@ const PostCard = () => {
                   <span className="text-sm">Liked by</span>
                   <span className="text-md text-cyan-600">
                     {
-                      Math.floor(Math.random() * likes?.filter((item) => item.post === _id).length - 1)?.name
+                    likes?.filter((item) => item.post === _id)[0]?.name
                     }
                   </span>
                   <span className="text-sm">and</span>
