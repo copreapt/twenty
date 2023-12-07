@@ -140,16 +140,16 @@ const PostCard = () => {
               </div>
               {/* liked by */}
               {likes?.filter((item) => item.post === _id).length > 0 ? (
-                <div className="flex gap-5 item-center">
-                  <span className="text-sm font-semibold">Liked by</span>
+                <div className="flex item-center font-semibold">
+                  <span className="text-sm">Liked by</span>
                   <span className="text-md text-cyan-600">
                     {
                       likes?.filter((item) => item.post === _id)[
-                        Math.floor(Math.random() * likes.length - 1)
+                        Math.floor(Math.random() * likes.length)
                       ]?.name
                     }
                   </span>
-                  <span className="text-sm font-semibold">and</span>
+                  <span className="text-sm">and</span>
                   <span
                     className="text-md text-cyan-600 hover:cursor-pointer"
                     onClick={() => fetchCurrentPostLikes(_id)}
