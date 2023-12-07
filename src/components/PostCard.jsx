@@ -140,11 +140,11 @@ const PostCard = () => {
               </div>
               {/* liked by */}
               {likes?.filter((item) => item.post === _id).length > 0 ? (
-                <div className="flex item-center font-semibold">
+                <div className="flex item-center gap-2 font-semibold">
                   <span className="text-sm">Liked by</span>
                   <span className="text-md text-cyan-600">
                     {
-                    likes?.filter((item) => item.post === _id)[0]?.name
+                    likes?.filter((item) => item.post === _id).pop()?.name
                     }
                   </span>
                   <span className="text-sm">and</span>
