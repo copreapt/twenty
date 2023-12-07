@@ -97,8 +97,7 @@ const PostCard = () => {
               </div>
               {/* add friend icon */}
               <div className="flex items-center text-cyan-700">
-                <HiOutlineUserAdd
-                />
+                <HiOutlineUserAdd />
               </div>
             </div>
             {/* img/photo div */}
@@ -127,30 +126,42 @@ const PostCard = () => {
                     }`}
                   />
                 </button>
-                <span className="text-xl font-semibold">
-                  {likes?.filter((item) => item.post === _id).length}
-                </span>
+                {/* number of likes */}
+                {likes?.filger((item) => item.post === _id).length > 0 ? (
+                  <span className="text-xl font-semibold">
+                    {likes?.filter((item) => item.post === _id).length}
+                  </span>
+                ) : (
+                  ""
+                )}
                 <button>
                   <FaRegCommentDots />
                 </button>
               </div>
-              <span className="text-sm font-semibold">
-                Liked by{" "}
-                <span className="text-md text-cyan-600">
-                  {
-                    likes?.filter((item) => item.post === _id)[
-                      Math.floor(Math.random() * likes.length)
-                    ]?.name
-                  }
-                </span>{" "}
-                and{" "}
-                <span
-                  className="text-md text-cyan-600 hover:cursor-pointer"
-                  onClick={() => fetchCurrentPostLikes(_id)}
-                >
-                  Others
-                </span>
-              </span>
+              {/* liked by */}
+              {likes?.filter((item) => item.post === _id).length > 0 ? (
+                <div>
+                  <span className="text-sm font-semibold">
+                    Liked by
+                    <span className="text-md text-cyan-600">
+                      {
+                        likes?.filter((item) => item.post === _id)[
+                          Math.floor(Math.random() * likes.length)
+                        ]?.name
+                      }
+                    </span>
+                    and
+                    <span
+                      className="text-md text-cyan-600 hover:cursor-pointer"
+                      onClick={() => fetchCurrentPostLikes(_id)}
+                    >
+                      Others
+                    </span>
+                  </span>
+                </div>
+              ) : (
+                ""
+              )}
               {/* last comment */}
               <span className="text-md">Last comment here</span>
               {/* comment input */}
