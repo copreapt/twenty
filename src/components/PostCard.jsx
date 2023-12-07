@@ -127,7 +127,7 @@ const PostCard = () => {
                   />
                 </button>
                 {/* number of likes */}
-                {likes?.filger((item) => item.post === _id).length > 0 ? (
+                {likes?.filter((item) => item.post === _id).length > 0 ? (
                   <span className="text-xl font-semibold">
                     {likes?.filter((item) => item.post === _id).length}
                   </span>
