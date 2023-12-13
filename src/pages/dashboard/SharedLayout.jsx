@@ -26,7 +26,6 @@ const SharedLayout = () => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
-    setValues(initialState);
   };
 
   const handleCommentSubmit = (e) => {
