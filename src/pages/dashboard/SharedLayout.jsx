@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
-import { toggleCloseCurrentPostComments } from "../../features/comments/commentsSlice";
+import { createComment, toggleCloseCurrentPostComments } from "../../features/comments/commentsSlice";
 
 const initialState = {
   comment: "",
@@ -15,6 +15,7 @@ const SharedLayout = () => {
 
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
+  const { currentPostId} = useSelector((store) => store.comments);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
   );
@@ -27,9 +28,10 @@ const SharedLayout = () => {
     setValues({ ...values, [name]: value });
   };
 
-  // const createComment () => {
-
-  // }
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createComment({name: currentUser?.name, profilePicture: currentUser?.profilePicture, comment: values?.comment, post: currentPostId?.payload }))
+  }
 
   const toggle = () => {
     dispatch(toggleCloseCurrentPostLikes())
@@ -159,7 +161,7 @@ const SharedLayout = () => {
                 </div>
               </div>
               {/* input div */}
-              <form className="mb-5 flex-none border-t border-black pt-3 flex gap-2 items-center" action="submit">
+              <form className="mb-5 flex-none border-t border-black pt-3 flex gap-2 items-center" action="submit" onSubmit={handleCommentSubmit}>
                 <input
                   type="text"
                   name="comment"
@@ -168,7 +170,7 @@ const SharedLayout = () => {
                   className="flex grow p-2 focus:shadow-none focus:border-black focus:outline-none focus:ring-transparent placeholder:text-black bg-gray-200"
                   placeholder="Add a comment..."
                 />
-                <button className="flex text-cyan-700">Post</button>
+                <button type="submit" className="flex text-cyan-700">Post</button>
               </form>
             </div>
           </div>
