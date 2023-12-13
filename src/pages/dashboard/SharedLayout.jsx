@@ -125,13 +125,13 @@ const SharedLayout = () => {
                 />
                 <div className="rounded-full justify-center overflow-hidden w-[40px] h-[40px] flex items-center">
                   <img
-                    src="/public/assets/defaultProfilePicture.jpg"
+                    src={currentUser?.profilePicture}
                     alt="image"
                     className="grow"
                   />
                 </div>
                 <div>
-                  <h1 className="text-md font-extra-light">Oprea Catalin</h1>
+                  <h1 className="text-md font-extra-light">{currentUser?.full}</h1>
                 </div>
               </div>
               {/* comments section */}
