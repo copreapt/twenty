@@ -3,8 +3,9 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
-import { toggleOpenCurrentPostComments } from '../features/comments/commentsSlice';
+import { toggleOpenCurrentPostComments, setCurrentPostId } from '../features/comments/commentsSlice';
 import { useCallback, useEffect, useState } from 'react';
+
 
 
 const PostCard = () => {
@@ -55,7 +56,8 @@ const PostCard = () => {
     dispatch(toggleOpenCurrentPostLikes());
   }
 
-  const fetchCurrentPostComments = () => {
+  const openCommentsModal = (id) => {
+    dispatch(setCurrentPostId(id));
     dispatch(toggleOpenCurrentPostComments());
   }
 
@@ -135,7 +137,7 @@ const PostCard = () => {
                 ) : (
                   ""
                 )}
-                <button onClick={fetchCurrentPostComments}>
+                <button onClick={(e) => openCommentsModal(_id)}>
                   <FaRegCommentDots />
                 </button>
               </div>

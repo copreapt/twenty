@@ -1,13 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { createCommentThunk } from "./commentsThunk";
 
 const initialState = {
-  isLoadingLikes: false,
+  isLoadingComments: false,
   comment: null,
   currentPostComments: null,
   openCurrentPostComments: false,
+  currentPostId:null,
 };
 
+
+export const createComment = createAsyncThunk(
+  "/comments/createComment",
+  async (commentData, thunkAPI) => {
+    return createCommentThunk("/comments", commentData, thunkAPI);
+  }
+);
 
 
 const commentsSlice = createSlice({
@@ -20,9 +29,25 @@ const commentsSlice = createSlice({
     toggleCloseCurrentPostComments: (state) => {
       state.openCurrentPostComments = false;
     },
+    setCurrentPostId : (state, id) => {
+        state.currentPostId = id;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createComment.pending, (state) => {
+        state.isLoadingComments = true;
+      })
+      .addCase(createComment.fulfilled, (state) => {
+        state.isLoadingComments = false;
+      })
+      .addCase(createComment.rejected, (state, { payload }) => {
+        state.isLoadingComments = false;
+        toast.error(payload);
+      });
   },
 });
 
-export const { toggleOpenCurrentPostComments, toggleCloseCurrentPostComments } =
+export const { toggleOpenCurrentPostComments, toggleCloseCurrentPostComments, setCurrentPostId } =
   commentsSlice.actions;
 export default commentsSlice.reducer;
