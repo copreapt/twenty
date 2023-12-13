@@ -30,7 +30,7 @@ const commentsSlice = createSlice({
       state.openCurrentPostComments = false;
     },
     setCurrentPostId : (state, id) => {
-        state.currentPostId = id;
+        state.currentPostComments = id;
     },
   },
   extraReducers: (builder) => {
