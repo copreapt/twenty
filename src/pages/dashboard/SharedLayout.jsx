@@ -30,7 +30,7 @@ const SharedLayout = () => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    dispatch(createComment({name: currentUser?.name, profilePicture: currentUser?.profilePicture, comment: values?.comment, post: currentPostId?.payload }))
+    dispatch(createComment({name: currentUser?.fullName, profilePicture: currentUser?.profilePicture, comment: values?.comment, post: currentPostId?.payload }))
   }
 
   const toggle = () => {
