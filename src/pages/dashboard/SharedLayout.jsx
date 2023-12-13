@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
+import { toggleCloseCurrentPostComments } from "../../features/comments/commentsSlice";
 
 
 
@@ -12,10 +13,15 @@ const SharedLayout = () => {
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
   );
+  const {openCurrentPostComments} = useSelector((store) => store.comments);
   const dispatch = useDispatch();
 
   const toggle = () => {
     dispatch(toggleCloseCurrentPostLikes())
+  }
+
+  const toggleComments = () => {
+    dispatch(toggleCloseCurrentPostComments());
   }
 
   useEffect(() => {
@@ -74,7 +80,11 @@ const SharedLayout = () => {
         </div>
       </div>
       {/* comments section modal */}
-      <div className="fixed flex top-0 left-0 w-full h-full  bg-black/80  items-center z-20">
+      <div
+        className={`fixed top-0 left-0 w-full h-full  bg-black/80  items-center z-20 ${
+          openCurrentPostComments ? "flex" : "hidden"
+        } `}
+      >
         {/* container */}
         <div className="grid grid-cols-12 p-20 max-w-screen-xl mx-auto">
           {/* image div */}
@@ -91,7 +101,10 @@ const SharedLayout = () => {
             <div className="flex flex-col relative">
               {/* current user profile picture and name */}
               <div className="border-b border-black mt-10 pb-5 flex items-center gap-3 flex-none">
-                <IoClose className="text-2xl absolute right-2 top-2 cursor-pointer" />
+                <IoClose
+                  className="text-2xl absolute right-2 top-2 cursor-pointer"
+                  onClick={toggleComments}
+                />
                 <div className="rounded-full justify-center overflow-hidden w-[40px] h-[40px] flex items-center">
                   <img
                     src="/public/assets/defaultProfilePicture.jpg"
