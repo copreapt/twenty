@@ -131,7 +131,7 @@ const SharedLayout = () => {
                   />
                 </div>
                 <div>
-                  <h1 className="text-md font-extra-light">{currentUser?.full}</h1>
+                  <h1 className="text-md font-extra-light">{currentUser?.fullName}</h1>
                 </div>
               </div>
               {/* comments section */}
