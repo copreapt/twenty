@@ -29,7 +29,9 @@ const SharedLayout = () => {
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
       {/* likes container */}
       <div
-        className={`fixed top-0 left-0 w-full h-full bg-black/80 justify-center items-center z-20 ease-in-out duration-700 ${openCurrentPostLikes? "flex" : "hidden"}`}
+        className={`fixed top-0 left-0 w-full h-full bg-black/80 justify-center items-center z-20 ease-in-out duration-700 ${
+          openCurrentPostLikes ? "flex" : "hidden"
+        }`}
       >
         <div className="bg-cyan-700 text-white max-h-[30rem] overflow-y-auto rounded-md">
           {/* likes and close button */}
@@ -69,6 +71,77 @@ const SharedLayout = () => {
               </div>
             );
           })}
+        </div>
+      </div>
+      {/* comments section modal */}
+      <div className="fixed flex top-0 left-0 w-full h-full  bg-black/80  items-center z-20">
+        {/* container */}
+        <div className="grid grid-cols-12 p-20 max-w-screen-xl mx-auto">
+          {/* image div */}
+          <div className="col-span-7 flex items-center justify-center bg-black">
+            <img
+              src="/public/assets/testimg.jpg"
+              alt="user image"
+              className="w-full"
+            />
+          </div>
+          {/* comments section div */}
+          <div className="col-span-5 p-5 bg-gray-200 ">
+            {/* container */}
+            <div className="flex flex-col relative">
+              {/* current user profile picture and name */}
+              <div className="border-b border-black mt-10 pb-5 flex items-center gap-3 flex-none">
+                <IoClose className="text-2xl absolute right-2 top-2 cursor-pointer" />
+                <div className="rounded-full justify-center overflow-hidden w-[40px] h-[40px] flex items-center">
+                  <img
+                    src="/public/assets/defaultProfilePicture.jpg"
+                    alt="image"
+                    className="grow"
+                  />
+                </div>
+                <div>
+                  <h1 className="text-md font-extra-light">Oprea Catalin</h1>
+                </div>
+              </div>
+              {/* comments section */}
+              <div className="grow my-5 overflow-y-auto p-2 space-y-3 max-h-[400px]">
+                {/* container */}
+                <div className="flex gap-5 items-center flex-col">
+                  {/* user div */}
+                  <div className="flex items-center gap-2">
+                    {/* img */}
+                    <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
+                      <img
+                        src="/public/assets/defaultProfilePicture.jpg"
+                        alt="image"
+                        className="grow"
+                      />
+                    </div>
+                    {/* name */}
+                    <div className="text-sm">
+                      <span className="font-extra-light text-cyan-700 mr-2">
+                        Oprea Catalin
+                      </span>
+                      <span className="text-[0.90rem] text-gray-700 break-all">
+                        random comment lets
+                        goooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* input div */}
+              <div className="mb-5 flex-none border-t border-black pt-3 flex gap-2 items-center">
+                <input
+                  type="text"
+                  className="flex grow p-2 focus:shadow-none focus:border-black focus:outline-none focus:ring-transparent placeholder:text-black bg-gray-200"
+                  placeholder="Add a comment..."
+                />
+                <p className="flex text-cyan-700 cursor-pointer">Post</p>
+              </div>
+            </div>
+          </div>
+          {/* end of comments section div */}
         </div>
       </div>
       {/* Search Bar for Desktop */}
