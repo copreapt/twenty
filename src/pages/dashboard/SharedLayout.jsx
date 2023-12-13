@@ -159,7 +159,7 @@ const SharedLayout = () => {
                 </div>
               </div>
               {/* input div */}
-              <form className="mb-5 flex-none border-t border-black pt-3 flex gap-2 items-center" action="submit" onSubmit={}>
+              <form className="mb-5 flex-none border-t border-black pt-3 flex gap-2 items-center" action="submit">
                 <input
                   type="text"
                   name="comment"
