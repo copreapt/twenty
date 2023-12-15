@@ -15,7 +15,7 @@ const SharedLayout = () => {
 
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -139,26 +139,29 @@ const SharedLayout = () => {
                 {/* container */}
                 <div className="flex gap-5 items-center flex-col">
                   {/* user div */}
-                  <div className="flex items-center gap-2">
-                    {/* img */}
-                    <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
-                      <img
-                        src="/public/assets/defaultProfilePicture.jpg"
-                        alt="image"
-                        className="grow"
-                      />
-                    </div>
-                    {/* name */}
-                    <div className="text-sm">
-                      <span className="font-extra-light text-cyan-700 mr-2">
-                        Oprea Catalin
-                      </span>
-                      <span className="text-[0.90rem] text-gray-700 break-all">
-                        random comment lets
-                        goooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-                      </span>
-                    </div>
-                  </div>
+                  {currentPostComments?.map((comment) => {
+                    return (
+                      <div className="flex items-center gap-2" key={comment._id}>
+                        {/* img */}
+                        <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
+                          <img
+                            src={comment.profilePicture}
+                            alt="image"
+                            className="grow"
+                          />
+                        </div>
+                        {/* name */}
+                        <div className="text-sm">
+                          <span className="font-extra-light text-cyan-700 mr-2">
+                            {comment.name}
+                          </span>
+                          <span className="text-[0.90rem] text-gray-700 break-all">
+                            {comment.comment}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               {/* input div */}
