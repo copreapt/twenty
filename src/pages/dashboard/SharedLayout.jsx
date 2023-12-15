@@ -137,7 +137,7 @@ const SharedLayout = () => {
               {/* comments section */}
               <div className="grow my-5 overflow-y-auto p-2 space-y-3 max-h-[400px]">
                 {/* container */}
-                <div className="flex gap-5 items-center justify-start flex-col">
+                <div className="flex gap-5 items-baseline flex-col">
                   {/* user div */}
                   {currentPostComments?.map((comment) => {
                     return (
