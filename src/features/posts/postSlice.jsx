@@ -4,6 +4,7 @@ import {
   getAllPostsThunk,
   uploadImageThunk,
   createPostThunk,
+  getCurrentPostThunk,
 } from "./postThunk";
 
 const initialState = {
@@ -28,6 +29,10 @@ export const uploadImage = createAsyncThunk(
 export const createPost = createAsyncThunk("/posts/createPost", async (post, thunkAPI) => {
   return createPostThunk("/posts", post, thunkAPI);
 });
+
+export const getCurrentPost = createAsyncThunk("/posts/getCurrentPost", async (thunkAPI) => {
+  return getCurrentPostThunk("/posts", thunkAPI);
+})
 
 const postsSlice = createSlice({
   name: "posts",
@@ -69,6 +74,18 @@ const postsSlice = createSlice({
         toast.success('Post Created');
       })
       .addCase(createPost.rejected, (state, {payload}) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(getCurrentPost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCurrentPost.fulfilled, (state, {payload}) => {
+        const {post} = payload;
+        state.isLoading = false;
+        state.currentPost = post;
+      })
+      .addCase(getCurrentPost.rejected, (state, {payload}) => {
         state.isLoading = false;
         toast.error(payload);
       })
