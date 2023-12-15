@@ -16,6 +16,7 @@ const SharedLayout = () => {
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
   const { currentPostId} = useSelector((store) => store.comments);
+  const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
   );
@@ -107,7 +108,7 @@ const SharedLayout = () => {
           {/* image div */}
           <div className="col-span-7 flex items-center justify-center bg-black">
             <img
-              src="/public/assets/testimg.jpg"
+              src={currentPost?.image}
               alt="user image"
               className="w-full"
             />

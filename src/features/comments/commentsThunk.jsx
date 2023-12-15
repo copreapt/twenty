@@ -8,3 +8,12 @@ export const createCommentThunk = async (url, commentData, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
+
+export const getCurrentPostCommentsThunk = async (url, postId, thunkAPI) => {
+  try {
+    const resp = await customFetch.get(url, postId);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+}
