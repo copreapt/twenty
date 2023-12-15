@@ -18,8 +18,8 @@ export const createComment = createAsyncThunk(
   }
 );
 
-export const getCurrentPostComments = createAsyncThunk("/comments/getCurrentPostComments", async (postId, thunkAPI) => {
-  return getCurrentPostCommentsThunk("/comments", postId, thunkAPI);
+export const getCurrentPostComments = createAsyncThunk("/comments/getCurrentPostComments", async (thunkAPI) => {
+  return getCurrentPostCommentsThunk("/comments",thunkAPI);
 })
 
 
