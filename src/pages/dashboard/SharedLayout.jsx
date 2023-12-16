@@ -32,7 +32,7 @@ const SharedLayout = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     dispatch(createComment({name: currentUser?.fullName, profilePicture: currentUser?.profilePicture, comment: values?.comment, post: currentPostId?.payload }))
-    if(!creatingComment){
+    if(creatingComment === false){
       dispatch(getLastComment({ post: currentPostId?.payload }));
     }
   }
