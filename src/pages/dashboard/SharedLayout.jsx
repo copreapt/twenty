@@ -41,7 +41,9 @@ const SharedLayout = () => {
         })
       );
     }
-    dispatch(getLastComment({ post: currentPostId?.payload }));
+    if(creatingComment === false){
+      dispatch(getLastComment({ post: currentPostId?.payload }));
+    }
   }
 
   const toggle = () => {
