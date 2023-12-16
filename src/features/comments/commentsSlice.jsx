@@ -46,6 +46,7 @@ const commentsSlice = createSlice({
     builder
       .addCase(createComment.pending, (state) => {
         state.isLoadingComments = true;
+        state.creatingComment = true;
       })
       .addCase(createComment.fulfilled, (state, {payload}) => {
         state.isLoadingComments = false;
@@ -54,6 +55,7 @@ const commentsSlice = createSlice({
       })
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
+        state.creatingComment = true;
         toast.error(payload);
       })
       .addCase(getCurrentPostComments.pending, (state) => {
@@ -67,6 +69,7 @@ const commentsSlice = createSlice({
       })
       .addCase(getCurrentPostComments.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
+        state.creatingComment = true;
         toast.error(payload);
       })
       .addCase(getLastComment.pending, (state) => {
