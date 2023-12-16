@@ -8,7 +8,7 @@ const initialState = {
   currentPostComments: null,
   openCurrentPostComments: false,
   currentPostId:null,
-  creatingComment: false,
+  creatingComment: true,
 };
 
 
