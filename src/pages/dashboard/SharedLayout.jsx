@@ -14,7 +14,7 @@ const SharedLayout = () => {
     comment: "",
   });
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments, createComment} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments, creatingComment} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -38,7 +38,7 @@ const SharedLayout = () => {
             post: currentPostId?.payload,
           })
         );
-      if(createComment === false){
+      if(creatingComment === false){
         dispatch(getCurrentPostComments({post: currentPostId?.payload}))
       }
         setValues({comment: ""});
