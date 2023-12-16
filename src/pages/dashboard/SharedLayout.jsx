@@ -14,7 +14,7 @@ const SharedLayout = () => {
     comment: "",
   });
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments, creatingComment} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -28,7 +28,7 @@ const SharedLayout = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleCommentSubmit =(e) => {
+  const handleCommentSubmit = useCallback((e) => {
     e.preventDefault();
         dispatch(
           createComment({
@@ -39,7 +39,7 @@ const SharedLayout = () => {
           })
         );
         setValues({comment: ""});
-  }
+  },[currentUser?.fullName,currentUser?.profilePicture,values?.comment,currentPostId?.payload, dispatch])
   
   const toggle = () => {
     dispatch(toggleCloseCurrentPostLikes())
@@ -55,6 +55,10 @@ const SharedLayout = () => {
     dispatch(getLikes());
     dispatch(getCurrentUserLikes());
   }, []);
+
+  useEffect(() => {
+    dispatch(getCurrentPostComments({post: currentPostId?.payload}))
+  },[currentPostId?.payload, dispatch, handleCommentSubmit])
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
