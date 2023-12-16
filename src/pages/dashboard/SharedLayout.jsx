@@ -29,7 +29,7 @@ const SharedLayout = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleCommentSubmit =(e) => {
+  const handleCommentSubmit = useCallback((e) => {
     e.preventDefault();
       dispatch(
         createComment({
@@ -39,11 +39,8 @@ const SharedLayout = () => {
           post: currentPostId?.payload,
         })
       );
-        if(isLoadingComments === false){
-          dispatch(getCurrentPostComments());
-        }
-  }
-  
+  },[currentUser?.fullName, currentUser?.profilePicture, values?.comment, currentPostId?.payload, dispatch])
+
   const toggle = () => {
     dispatch(toggleCloseCurrentPostLikes())
   }
@@ -58,6 +55,10 @@ const SharedLayout = () => {
     dispatch(getLikes());
     dispatch(getCurrentUserLikes());
   }, []);
+
+  useEffect(() => {
+    dispatch(getCurrentPostComments())
+  },[handleCommentSubmit, dispatch])
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
