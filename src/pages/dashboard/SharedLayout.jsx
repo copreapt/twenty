@@ -31,7 +31,6 @@ const SharedLayout = () => {
 
   const handleCommentSubmit =(e) => {
     e.preventDefault();
-      if(creatingComment === true){
         dispatch(
           createComment({
             name: currentUser?.fullName,
@@ -40,10 +39,7 @@ const SharedLayout = () => {
             post: currentPostId?.payload,
           })
         );
-      }
-      if(creatingComment === false){
-        dispatch(getCurrentPostComments({post: currentPostId?.payload}));
-      }
+      setValues(initialState);
   }
   
   const toggle = () => {
