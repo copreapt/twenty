@@ -176,7 +176,7 @@ const SharedLayout = () => {
                 <input
                   type="text"
                   name="comment"
-                  value={values.name}
+                  value={values.comment}
                   onChange={storeMessageInState}
                   className="flex grow p-2 focus:shadow-none focus:border-black focus:outline-none focus:ring-transparent placeholder:text-black bg-gray-200"
                   placeholder="Add a comment..."
