@@ -15,7 +15,7 @@ const SharedLayout = () => {
 
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments, isLoadingComments} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments, creatingComment} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -29,18 +29,23 @@ const SharedLayout = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleCommentSubmit = useCallback((e) => {
+  const handleCommentSubmit =(e) => {
     e.preventDefault();
-      dispatch(
-        createComment({
-          name: currentUser?.fullName,
-          profilePicture: currentUser?.profilePicture,
-          comment: values?.comment,
-          post: currentPostId?.payload,
-        })
-      );
-  },[currentUser?.fullName, currentUser?.profilePicture, values?.comment, currentPostId?.payload, dispatch])
-
+      if(creatingComment === true){
+        dispatch(
+          createComment({
+            name: currentUser?.fullName,
+            profilePicture: currentUser?.profilePicture,
+            comment: values?.comment,
+            post: currentPostId?.payload,
+          })
+        );
+      }
+      if(creatingComment === false){
+        dispatch(getCurrentPostComments());
+      }
+  }
+  
   const toggle = () => {
     dispatch(toggleCloseCurrentPostLikes())
   }
@@ -55,10 +60,6 @@ const SharedLayout = () => {
     dispatch(getLikes());
     dispatch(getCurrentUserLikes());
   }, []);
-
-  useEffect(() => {
-    dispatch(getCurrentPostComments())
-  },[handleCommentSubmit, dispatch])
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
