@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
-import { createComment, toggleCloseCurrentPostComments, getLastComment } from "../../features/comments/commentsSlice";
+import { createComment, toggleCloseCurrentPostComments, getCurrentPostComments } from "../../features/comments/commentsSlice";
 
 const initialState = {
   comment: "",
@@ -15,7 +15,7 @@ const SharedLayout = () => {
 
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments, creatingComment} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -31,7 +31,6 @@ const SharedLayout = () => {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    if(creatingComment){
       dispatch(
         createComment({
           name: currentUser?.fullName,
@@ -40,10 +39,6 @@ const SharedLayout = () => {
           post: currentPostId?.payload,
         })
       );
-    }
-    if(creatingComment === false){
-      dispatch(getLastComment({ post: currentPostId?.payload }));
-    }
   }
 
   const toggle = () => {
@@ -60,6 +55,10 @@ const SharedLayout = () => {
     dispatch(getLikes());
     dispatch(getCurrentUserLikes());
   }, []);
+
+  useEffect(() => {
+    getCurrentPostComments()
+  },[handleCommentSubmit])
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">

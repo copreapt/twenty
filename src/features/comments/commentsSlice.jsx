@@ -8,7 +8,6 @@ const initialState = {
   currentPostComments: null,
   openCurrentPostComments: false,
   currentPostId:null,
-  creatingComment: true,
   lastComment: null,
 };
 
@@ -47,13 +46,12 @@ const commentsSlice = createSlice({
       .addCase(createComment.pending, (state) => {
         state.isLoadingComments = true;
       })
-      .addCase(createComment.fulfilled, (state) => {
+      .addCase(createComment.fulfilled, (state, {payload}) => {
         state.isLoadingComments = false;
-        state.creatingComment = false;
+        state.lastComment = payload;
       })
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
-        state.creatingComment = false;
         toast.error(payload);
       })
       .addCase(getCurrentPostComments.pending, (state) => {
@@ -62,7 +60,6 @@ const commentsSlice = createSlice({
       .addCase(getCurrentPostComments.fulfilled, (state, { payload }) => {
         const { comments } = payload;
         state.isLoadingComments = false;
-        state.creatingComment = true;
         state.currentPostComments = comments;
       })
       .addCase(getCurrentPostComments.rejected, (state, { payload }) => {
