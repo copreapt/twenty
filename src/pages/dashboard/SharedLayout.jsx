@@ -7,13 +7,12 @@ import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
 import { createComment, toggleCloseCurrentPostComments, getCurrentPostComments } from "../../features/comments/commentsSlice";
 
-const initialState = {
-  comment: "",
-};
 
 const SharedLayout = () => {
 
-  const [values, setValues] = useState(initialState);
+  const [values, setValues] = useState({
+    comment: "",
+  });
   const { currentUser } = useSelector((store) => store.user);
   const { currentPostId, currentPostComments, creatingComment} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
@@ -39,7 +38,7 @@ const SharedLayout = () => {
             post: currentPostId?.payload,
           })
         );
-      setValues(initialState);
+        setValues({comment: ""});
   }
   
   const toggle = () => {
