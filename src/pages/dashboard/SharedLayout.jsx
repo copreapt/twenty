@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,7 @@ const SharedLayout = () => {
 
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments, isLoadingComments} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -29,7 +29,7 @@ const SharedLayout = () => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleCommentSubmit = (e) => {
+  const handleCommentSubmit =(e) => {
     e.preventDefault();
       dispatch(
         createComment({
@@ -39,8 +39,11 @@ const SharedLayout = () => {
           post: currentPostId?.payload,
         })
       );
+        if(isLoadingComments === false){
+          dispatch(getCurrentPostComments());
+        }
   }
-
+  
   const toggle = () => {
     dispatch(toggleCloseCurrentPostLikes())
   }
@@ -55,10 +58,6 @@ const SharedLayout = () => {
     dispatch(getLikes());
     dispatch(getCurrentUserLikes());
   }, []);
-
-  useEffect(() => {
-    getCurrentPostComments()
-  },[handleCommentSubmit])
 
   return (
     <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
