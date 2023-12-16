@@ -38,7 +38,9 @@ const SharedLayout = () => {
             post: currentPostId?.payload,
           })
         );
-      
+      if(createComment === false){
+        dispatch(getCurrentPostComments({post: currentPostId?.payload}))
+      }
         setValues({comment: ""});
 
   }
