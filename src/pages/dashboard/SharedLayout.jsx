@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
-import { createComment, toggleCloseCurrentPostComments } from "../../features/comments/commentsSlice";
+import { createComment, toggleCloseCurrentPostComments, getLastComment } from "../../features/comments/commentsSlice";
 
 const initialState = {
   comment: "",
@@ -32,6 +32,7 @@ const SharedLayout = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     dispatch(createComment({name: currentUser?.fullName, profilePicture: currentUser?.profilePicture, comment: values?.comment, post: currentPostId?.payload }))
+    dispatch(getLastComment({ post: currentPostId?.payload }));
   }
 
   const toggle = () => {
