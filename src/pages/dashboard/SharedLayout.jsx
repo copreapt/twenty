@@ -42,7 +42,7 @@ const SharedLayout = () => {
         );
       }
       if(creatingComment === false){
-        dispatch(getCurrentPostComments());
+        dispatch(getCurrentPostComments({post: currentPostId?.payload}));
       }
   }
   
