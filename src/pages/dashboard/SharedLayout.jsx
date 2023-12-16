@@ -15,7 +15,7 @@ const SharedLayout = () => {
 
   const [values, setValues] = useState(initialState);
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments, creatingComment} = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -32,7 +32,9 @@ const SharedLayout = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     dispatch(createComment({name: currentUser?.fullName, profilePicture: currentUser?.profilePicture, comment: values?.comment, post: currentPostId?.payload }))
-    dispatch(getLastComment({ post: currentPostId?.payload }));
+    if(!creatingComment){
+      dispatch(getLastComment({ post: currentPostId?.payload }));
+    }
   }
 
   const toggle = () => {

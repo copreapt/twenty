@@ -8,6 +8,7 @@ const initialState = {
   currentPostComments: null,
   openCurrentPostComments: false,
   currentPostId:null,
+  creatingComment: false,
 };
 
 
@@ -44,12 +45,15 @@ const commentsSlice = createSlice({
     builder
       .addCase(createComment.pending, (state) => {
         state.isLoadingComments = true;
+        state.creatingComment = true;
       })
       .addCase(createComment.fulfilled, (state) => {
         state.isLoadingComments = false;
+        state.creatingComment = false;
       })
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
+        state.creatingComment = false;
         toast.error(payload);
       })
       .addCase(getCurrentPostComments.pending, (state) => {
