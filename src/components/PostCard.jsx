@@ -164,14 +164,6 @@ const PostCard = () => {
               ) : (
                 ""
               )}
-              {/* last comment */}
-              <span className="text-md">Last comment here</span>
-              {/* comment input */}
-              <input
-                type="text"
-                placeholder="Leave a comment here..."
-                className="text-sm"
-              />
             </div>
           </div>
         );
