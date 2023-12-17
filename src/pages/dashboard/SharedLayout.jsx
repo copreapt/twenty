@@ -146,7 +146,7 @@ const SharedLayout = () => {
                 {/* container */}
                 <div className="flex gap-5 items-baseline flex-col">
                   {/* user div */}
-                  {currentPostComments?.map((comment) => {
+                  {currentPostComments?.reverse().map((comment) => {
                     return (
                       <div className="flex items-center gap-2" key={comment._id}>
                         {/* img */}
