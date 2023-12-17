@@ -8,8 +8,6 @@ const initialState = {
   currentPostComments: null,
   openCurrentPostComments: false,
   currentPostId:null,
-  lastComment: null,
-  creatingComment: true,
 };
 
 
@@ -23,10 +21,6 @@ export const createComment = createAsyncThunk(
 export const getCurrentPostComments = createAsyncThunk("/comments/getCurrentPostComments", async ( postId, thunkAPI) => {
   return getCurrentPostCommentsThunk("/comments/getCurrentPostComments", postId, thunkAPI);
 })
-
-export const getLastComment = createAsyncThunk("/comments/getLastComment", async (postId, thunkAPI) => {
-  return getLastCommentThunk("/comments/getLastComment", postId, thunkAPI);
-});
 
 const commentsSlice = createSlice({
   name: "comments",
@@ -46,16 +40,14 @@ const commentsSlice = createSlice({
     builder
       .addCase(createComment.pending, (state) => {
         state.isLoadingComments = true;
-        state.creatingComment = true;
       })
       .addCase(createComment.fulfilled, (state, {payload}) => {
+        const {allComments} = payload;
         state.isLoadingComments = false;
-        state.lastComment = payload;
-        state.creatingComment = false;
+        state.currentPostComments = allComments;
       })
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
-        state.creatingComment = true;
         toast.error(payload);
       })
       .addCase(getCurrentPostComments.pending, (state) => {
@@ -65,22 +57,8 @@ const commentsSlice = createSlice({
         const { comments } = payload;
         state.isLoadingComments = false;
         state.currentPostComments = comments;
-        state.creatingComment = true;
       })
       .addCase(getCurrentPostComments.rejected, (state, { payload }) => {
-        state.isLoadingComments = false;
-        state.creatingComment = true;
-        toast.error(payload);
-      })
-      .addCase(getLastComment.pending, (state) => {
-        state.isLoadingComments = true;
-      })
-      .addCase(getLastComment.fulfilled, (state, { payload }) => {
-        const { lastComment } = payload;
-        state.isLoadingComments = false;
-        state.lastComment = lastComment;
-      })
-      .addCase(getLastComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
         toast.error(payload);
       });
