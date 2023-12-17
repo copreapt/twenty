@@ -14,7 +14,7 @@ const SharedLayout = () => {
     comment: "",
   });
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments} = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments } = useSelector((store) => store.comments);
   const {currentPost} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes

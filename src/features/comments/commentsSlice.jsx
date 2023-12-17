@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createCommentThunk, getCurrentPostCommentsThunk, getLastCommentThunk } from "./commentsThunk";
+import { createCommentThunk, getCurrentPostCommentsThunk } from "./commentsThunk";
 
 const initialState = {
   isLoadingComments: false,

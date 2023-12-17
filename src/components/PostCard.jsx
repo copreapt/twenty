@@ -14,6 +14,7 @@ const PostCard = () => {
   const  {posts}  = useSelector((store) => store.posts);
   const {currentUser} = useSelector((store) => store.user);
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
+  const {isLoading} = useSelector((store) => store.posts);
 
   const [likedPosts, setLikedPosts] = useState(null)
 
@@ -61,7 +62,9 @@ const PostCard = () => {
     dispatch(setCurrentPostId(id));
     dispatch(getCurrentPost({id: id}))
     dispatch(getCurrentPostComments({post: id}))
-    dispatch(toggleOpenCurrentPostComments());
+    if(!isLoading){
+      dispatch(toggleOpenCurrentPostComments());
+    }
   }
 
 
