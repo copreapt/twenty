@@ -13,7 +13,7 @@ const PostCard = () => {
 
   const  {posts}  = useSelector((store) => store.posts);
   const {currentUser} = useSelector((store) => store.user);
-  const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
+  const {currentUserLikes, isLoadingLikes, likes, numberOfLikes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
 
@@ -135,10 +135,12 @@ const PostCard = () => {
                 {/* number of likes */}
                 {likes?.filter((item) => item.post === _id).length > 0 ? (
                   <span className="text-xl font-semibold">
-                    {likes?.filter((item) => item.post === _id).length}
+                    {numberOfLikes?.count}
                   </span>
                 ) : (
-                  ""
+                  <span className="text-xl font-semibold">
+                    {likes?.filter((item) => item.post === _id).length}
+                  </span>
                 )}
                 <button onClick={(e) => openCommentsModal(_id)}>
                   <FaRegCommentDots />
@@ -149,9 +151,7 @@ const PostCard = () => {
                 <div className="flex items-center gap-2 font-semibold">
                   <span className="text-sm">Liked by</span>
                   <span className="text-md text-cyan-600">
-                    {
-                    likes?.filter((item) => item.post === _id).pop()?.name
-                    }
+                    {likes?.filter((item) => item.post === _id).pop()?.name}
                   </span>
                   <span className="text-sm">and</span>
                   <span
