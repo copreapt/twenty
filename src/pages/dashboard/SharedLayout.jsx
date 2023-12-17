@@ -15,7 +15,7 @@ const SharedLayout = () => {
   });
   const { currentUser } = useSelector((store) => store.user);
   const { currentPostId, currentPostComments } = useSelector((store) => store.comments);
-  const {currentPost} = useSelector((store) => store.posts);
+  const {currentPost, isLoading} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
   );
@@ -148,15 +148,22 @@ const SharedLayout = () => {
                   {/* user div */}
                   {currentPostComments?.map((comment) => {
                     return (
-                      <div className="flex items-center gap-2" key={comment._id}>
+                      <div
+                        className="flex items-center gap-2"
+                        key={comment._id}
+                      >
                         {/* img */}
-                        <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
-                          <img
-                            src={comment.profilePicture}
-                            alt="image"
-                            className="grow"
-                          />
-                        </div>
+                        {isLoading ? (
+                          "Loading..."
+                        ) : (
+                          <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
+                            <img
+                              src={comment.profilePicture}
+                              alt="image"
+                              className="grow"
+                            />
+                          </div>
+                        )}
                         {/* name */}
                         <div className="text-sm">
                           <span className="font-extra-light text-cyan-700 mr-2">
