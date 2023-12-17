@@ -8,7 +8,6 @@ const initialState = {
   likes: null,
   currentUserLikes: null,
   currentPostLikes: null,
-  numberOfLikes: null,
   openCurrentPostLikes: false,
 };
 
@@ -57,9 +56,9 @@ const likesSlice = createSlice({
         state.isLoadingLikes = true;
       })
       .addCase(createLike.fulfilled, (state, { payload }) => {
-        const {count} = payload;
+        const {currentPostLikes} = payload;
         state.isLoadingLikes = false;
-        state.numberOfLikes = count;
+        state.currentPostLikes = currentPostLikes;
         toast.success = payload.msg;
       })
       .addCase(createLike.rejected, (state, { payload }) => {
