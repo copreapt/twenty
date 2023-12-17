@@ -38,14 +38,16 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    
+    removeCurrentPostFromState: (state) => {
+      state.currentPost = null;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAllPosts.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllPosts.fulfilled, (state, {payload}) => {
+      .addCase(getAllPosts.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.posts = payload.posts;
       })
@@ -56,12 +58,12 @@ const postsSlice = createSlice({
       .addCase(uploadImage.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(uploadImage.fulfilled, (state, {payload}) => {
-        const {image} = payload
+      .addCase(uploadImage.fulfilled, (state, { payload }) => {
+        const { image } = payload;
         state.isLoading = false;
         state.postImage = image?.src;
       })
-      .addCase(uploadImage.rejected, (state, {payload}) => {
+      .addCase(uploadImage.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       })
@@ -70,26 +72,28 @@ const postsSlice = createSlice({
       })
       .addCase(createPost.fulfilled, (state) => {
         state.isLoading = false;
-        state.postImage = '';
-        toast.success('Post Created');
+        state.postImage = "";
+        toast.success("Post Created");
       })
-      .addCase(createPost.rejected, (state, {payload}) => {
+      .addCase(createPost.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       })
       .addCase(getCurrentPost.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCurrentPost.fulfilled, (state, {payload}) => {
-        const {post} = payload;
+      .addCase(getCurrentPost.fulfilled, (state, { payload }) => {
+        const { post } = payload;
         state.isLoading = false;
         state.currentPost = post;
       })
-      .addCase(getCurrentPost.rejected, (state, {payload}) => {
+      .addCase(getCurrentPost.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
-      })
+      });
   },
 });
 
+export const { removeCurrentPostFromState } =
+  postsSlice.actions;
 export default postsSlice.reducer;

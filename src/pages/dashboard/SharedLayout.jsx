@@ -2,7 +2,7 @@ import {  useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "../../features/posts/postSlice";
+import { getAllPosts, removeCurrentPostFromState } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
 import { createComment, toggleCloseCurrentPostComments } from "../../features/comments/commentsSlice";
@@ -47,6 +47,7 @@ const SharedLayout = () => {
 
   const toggleComments = () => {
     dispatch(toggleCloseCurrentPostComments());
+    dispatch(removeCurrentPostFromState());
   }
 
   useEffect(() => {
