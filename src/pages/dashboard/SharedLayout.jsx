@@ -51,9 +51,7 @@ const SharedLayout = () => {
     dispatch(removeCurrentPostFromState());
   }
 
-  const deleteCommentTrigger = (commentId, postId) => {
-    dispatch(deleteComment({id: commentId, post: postId}))
-  }
+
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -182,9 +180,14 @@ const SharedLayout = () => {
                         {currentUserComments?.map((item) => {
                           if (item._id === comment._id) {
                             return (
-                              <div className="flex items-center text-md text-black absolute right-2 cursor-pointer" onClick={(e) => deleteCommentTrigger(comment._id, currentPostId?.payload)}>
+                              <div
+                                className="flex items-center text-md text-black absolute right-2 cursor-pointer"
+                                onClick={(e) =>
+                                  dispatch(deleteComment({ id: comment._id, post: currentPostId?.payload }))
+                                }
+                              >
                                 <span>
-                                  <MdDelete/>
+                                  <MdDelete />
                                 </span>
                               </div>
                             );
