@@ -47,9 +47,10 @@ const commentsSlice = createSlice({
         state.isLoadingComments = true;
       })
       .addCase(createComment.fulfilled, (state, {payload}) => {
-        const {allComments} = payload;
+        const {allComments, currentUserCommentsToCurrentPost} = payload;
         state.isLoadingComments = false;
         state.currentPostComments = allComments;
+        state.currentUserComments = currentUserCommentsToCurrentPost;
       })
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
