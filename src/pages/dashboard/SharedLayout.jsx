@@ -151,7 +151,7 @@ const SharedLayout = () => {
                   {currentPostComments?.map((comment) => {
                     return (
                       <div
-                        className="flex items-center justify-between"
+                        className="flex items-center justify-between relative"
                         key={comment._id}
                       >
                         {/* image and comment */}
@@ -178,7 +178,7 @@ const SharedLayout = () => {
                         {currentUserComments?.map((item) => {
                           if (item._id === comment._id) {
                             return (
-                              <div className="flex items-center text-sm text-red-500">
+                              <div className="flex items-center text-md text-red-500 absolute right-2 cursor-pointer">
                                 <span>
                                   <MdDelete />
                                 </span>
