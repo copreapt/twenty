@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts, removeCurrentPostFromState } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
 import { getLikes, getCurrentUserLikes, toggleCloseCurrentPostLikes } from "../../features/likes/likesSlice";
-import { createComment, toggleCloseCurrentPostComments } from "../../features/comments/commentsSlice";
+import { createComment, toggleCloseCurrentPostComments, deleteComment } from "../../features/comments/commentsSlice";
 
 
 const SharedLayout = () => {
@@ -49,6 +49,10 @@ const SharedLayout = () => {
   const toggleComments = () => {
     dispatch(toggleCloseCurrentPostComments());
     dispatch(removeCurrentPostFromState());
+  }
+
+  const deleteCommentTrigger = (commentId, postId) => {
+    dispatch(deleteComment({id: commentId, post: postId}))
   }
 
   useEffect(() => {
@@ -178,9 +182,9 @@ const SharedLayout = () => {
                         {currentUserComments?.map((item) => {
                           if (item._id === comment._id) {
                             return (
-                              <div className="flex items-center text-md text-red-500 absolute right-2 cursor-pointer">
+                              <div className="flex items-center text-md text-black absolute right-2 cursor-pointer" onClick={(e) => deleteCommentTrigger(comment._id, currentPostId?.payload)}>
                                 <span>
-                                  <MdDelete />
+                                  <MdDelete/>
                                 </span>
                               </div>
                             );
