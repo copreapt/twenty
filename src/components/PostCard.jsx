@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
 import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments, getCurrentUserComments } from '../features/comments/commentsSlice';
 import { getCurrentPost } from '../features/posts/postSlice';
+import { createComment } from '../features/comments/commentsSlice';
 import { useCallback, useEffect, useState } from 'react';
 
 
@@ -16,6 +17,9 @@ const PostCard = () => {
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
+  const [values, setValues] = useState({
+    comment: "",
+  });
 
   const dispatch = useDispatch();
 
@@ -56,6 +60,25 @@ const PostCard = () => {
     dispatch(getCurrentPostLikes({post: id}))
     dispatch(toggleOpenCurrentPostLikes());
   }
+
+  const storeMessageInState = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleCommentSubmit = (e, id) => {
+    e.preventDefault();
+    dispatch(
+      createComment({
+        name: currentUser?.fullName,
+        profilePicture: currentUser?.profilePicture,
+        comment: values?.comment,
+        post: id,
+      })
+    );
+    setValues({ comment: "" });
+  };
 
   const openCommentsModal = (id) => {
     dispatch(setCurrentPostId(id));
@@ -150,9 +173,7 @@ const PostCard = () => {
                 <div className="flex items-center gap-2 font-semibold">
                   <span className="text-sm">Liked by</span>
                   <span className="text-md text-cyan-600">
-                    {
-                    likes?.filter((item) => item.post === _id).pop()?.name
-                    }
+                    {likes?.filter((item) => item.post === _id).pop()?.name}
                   </span>
                   <span className="text-sm">and</span>
                   <span
@@ -165,14 +186,17 @@ const PostCard = () => {
               ) : (
                 ""
               )}
-              {/* last comment */}
-              <span className="text-md">Last comment here</span>
               {/* comment input */}
-              <input
-                type="text"
-                placeholder="Leave a comment here..."
-                className="text-sm"
-              />
+              <form action="submit" onSubmit={(e) => handleCommentSubmit(_id)}>
+                <input
+                  type="text"
+                  name="comment"
+                  value={values.comment}
+                  onChange={storeMessageInState}
+                  placeholder="Leave a comment here..."
+                  className="text-sm p-2"
+                />
+              </form>
             </div>
           </div>
         );
