@@ -1,4 +1,5 @@
 import customFetch from "../../utils/axios";
+import { getCurrentPostComments, getCurrentUserComments } from "./commentsSlice";
 
 export const createCommentThunk = async (url, commentData, thunkAPI) => {
   try {
@@ -30,8 +31,8 @@ export const getCurrentUserCommentsThunk = async (url, postId, thunkAPI) => {
 export const deleteCommentThunk = async (url, { id, postId }, thunkAPI) => {
   try {
     const resp = await customFetch.delete(`${url}/${id}`);
-    thunkAPI.getCurrentUserComments({post: postId})
-    thunkAPI.getCurrentPostComments({post: postId})
+    thunkAPI.dispatch(getCurrentUserComments({post: postId}))
+    thunkAPI.dispatch(getCurrentPostComments({post: postId}))
     return resp.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
