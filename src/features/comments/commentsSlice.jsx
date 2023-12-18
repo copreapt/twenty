@@ -87,7 +87,8 @@ const commentsSlice = createSlice({
       .addCase(deleteComment.pending, (state) => {
         state.isLoadingComments = true;
       })
-      .addCase(deleteComment.fulfilled, (state, {allComments, currentUserComments}) => {
+      .addCase(deleteComment.fulfilled, (state, {payload}) => {
+        const {allComments, currentUserComments} = payload;
         state.isLoadingComments = false;
         state.currentPostComments = allComments;
         state.currentUserComments = currentUserComments;
