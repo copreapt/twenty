@@ -27,8 +27,8 @@ export const getCurrentUserComments = createAsyncThunk("/comments/getCurrentUser
   return getCurrentUserCommentsThunk("/comments/getCurrentUserComments", postId, thunkAPI);
 })
 
-export const deleteComment = createAsyncThunk("/comments/deleteComment", async (thunkAPI) => {
-  return deleteCommentThunk("/comments", thunkAPI);
+export const deleteComment = createAsyncThunk("/comments/deleteComment", async (postId, thunkAPI) => {
+  return deleteCommentThunk("/comments", postId, thunkAPI);
 })
 
 const commentsSlice = createSlice({
