@@ -7,6 +7,7 @@ import FormRow from "./FormRow";
 import UserInfo from "./UserInfo";
 import CreatePost from "./CreatePost";
 import FriendList from "./FriendList";
+import Loading from "./Loading";
 
 
 export {
@@ -19,4 +20,5 @@ export {
     UserInfo,
     CreatePost,
     FriendList,
+    Loading,
 }
