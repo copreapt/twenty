@@ -6,7 +6,6 @@ import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../
 import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments, getCurrentUserComments } from '../features/comments/commentsSlice';
 import { getCurrentPost } from '../features/posts/postSlice';
 import { useCallback, useEffect, useState } from 'react';
-import Loading from './Loading';
 
 
 
@@ -81,92 +80,91 @@ const PostCard = () => {
       {posts?.map((post) => {
         const {description, image, name, profilePicture, location, _id} = post;
         return (
-          // <div
-          //   className="bg-white mb-4 flex flex-col space-y-4 p-3 rounded-md"
-          //   key={_id}
-          // >
-          //   {/* top div */}
-          //   <div className="flex justify-between">
-          //     {/* img and name */}
-          //     <div className="flex gap-2">
-          //       <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
-          //         <img
-          //           src={profilePicture}
-          //           alt="person image"
-          //           className="grow"
-          //         />
-          //       </div>
-          //       <div className="flex flex-col items-center">
-          //         <span className="text-[0.80rem]">{name}</span>
-          //         <span className="text-[0.60rem] text-gray-500">
-          //           {location}
-          //         </span>
-          //       </div>
-          //     </div>
-          //     {/* add friend icon */}
-          //     <div className="flex items-center text-cyan-700">
-          //       <HiOutlineUserAdd />
-          //     </div>
-          //   </div>
-          //   {/* img/photo div */}
-          //   <div className="space-y-2">
-          //     {/* description */}
-          //     <div className="px-2">
-          //       <p className="text-sm">{description}</p>
-          //     </div>
-          //     {/* image/photo */}
-          //     <div>
-          //       <img src={image} alt="image" className="w-full" />
-          //     </div>
-          //   </div>
-          //   {/* bottom div - like, comment */}
-          //   <div className="flex flex-col gap-1 px-1">
-          //     <div className="flex gap-5 text-2xl text-cyan-700 items-center">
-          //       <button
-          //         disabled={isLoadingLikes}
-          //         onClick={(e) => likePostOnClick(_id)}
-          //       >
-          //         <AiFillHeart
-          //           className={`ease-in-out duration-800 ${
-          //             likedPosts?.includes(_id)
-          //               ? "text-red-500 text-3xl"
-          //               : "text-cyan-700"
-          //           }`}
-          //         />
-          //       </button>
-          //       {/* number of likes */}
-          //       {likes?.filter((item) => item.post === _id).length > 0 ? (
-          //         <span className="text-xl font-semibold">
-          //           {likes?.filter((item) => item.post === _id).length}
-          //         </span>
-          //       ) : (
-          //         ""
-          //       )}
-          //       <button onClick={(e) => openCommentsModal(_id)}>
-          //         <FaRegCommentDots />
-          //       </button>
-          //     </div>
-          //     {/* liked by */}
-          //     {likes?.filter((item) => item.post === _id).length > 0 ? (
-          //       <div className="flex items-center gap-2 font-semibold">
-          //         <span className="text-sm">Liked by</span>
-          //         <span className="text-md text-cyan-600">
-          //           {likes?.filter((item) => item.post === _id).pop()?.name}
-          //         </span>
-          //         <span className="text-sm">and</span>
-          //         <span
-          //           className="text-md text-cyan-600 hover:cursor-pointer"
-          //           onClick={() => fetchCurrentPostLikes(_id)}
-          //         >
-          //           Others
-          //         </span>
-          //       </div>
-          //     ) : (
-          //       ""
-          //     )}
-          //   </div>
-          // </div>
-          <Loading />
+          <div
+            className="bg-white mb-4 flex flex-col space-y-4 p-3 rounded-md"
+            key={_id}
+          >
+            {/* top div */}
+            <div className="flex justify-between">
+              {/* img and name */}
+              <div className="flex gap-2">
+                <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
+                  <img
+                    src={profilePicture}
+                    alt="person image"
+                    className="grow"
+                  />
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-[0.80rem]">{name}</span>
+                  <span className="text-[0.60rem] text-gray-500">
+                    {location}
+                  </span>
+                </div>
+              </div>
+              {/* add friend icon */}
+              <div className="flex items-center text-cyan-700">
+                <HiOutlineUserAdd />
+              </div>
+            </div>
+            {/* img/photo div */}
+            <div className="space-y-2">
+              {/* description */}
+              <div className="px-2">
+                <p className="text-sm">{description}</p>
+              </div>
+              {/* image/photo */}
+              <div>
+                <img src={image} alt="image" className="w-full" />
+              </div>
+            </div>
+            {/* bottom div - like, comment */}
+            <div className="flex flex-col gap-1 px-1">
+              <div className="flex gap-5 text-2xl text-cyan-700 items-center">
+                <button
+                  disabled={isLoadingLikes}
+                  onClick={(e) => likePostOnClick(_id)}
+                >
+                  <AiFillHeart
+                    className={`ease-in-out duration-800 ${
+                      likedPosts?.includes(_id)
+                        ? "text-red-500 text-3xl"
+                        : "text-cyan-700"
+                    }`}
+                  />
+                </button>
+                {/* number of likes */}
+                {likes?.filter((item) => item.post === _id).length > 0 ? (
+                  <span className="text-xl font-semibold">
+                    {likes?.filter((item) => item.post === _id).length}
+                  </span>
+                ) : (
+                  ""
+                )}
+                <button onClick={(e) => openCommentsModal(_id)}>
+                  <FaRegCommentDots />
+                </button>
+              </div>
+              {/* liked by */}
+              {likes?.filter((item) => item.post === _id).length > 0 ? (
+                <div className="flex items-center gap-2 font-semibold">
+                  <span className="text-sm">Liked by</span>
+                  <span className="text-md text-cyan-600">
+                    {likes?.filter((item) => item.post === _id).pop()?.name}
+                  </span>
+                  <span className="text-sm">and</span>
+                  <span
+                    className="text-md text-cyan-600 hover:cursor-pointer"
+                    onClick={() => fetchCurrentPostLikes(_id)}
+                  >
+                    Others
+                  </span>
+                </div>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
         );
       })}
     </>
