@@ -14,7 +14,7 @@ const SharedLayout = () => {
     comment: "",
   });
   const { currentUser } = useSelector((store) => store.user);
-  const { currentPostId, currentPostComments } = useSelector((store) => store.comments);
+  const { currentPostId, currentPostComments, currentUserComments } = useSelector((store) => store.comments);
   const {currentPost, isLoading} = useSelector((store) => store.posts);
   const { currentPostLikes, openCurrentPostLikes } = useSelector(
     (store) => store.likes
@@ -150,13 +150,11 @@ const SharedLayout = () => {
                   {currentPostComments?.map((comment) => {
                     return (
                       <div
-                        className="flex items-center gap-2"
+                        className="flex items-center justify-between"
                         key={comment._id}
                       >
-                        {/* img */}
-                        {isLoading ? (
-                          "Loading..."
-                        ) : (
+                        <div className="flex items-center gap-2">
+                          {/* img */}
                           <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
                             <img
                               src={comment.profilePicture}
@@ -164,16 +162,19 @@ const SharedLayout = () => {
                               className="grow"
                             />
                           </div>
-                        )}
-                        {/* name */}
-                        <div className="text-sm">
-                          <span className="font-extra-light text-cyan-700 mr-2">
-                            {comment.name}
-                          </span>
-                          <span className="text-[0.90rem] text-gray-700 break-all">
-                            {comment.comment}
-                          </span>
+                          {/* name and comment */}
+                          <div className="text-sm">
+                            <span className="font-extra-light text-cyan-700 mr-2">
+                              {comment.name}
+                            </span>
+                            <span className="text-[0.90rem] text-gray-700 break-all">
+                              {comment.comment}
+                            </span>
+                          </div>
                         </div>
+                        {
+                          currentUserComments?.filter((item) => item._id === comment._id)? "comment exists" : ""
+                        }
                       </div>
                     );
                   })}
