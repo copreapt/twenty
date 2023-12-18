@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createCommentThunk, getCurrentPostCommentsThunk } from "./commentsThunk";
+import { createCommentThunk, getCurrentPostCommentsThunk, getCurrentUserCommentsThunk } from "./commentsThunk";
 
 const initialState = {
   isLoadingComments: false,
@@ -8,6 +8,7 @@ const initialState = {
   currentPostComments: null,
   openCurrentPostComments: false,
   currentPostId:null,
+  currentUserComments: null,
 };
 
 
@@ -20,6 +21,10 @@ export const createComment = createAsyncThunk(
 
 export const getCurrentPostComments = createAsyncThunk("/comments/getCurrentPostComments", async ( postId, thunkAPI) => {
   return getCurrentPostCommentsThunk("/comments/getCurrentPostComments", postId, thunkAPI);
+})
+
+export const getCurrentUserComments = createAsyncThunk("/comments/getCurrentUserComments", async(postId, thunkAPI) => {
+  return getCurrentUserCommentsThunk("/comments/getCurrentUserComments", postId, thunkAPI);
 })
 
 const commentsSlice = createSlice({
@@ -59,6 +64,18 @@ const commentsSlice = createSlice({
         state.currentPostComments = comments;
       })
       .addCase(getCurrentPostComments.rejected, (state, { payload }) => {
+        state.isLoadingComments = false;
+        toast.error(payload);
+      })
+      .addCase(getCurrentUserComments.pending, (state) => {
+        state.isLoadingComments = true;
+      })
+      .addCase(getCurrentUserComments.fulfilled, (state, {payload}) => {
+        const {currentUserComments} = payload;
+        state.isLoadingComments = false;
+        state.currentUserComments = currentUserComments;
+      })
+      .addCase(getCurrentUserComments.rejected, (state, {payload}) => {
         state.isLoadingComments = false;
         toast.error(payload);
       });

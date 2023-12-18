@@ -3,7 +3,7 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
-import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments } from '../features/comments/commentsSlice';
+import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments, getCurrentUserComments } from '../features/comments/commentsSlice';
 import { getCurrentPost } from '../features/posts/postSlice';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -59,8 +59,9 @@ const PostCard = () => {
 
   const openCommentsModal = (id) => {
     dispatch(setCurrentPostId(id));
-    dispatch(getCurrentPost({id: id}))
-    dispatch(getCurrentPostComments({post: id}))
+    dispatch(getCurrentPost({id: id}));
+    dispatch(getCurrentPostComments({post: id}));
+    dispatch(getCurrentUserComments({post: id}));
     dispatch(toggleOpenCurrentPostComments());
   }
 
