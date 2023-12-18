@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
 import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments, getCurrentUserComments } from '../features/comments/commentsSlice';
 import { getCurrentPost } from '../features/posts/postSlice';
-import { createComment } from '../features/comments/commentsSlice';
 import { useCallback, useEffect, useState } from 'react';
 
 
@@ -17,9 +16,6 @@ const PostCard = () => {
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
 
   const [likedPosts, setLikedPosts] = useState(null)
-  const [values, setValues] = useState({
-    comment: "",
-  });
 
   const dispatch = useDispatch();
 
@@ -61,25 +57,6 @@ const PostCard = () => {
     dispatch(toggleOpenCurrentPostLikes());
   }
 
-  const storeMessageInState = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setValues({ ...values, [name]: value });
-  };
-
-  const handleCommentSubmit = (e, id) => {
-    e.preventDefault();
-    dispatch(
-      createComment({
-        name: currentUser?.fullName,
-        profilePicture: currentUser?.profilePicture,
-        comment: values?.comment,
-        post: id,
-      })
-    );
-    setValues({ comment: "" });
-  };
-
   const openCommentsModal = (id) => {
     dispatch(setCurrentPostId(id));
     dispatch(getCurrentPost({id: id}));
@@ -104,7 +81,7 @@ const PostCard = () => {
         const {description, image, name, profilePicture, location, _id} = post;
         return (
           <div
-            className="bg-white mb-4 flex flex-col space-y-2 p-3 rounded-md"
+            className="bg-white mb-4 flex flex-col space-y-4 p-3 rounded-md"
             key={_id}
           >
             {/* top div */}
@@ -186,17 +163,6 @@ const PostCard = () => {
               ) : (
                 ""
               )}
-              {/* comment input */}
-              <form action="submit" onSubmit={(e) => handleCommentSubmit(_id)}>
-                <input
-                  type="text"
-                  name="comment"
-                  value={values.comment}
-                  onChange={storeMessageInState}
-                  placeholder="Leave a comment here..."
-                  className="text-sm p-2"
-                />
-              </form>
             </div>
           </div>
         );
