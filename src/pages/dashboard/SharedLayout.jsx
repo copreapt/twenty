@@ -151,7 +151,7 @@ const SharedLayout = () => {
                   {currentPostComments?.map((comment) => {
                     return (
                       <div
-                        className="flex items-center justify-between relative"
+                        className="flex items-center justify-between relative w-full"
                         key={comment._id}
                       >
                         {/* image and comment */}
