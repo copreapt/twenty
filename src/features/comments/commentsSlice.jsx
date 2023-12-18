@@ -27,8 +27,8 @@ export const getCurrentUserComments = createAsyncThunk("/comments/getCurrentUser
   return getCurrentUserCommentsThunk("/comments/getCurrentUserComments", postId, thunkAPI);
 })
 
-export const deleteComment = createAsyncThunk("/comments/deleteComment", async (thunkAPI) => {
-  return deleteCommentThunk("/comments",thunkAPI);
+export const deleteComment = createAsyncThunk("/comments/deleteComment", async (postId, thunkAPI) => {
+  return deleteCommentThunk("/comments", postId, thunkAPI);
 })
 
 const commentsSlice = createSlice({
@@ -88,9 +88,10 @@ const commentsSlice = createSlice({
         state.isLoadingComments = true;
       })
       .addCase(deleteComment.fulfilled, (state, {payload}) => {
-        const {currentUserComments} = payload;
+        const {allComments, currentUserComments} = payload;
         state.isLoadingComments = false;
         state.currentUserComments = currentUserComments;
+        state.currentPostComments = allComments;
       })
       .addCase(deleteComment.rejected, (state, {payload}) => {
         state.isLoadingComments = false;
