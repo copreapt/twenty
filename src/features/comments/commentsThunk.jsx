@@ -27,9 +27,9 @@ export const getCurrentUserCommentsThunk = async (url, postId, thunkAPI) => {
   }
 };
 
-export const deleteCommentThunk = async (url, { id }, postId, thunkAPI) => {
+export const deleteCommentThunk = async (url, { id, postId }, thunkAPI) => {
   try {
-    const resp = await customFetch.delete(`${url}/${id}`, postId);
+    const resp = await customFetch.delete(`${url}/${id}`, {postId});
     return resp.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);
