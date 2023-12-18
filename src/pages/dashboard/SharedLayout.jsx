@@ -174,8 +174,13 @@ const SharedLayout = () => {
                         </div>
                         {
                           currentUserComments?.map((item) => {
-                            return item._id;
-                          }) === comment._id ? "exists" : ""
+                            if(item._id === comment._id){
+                              return <div>
+                                <span>delete</span>
+                              </div>
+                            }
+                            return
+                          })
                         }
                       </div>
                     );
