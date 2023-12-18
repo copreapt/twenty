@@ -1,5 +1,6 @@
 import {  useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList } from "../../components"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts, removeCurrentPostFromState } from "../../features/posts/postSlice";
@@ -153,6 +154,7 @@ const SharedLayout = () => {
                         className="flex items-center justify-between"
                         key={comment._id}
                       >
+                        {/* image and comment */}
                         <div className="flex items-center gap-2">
                           {/* img */}
                           <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
@@ -172,16 +174,19 @@ const SharedLayout = () => {
                             </span>
                           </div>
                         </div>
-                        {
-                          currentUserComments?.map((item) => {
-                            if(item._id === comment._id){
-                              return <div>
-                                <span>delete</span>
+                        {/* delete button */}
+                        {currentUserComments?.map((item) => {
+                          if (item._id === comment._id) {
+                            return (
+                              <div className="flex items-center text-sm text-red-500">
+                                <span>
+                                  <MdDelete />
+                                </span>
                               </div>
-                            }
-                            return
-                          })
-                        }
+                            );
+                          }
+                          return;
+                        })}
                       </div>
                     );
                   })}
