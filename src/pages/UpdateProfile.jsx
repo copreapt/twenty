@@ -57,66 +57,65 @@ const UpdateProfile = () => {
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
         <SearchBar />
       </div>
-      {/* container */}
-      <form
-        className="grid grid-cols-12 py-14 md:max-w-3xl md:mx-auto lg:max-w-screen-lg lg:gap-20 xl:max-w-screen-xl md:mt-10"
-        action="submit"
-      >
-        {/* Profile Picture */}
-        <div className="flex flex-col items-center space-y-10 col-span-5">
-          <div className="flex justify-center items-center h-[400px] w-[400px] rounded-full overflow-hidden">
-            {profilePictureImage ? (
-              <img
-                src={profilePictureImage}
-                alt="person image"
-                className="grow"
-              />
-            ) : (
-              <img
-                src={currentUser?.profilePicture}
-                alt="person image"
-                className="grow"
-              />
-            )}
-            {/* chose image */}
+      <form action="submit">
+        {/* container */}
+        <div className="grid grid-cols-12 py-14 md:max-w-3xl md:mx-auto lg:max-w-screen-lg lg:gap-20 xl:max-w-screen-xl md:mt-10">
+          {/* Profile Picture */}
+          <div className="flex flex-col items-center space-y-10 col-span-5">
+            <div className="flex justify-center items-center h-[400px] w-[400px] rounded-full overflow-hidden">
+              {profilePictureImage ? (
+                <img
+                  src={profilePictureImage}
+                  alt="person image"
+                  className="grow"
+                />
+              ) : (
+                <img
+                  src={currentUser?.profilePicture}
+                  alt="person image"
+                  className="grow"
+                />
+              )}
+              {/* chose image */}
+            </div>
+            <label htmlFor="uploadImage">
+              <span className="bg-white py-2 px-20 rounded-md text-black hover:cursor-pointer">
+                Upload Image
+              </span>
+            </label>
+            <input
+              type="file"
+              id="uploadImage"
+              className="custom-file-input hidden"
+              accept="image/*"
+              onChange={selectAndUploadImage}
+            />
           </div>
-          <label htmlFor="uploadImage">
-            <span className="bg-white py-2 px-20 rounded-md text-black hover:cursor-pointer">
-              Upload Image
-            </span>
-          </label>
-          <input
-            type="file"
-            id="uploadImage"
-            className="custom-file-input hidden"
-            accept="image/*"
-            onChange={selectAndUploadImage}
-          />
-        </div>
-        {/* container for email, username, name */}
-        <div className="col-span-7 grid justify-items-center content-center gap-10">
-          {/* Email */}
-          <FormRow
-            type="email"
-            name="email"
-            value={values?.email}
-            handleChange={handleChange}
-          />
-          {/* Email */}
-          <FormRow
-            type="text"
-            name="username"
-            value={values?.username}
-            handleChange={handleChange}
-          />
-          {/* Email */}
-          <FormRow
-            type="text"
-            name="fullName"
-            value={values?.fullName}
-            handleChange={handleChange}
-            labelText="full name"
-          />
+          {/* container for email, username, name */}
+          <div className="col-span-7 grid justify-items-center content-center gap-10">
+            {/* Email */}
+            <FormRow
+              type="email"
+              name="email"
+              value={values?.email}
+              handleChange={handleChange}
+            />
+            {/* Email */}
+            <FormRow
+              type="text"
+              name="username"
+              value={values?.username}
+              handleChange={handleChange}
+            />
+            {/* Email */}
+            <FormRow
+              type="text"
+              name="fullName"
+              value={values?.fullName}
+              handleChange={handleChange}
+              labelText="full name"
+            />
+          </div>
         </div>
         <button
           className="bg-cyan-500 px-20 py-2 text-white rounded-lg hover:bg-cyan-700 ease-in-out duration-700 hover:cursor-pointer"
@@ -126,7 +125,6 @@ const UpdateProfile = () => {
           Save changes
         </button>
       </form>
-      {/* save button */}
     </div>
   );
 };
