@@ -52,7 +52,10 @@ const UpdateProfile = () => {
   };
 
   return (
-    <form className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center" onSubmit={onSubmit}>
+    <form
+      className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center"
+      onSubmit={onSubmit}
+    >
       {/* navbar div */}
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
         <SearchBar />
@@ -98,7 +101,6 @@ const UpdateProfile = () => {
             name="email"
             value={values?.email}
             handleChange={handleChange}
-            
           />
           {/* Email */}
           <FormRow
