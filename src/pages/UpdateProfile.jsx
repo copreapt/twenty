@@ -7,10 +7,10 @@ import { uploadImage, updateUser, getCurrentUser } from "../features/user/userSl
 const UpdateProfile = () => {
   const {currentUser, profilePictureImage} = useSelector((store) => store.user);
   const [values, setValues] = useState({
-    email: currentUser?.email,
-    fullName: currentUser?.fullName,
-    username: currentUser?.username,
-    profilePicture: currentUser?.profilePicture,
+    email: '',
+    fullName: '',
+    username: '',
+    profilePicture: '',
   });
 
   const dispatch = useDispatch();
@@ -24,7 +24,6 @@ const UpdateProfile = () => {
   const selectAndUploadImage = (e) => {
     const imageFile = e.target.files[0];
     if (imageFile) {
-      setValues({...values, profilePicture: imageFile})
       dispatch(uploadImage({ image: imageFile }));
     }
   };
@@ -38,7 +37,16 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
+    if(currentUser){
+      setValues({email: currentUser?.email, fullName: currentUser?.fullName, username: currentUser?.username, profilePicture: currentUser?.profilePicture})
+    }
   },[])
+
+  useEffect(() => {
+    if(profilePictureImage){
+      setValues({...values, profilePicture: profilePictureImage})
+    }
+  },[profilePictureImage])
 
   return (
     <main className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center">
@@ -85,7 +93,7 @@ const UpdateProfile = () => {
           <FormRow
             type="email"
             name="email"
-            value={values.name}
+            value={values?.email}
             handleChange={handleChange}
             
           />
@@ -93,14 +101,14 @@ const UpdateProfile = () => {
           <FormRow
             type="text"
             name="username"
-            value={values.name}
+            value={values?.username}
             handleChange={handleChange}
           />
           {/* Email */}
           <FormRow
             type="text"
             name="fullName"
-            value={values.name}
+            value={values?.fullName}
             handleChange={handleChange}
           />
         </form>
