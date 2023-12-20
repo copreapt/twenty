@@ -54,6 +54,7 @@ const UpdateProfile = () => {
   return (
     <form
       className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center"
+      action="submit"
       onSubmit={onSubmit}
     >
       {/* navbar div */}
@@ -120,11 +121,8 @@ const UpdateProfile = () => {
         </div>
       </div>
       {/* save button */}
-      <div
-        className="bg-cyan-500 px-20 py-2 text-white rounded-lg hover:bg-cyan-700 ease-in-out duration-700 hover:cursor-pointer"
-        type="submit"
-      >
-        <button>Save changes</button>
+      <div className="bg-cyan-500 px-20 py-2 text-white rounded-lg hover:bg-cyan-700 ease-in-out duration-700 hover:cursor-pointer">
+        <button type="submit">Save changes</button>
       </div>
     </form>
   );
