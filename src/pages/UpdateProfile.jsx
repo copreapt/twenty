@@ -35,9 +35,9 @@ const UpdateProfile = () => {
     window.location.reload(true);
   };
 
-  useEffect(() => {
-    dispatch(getCurrentUser());
-  })
+  // useEffect(() => {
+  //   dispatch(getCurrentUser());
+  // })
 
   return (
     <main className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center">
