@@ -32,6 +32,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     const { fullName, email, username } = values;
     dispatch(updateUser({ fullName, email, username, profilePicture: profilePictureImage || values.profilePicture }));
+    window.location.reload(true);
   };
 
   return (
