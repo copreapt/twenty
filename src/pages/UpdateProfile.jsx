@@ -4,22 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, updateUser, getCurrentUser } from "../features/user/userSlice";
 
 
+const initialState = {
+  email: "",
+  fullName: "",
+  username: "",
+  profilePicture: "",
+};
+
+
 const UpdateProfile = () => {
   const {currentUser, profilePictureImage} = useSelector((store) => store.user);
-  const [values, setValues] = useState({
-    email: '',
-    fullName: '',
-    username: '',
-    profilePicture: '',
-  });
+  const [values, setValues] = useState(initialState);
 
   const dispatch = useDispatch();
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setValues({ ...values, [name]: value });
-  };
 
   const selectAndUploadImage = (e) => {
     const imageFile = e.target.files[0];
@@ -47,6 +44,12 @@ const UpdateProfile = () => {
       setValues({...values, profilePicture: profilePictureImage})
     }
   },[profilePictureImage])
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+  };
 
   return (
     <form className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center" onSubmit={onSubmit}>
@@ -93,7 +96,7 @@ const UpdateProfile = () => {
           <FormRow
             type="email"
             name="email"
-            value={values?.name}
+            value={values?.email}
             handleChange={handleChange}
             
           />
@@ -101,15 +104,16 @@ const UpdateProfile = () => {
           <FormRow
             type="text"
             name="username"
-            value={values?.name}
+            value={values?.username}
             handleChange={handleChange}
           />
           {/* Email */}
           <FormRow
             type="text"
             name="fullName"
-            value={values?.name}
+            value={values?.fullName}
             handleChange={handleChange}
+            labelText="full name"
           />
         </div>
       </div>
