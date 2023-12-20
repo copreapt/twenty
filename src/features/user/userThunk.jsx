@@ -1,4 +1,5 @@
 import customFetch from "../../utils/axios";
+import { toggleLogout } from "./userSlice";
 
 export const registerUserThunk = async(url, user, thunkAPI) => {
     try {
@@ -40,6 +41,7 @@ export const verifyUserEmailThunk = async (url, user, thunkAPI) => {
 export const logoutUserThunk = async (url, thunkAPI) => {
     try {
         const resp = await customFetch.delete(url);
+        thunkAPI.dispatch(toggleLogout());
         return resp.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.msg);
