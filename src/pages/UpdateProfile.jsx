@@ -89,8 +89,8 @@ const UpdateProfile = () => {
           {/* Email */}
           <FormRow
             type="text"
-            name="name"
-            value={values.name}
+            name="fullName"
+            value={values.fullName}
             handleChange={handleChange}
           />
         </form>
