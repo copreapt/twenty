@@ -114,6 +114,7 @@ const userSlice = createSlice({
             const { msg } = payload;
             state.isLoading = false;
             state.user = null;
+            state.openLogoutDiv = false;
             toast.success(msg);
           })
           .addCase(logoutUser.rejected, (state, { payload }) => {

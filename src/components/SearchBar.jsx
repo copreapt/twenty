@@ -13,7 +13,6 @@ const SearchBar = () => {
 
   const logoutUserFunction = () => {
     dispatch(logoutUser());
-    dispatch(toggleLogout());
   }
 
   const toggleLogoutFunction = () => {
