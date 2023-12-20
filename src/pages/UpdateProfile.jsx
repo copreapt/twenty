@@ -24,14 +24,15 @@ const UpdateProfile = () => {
   const selectAndUploadImage = (e) => {
     const imageFile = e.target.files[0];
     if (imageFile) {
+      setValues({...values, profilePicture: imageFile})
       dispatch(uploadImage({ image: imageFile }));
     }
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { fullName, email, username } = values;
-    dispatch(updateUser({ fullName, email, username, profilePicture: profilePictureImage || values.profilePicture }));
+    const { fullName, email, username, profilePicture } = values;
+    dispatch(updateUser({ fullName, email, username, profilePicture }));
     window.location.reload(true);
   };
 
@@ -50,11 +51,19 @@ const UpdateProfile = () => {
         {/* Profile Picture */}
         <div className="flex flex-col items-center space-y-10 col-span-5">
           <div className="flex justify-center items-center h-[400px] w-[400px] rounded-full overflow-hidden">
-            <img
-              src={currentUser?.profilePicture}
-              alt="person image"
-              className="grow"
-            />
+            {profilePictureImage ? (
+              <img
+                src={profilePictureImage}
+                alt="person image"
+                className="grow"
+              />
+            ) : (
+              <img
+                src={currentUser?.profilePicture}
+                alt="person image"
+                className="grow"
+              />
+            )}
             {/* chose image */}
           </div>
           <label htmlFor="uploadImage">
@@ -76,30 +85,31 @@ const UpdateProfile = () => {
           <FormRow
             type="email"
             name="email"
-            value={values.email}
+            value={values.name}
             handleChange={handleChange}
-            placeholder={currentUser?.email}
+            
           />
           {/* Email */}
           <FormRow
             type="text"
             name="username"
-            value={values.username}
+            value={values.name}
             handleChange={handleChange}
-            placeholder={currentUser?.username}
           />
           {/* Email */}
           <FormRow
             type="text"
             name="fullName"
-            value={values.fullName}
+            value={values.name}
             handleChange={handleChange}
-            placeholder={currentUser?.fullName}
           />
         </form>
       </div>
       {/* save button */}
-      <div className="bg-cyan-500 px-20 py-2 text-white rounded-lg hover:bg-cyan-700 ease-in-out duration-700 hover:cursor-pointer" onClick={onSubmit}>
+      <div
+        className="bg-cyan-500 px-20 py-2 text-white rounded-lg hover:bg-cyan-700 ease-in-out duration-700 hover:cursor-pointer"
+        onClick={onSubmit}
+      >
         <button>Save changes</button>
       </div>
     </main>
