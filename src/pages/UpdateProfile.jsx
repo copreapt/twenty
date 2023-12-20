@@ -40,7 +40,7 @@ const UpdateProfile = () => {
     if(currentUser){
       setValues({email: currentUser?.email, fullName: currentUser?.fullName, username: currentUser?.username, profilePicture: currentUser?.profilePicture})
     }
-  },[])
+  },[currentUser])
 
   useEffect(() => {
     if(profilePictureImage){

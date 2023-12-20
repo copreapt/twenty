@@ -190,6 +190,10 @@ const userSlice = createSlice({
             state.currentUser = user;
             state.profilePictureImage = "";
           })
+          .addCase(updateUser.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            toast.error(payload);
+          })
     },
 })
 
