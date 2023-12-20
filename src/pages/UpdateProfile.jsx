@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchBar, FormRow } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadImage, updateUser } from "../features/user/userSlice";
+import { uploadImage, updateUser, getCurrentUser } from "../features/user/userSlice";
 
 
 const UpdateProfile = () => {
@@ -34,6 +34,10 @@ const UpdateProfile = () => {
     dispatch(updateUser({ fullName, email, username, profilePicture: profilePictureImage || values.profilePicture }));
     window.location.reload(true);
   };
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  })
 
   return (
     <main className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center">
