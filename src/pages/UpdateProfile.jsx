@@ -78,6 +78,7 @@ const UpdateProfile = () => {
             name="email"
             value={values.email}
             handleChange={handleChange}
+            placeholder={currentUser?.email}
           />
           {/* Email */}
           <FormRow
@@ -85,6 +86,7 @@ const UpdateProfile = () => {
             name="username"
             value={values.username}
             handleChange={handleChange}
+            placeholder={currentUser?.username}
           />
           {/* Email */}
           <FormRow
@@ -92,6 +94,7 @@ const UpdateProfile = () => {
             name="fullName"
             value={values.fullName}
             handleChange={handleChange}
+            placeholder={currentUser?.fullName}
           />
         </form>
       </div>
