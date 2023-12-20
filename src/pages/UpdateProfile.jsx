@@ -57,7 +57,7 @@ const UpdateProfile = () => {
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
         <SearchBar />
       </div>
-      <form action="submit">
+      <form action="submit flex flex-col items-center">
         {/* container */}
         <div className="grid grid-cols-12 py-14 md:max-w-3xl md:mx-auto lg:max-w-screen-lg lg:gap-20 xl:max-w-screen-xl md:mt-10">
           {/* Profile Picture */}
