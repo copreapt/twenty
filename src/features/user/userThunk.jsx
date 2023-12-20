@@ -1,4 +1,5 @@
 import customFetch from "../../utils/axios";
+import { imageFetch } from "../../utils/axios";
 
 export const registerUserThunk = async(url, user, thunkAPI) => {
     try {
@@ -18,6 +19,24 @@ export const loginUserThunk = async (url,user,thunkAPI) => {
         return thunkAPI.rejectWithValue(error.response.data.msg);
     }
 }
+
+export const updateUserThunk = async(url, user, thunkAPI) => {
+    try {
+        const resp = await customFetch.patch(url, user);
+        return resp.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+}
+
+export const uploadImageThunk = async (url, image, thunkAPI) => {
+  try {
+    const resp = await imageFetch.post(url, image);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};
 
 export const updateUserPasswordThunk = async (url, user, thunkAPI) => {
     try {

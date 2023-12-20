@@ -63,7 +63,7 @@ const SharedLayout = () => {
   }, []);
 
   return (
-    <main className="md:w-full md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
+    <main className="md:w-full h-screen md:mx-auto  bg-gray-200 flex flex-col md:absolute md:items-center">
       {/* likes container */}
       <div
         className={`fixed top-0 left-0 w-full h-full bg-black/80 justify-center items-center z-20 ease-in-out duration-700 ${

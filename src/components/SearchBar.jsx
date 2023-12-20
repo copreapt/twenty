@@ -1,24 +1,30 @@
-import {BsSearch} from 'react-icons/bs';
-import { navbarDesktop } from '../utils/utils';
+import { useEffect, useState } from "react";
+import { BsSearch } from "react-icons/bs";
+import { navbarDesktop } from "../utils/utils";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from '../features/user/userSlice';
-import { toggleLogout } from '../features/user/userSlice';
+import { logoutUser } from "../features/user/userSlice";
+import { toggleLogout } from "../features/user/userSlice";
 
 const SearchBar = () => {
-
-  const {openLogoutDiv} = useSelector((store) => store.user);
+  const [data, setData] = useState(null);
+  const { openLogoutDiv } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const logoutUserFunction = () => {
     dispatch(logoutUser());
-  }
+  };
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("userData"));
+    setData(data);
+  }, []);
 
   const toggleLogoutFunction = () => {
     dispatch(toggleLogout());
-  }
-  
+  };
+
   return (
     <section className="w-full">
       <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
@@ -55,7 +61,7 @@ const SearchBar = () => {
             className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4 hover:cursor-pointer"
             onClick={toggleLogoutFunction}
           >
-            <h1>Catalin</h1>
+            <h1>{data?.fullName}</h1>
             <IoIosArrowDown />
           </div>
           {/* logout */}
@@ -71,6 +77,6 @@ const SearchBar = () => {
       </div>
     </section>
   );
-}
+};
 
-export default SearchBar
+export default SearchBar;

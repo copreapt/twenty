@@ -12,6 +12,7 @@ const initialState = {
   posts:null,
   currentUser:null,
   currentPost: null,
+  postImage: "",
 };
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (thunkAPI) => {

@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk, logoutUserThunk, forgotUserPasswordThunk, resetUserPasswordThunk, getCurrentUserThunk} from './userThunk';
+import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk, logoutUserThunk, forgotUserPasswordThunk, resetUserPasswordThunk, getCurrentUserThunk, uploadImageThunk, updateUserThunk} from './userThunk';
 
 
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
   formSubmitted: false,
   openModal:false,
   openLogoutDiv: false,
+  profilePictureImage:"",
 };
 
 
@@ -24,6 +25,17 @@ export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAP
         return loginUserThunk('/auth/login', user, thunkAPI)
     }
 );
+
+export const uploadImage = createAsyncThunk(
+  "/user/uploadImage",
+  async (image, thunkAPI) => {
+    return uploadImageThunk("/users/uploadImage", image, thunkAPI);
+  }
+);
+
+export const updateUser = createAsyncThunk("/user/updateUser", async (user, thunkAPI) => {
+  return updateUserThunk("/users/updateUser", user, thunkAPI);
+});
 
 export const updateUserPassword = createAsyncThunk("user/updateUserPassword", async(user, thunkAPI) => {
     return updateUserPasswordThunk('/users/updateUserPassword', user, thunkAPI)
@@ -48,6 +60,7 @@ export const resetPassword = createAsyncThunk('/user/resetPassword', async (user
 export const getCurrentUser = createAsyncThunk("/users/getCurrentUser", async(thunkAPI) => {
     return getCurrentUserThunk("users/showMe", thunkAPI)
 });
+
 
 
 const userSlice = createSlice({
@@ -148,14 +161,35 @@ const userSlice = createSlice({
             state.isLoading = true;
           })
           .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-            const {user} = payload;
+            const { user } = payload;
             state.isLoading = false;
             state.currentUser = user;
           })
           .addCase(getCurrentUser.rejected, (state, { payload }) => {
             state.isLoading = false;
             state.error = payload;
-          });
+          })
+          .addCase(uploadImage.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(uploadImage.fulfilled, (state, { payload }) => {
+            const { image } = payload;
+            state.isLoading = false;
+            state.profilePictureImage = image?.src;
+          })
+          .addCase(uploadImage.rejected, (state, { payload }) => {
+            state.isLoading = false;
+            toast.error(payload);
+          })
+          .addCase(updateUser.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(updateUser.fulfilled, (state,{payload}) => {
+            const {user} = payload;
+            state.isLoading = false;
+            state.currentUser = user;
+            state.profilePictureImage = "";
+          })
     },
 })
 
