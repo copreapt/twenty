@@ -5,12 +5,13 @@ const FormRow = ({type, name, value, handleChange, labelText}) => {
           {labelText || name}
         </label>
         <input
+          placeholder={value}
           id={name}
           type={type}
           name={name}
           value={value}
           onChange={handleChange}
-          className="border border-gray-700 p-1 px-2"
+          className="border border-gray-700 p-1 px-2 placeholder:text-black"
         />
       </div>
     );
