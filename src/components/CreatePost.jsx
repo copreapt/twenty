@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { createPostLinks } from '../utils/utils';
 import {useSelector, useDispatch} from "react-redux";
 import { uploadImage, createPost } from '../features/posts/postSlice';
+import Loading from './Loading';
 
 
 const initialState = {
@@ -34,6 +35,10 @@ function CreatePost() {
     const value = e.target.value;
     setValues({ ...values, [name]: value });
   };
+
+  if(isLoading){
+    return <Loading />
+  }
 
   return (
     <div className='bg-white rounded-md py-2 shadow-sm shadow-white px-3"'>

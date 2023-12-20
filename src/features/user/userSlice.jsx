@@ -12,6 +12,7 @@ const initialState = {
   error: "",
   formSubmitted: false,
   openModal:false,
+  openLogoutDiv: false,
 };
 
 
@@ -58,6 +59,9 @@ const userSlice = createSlice({
         },
         toggleOpenModal: (state) => {
             state.openModal = !state.openModal;
+        },
+        toggleLogout: (state) => {
+          state.openLogoutDiv = !state.openLogoutDiv;
         },
     },
     extraReducers: (builder) => {
@@ -155,5 +159,5 @@ const userSlice = createSlice({
 })
 
 
-export const { toggleSidebar, toggleOpenModal } = userSlice.actions;
+export const { toggleSidebar, toggleOpenModal, toggleLogout } = userSlice.actions;
 export default userSlice.reducer;

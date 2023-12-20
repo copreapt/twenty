@@ -4,21 +4,20 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from '../features/user/userSlice';
-import { useEffect, useState } from 'react';
+import { toggleLogout } from '../features/user/userSlice';
 
 const SearchBar = () => {
 
-  const [data, setData] = useState(null)
+  const {openLogoutDiv} = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const logoutUserFunction = () => {
     dispatch(logoutUser());
   }
 
-  useEffect(() => {
-     const data = JSON.parse(localStorage.getItem("userData"));
-     setData(data);
-  },[])
+  const toggleLogoutFunction = () => {
+    dispatch(toggleLogout());
+  }
   
   return (
     <section className="w-full">
@@ -26,7 +25,9 @@ const SearchBar = () => {
         {/* navbar logo and search */}
         <div className="flex gap-4">
           <div className="">
-            <Link to='/' className="text-3xl text-cyan-500">Twenty</Link>
+            <Link to="/" className="text-3xl text-cyan-500">
+              Twenty
+            </Link>
           </div>
           <div className="flex items-center justify-center border-2 rounded-md  bg-gray-200">
             <input
@@ -50,10 +51,21 @@ const SearchBar = () => {
             })}
           </div>
           {/* username */}
-          <div className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4">
-            <h1>{data?.fullName}</h1>
-            <IoIosArrowDown/>
-            <h1 onClick={logoutUserFunction}>Logout</h1>
+          <div
+            className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4 hover:cursor-pointer"
+            onClick={toggleLogoutFunction}
+          >
+            <h1>Catalin</h1>
+            <IoIosArrowDown />
+          </div>
+          {/* logout */}
+          <div
+            className={`top-12 right-10 bg-cyan-400 px-5 py-1 rounded-md flex hover:cursor-pointer text-white hover:bg-cyan-700 ease-in-out duration-500 ${
+              openLogoutDiv ? "fixed" : "hidden"
+            }`}
+            onClick={logoutUserFunction}
+          >
+            <h1 className="px-5">Logout</h1>
           </div>
         </div>
       </div>
