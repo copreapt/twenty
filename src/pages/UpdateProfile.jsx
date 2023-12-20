@@ -49,7 +49,7 @@ const UpdateProfile = () => {
   },[profilePictureImage])
 
   return (
-    <main className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center">
+    <form className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center" onSubmit={onSubmit}>
       {/* navbar div */}
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
         <SearchBar />
@@ -88,7 +88,7 @@ const UpdateProfile = () => {
           />
         </div>
         {/* container for email, username, name */}
-        <form className="col-span-7 grid justify-items-center content-center gap-10">
+        <div className="col-span-7 grid justify-items-center content-center gap-10">
           {/* Email */}
           <FormRow
             type="email"
@@ -111,16 +111,16 @@ const UpdateProfile = () => {
             value={values?.fullName}
             handleChange={handleChange}
           />
-        </form>
+        </div>
       </div>
       {/* save button */}
       <div
         className="bg-cyan-500 px-20 py-2 text-white rounded-lg hover:bg-cyan-700 ease-in-out duration-700 hover:cursor-pointer"
-        onClick={onSubmit}
+        type="submit"
       >
         <button>Save changes</button>
       </div>
-    </main>
+    </form>
   );
 };
 
