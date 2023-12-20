@@ -93,7 +93,7 @@ const UpdateProfile = () => {
           <FormRow
             type="email"
             name="email"
-            value={values?.email}
+            value={values?.name}
             handleChange={handleChange}
             
           />
@@ -101,14 +101,14 @@ const UpdateProfile = () => {
           <FormRow
             type="text"
             name="username"
-            value={values?.username}
+            value={values?.name}
             handleChange={handleChange}
           />
           {/* Email */}
           <FormRow
             type="text"
             name="fullName"
-            value={values?.fullName}
+            value={values?.name}
             handleChange={handleChange}
           />
         </div>
