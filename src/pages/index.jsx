@@ -6,6 +6,8 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Verification from "./Verification";
 import ResetPassword from "./ResetPassword";
 import UpdateProfile from "./UpdateProfile";
+import SingleUser from "./SingleUser";
+import PersistentLogin from "./PersistentLogin"
 
 export {
     Error,
@@ -16,4 +18,6 @@ export {
     Verification,
     ResetPassword,
     UpdateProfile,
+    SingleUser,
+    PersistentLogin,
 }

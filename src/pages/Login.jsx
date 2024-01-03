@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser} from "../features/user/userSlice";
+import { autoLogin, loginUser} from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
 
@@ -42,12 +42,28 @@ const onSubmit = (e) => {
 useEffect(() => {
   if (user) {
     setUserLocalStorage(user);
-    console.log(user)
+    // console.log(user)
     setTimeout(() => {
       navigate("/");
     }, 2000);
   }
 }, [user]);
+
+
+useEffect(() => {
+  async function autoLogin() {
+    const response = await fetch("http://localhost:5000/api/v1/auth/autoLogin", {
+      method: "GET",
+      credentials: "include",
+    });
+    if (response.status === 200) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }
+  autoLogin();
+}, []);
 
   return (
     <>

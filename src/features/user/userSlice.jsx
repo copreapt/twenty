@@ -1,67 +1,83 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk, logoutUserThunk, forgotUserPasswordThunk, resetUserPasswordThunk, getCurrentUserThunk, uploadImageThunk, updateUserThunk} from './userThunk';
+import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserEmailThunk, logoutUserThunk, forgotUserPasswordThunk, resetUserPasswordThunk, getCurrentUserThunk, uploadImageThunk, updateUserThunk, getSingleUserThunk, addFriendThunk, persistentLoginThunk, searchUsersThunk} from './userThunk';
 
 
 const initialState = {
   isLoading: false,
+  isLoadingUsers: false,
   isSidebarOpen: false,
   userFromLocalStorage:null,
   user: null,
   currentUser:null,
+  singleUser:null,
+  singleUserPosts:null,
   error: "",
   formSubmitted: false,
   openModal:false,
   openLogoutDiv: false,
   profilePictureImage:"",
+  persistentLogin: true,
+  searchUsersResult:null,
+  searchUserModal:false,
 };
 
 
 export const registerUser = createAsyncThunk('user/registerUser', async(user, thunkAPI) => {
-    return registerUserThunk('/auth/register', user, thunkAPI)
+  return registerUserThunk('/auth/register', user, thunkAPI)
 });
 
 export const loginUser = createAsyncThunk("user/loginUser", async (user, thunkAPI) => {
-        return loginUserThunk('/auth/login', user, thunkAPI)
-    }
-);
+  return loginUserThunk('/auth/login', user, thunkAPI)
+});
 
-export const uploadImage = createAsyncThunk(
-  "/user/uploadImage",
-  async (image, thunkAPI) => {
-    return uploadImageThunk("/users/uploadImage", image, thunkAPI);
-  }
-);
+export const uploadImage = createAsyncThunk("/user/uploadImage", async (image, thunkAPI) => {
+  return uploadImageThunk("/users/uploadImage", image, thunkAPI);
+});
 
 export const updateUser = createAsyncThunk("/user/updateUser", async (user, thunkAPI) => {
   return updateUserThunk("/users/updateUser", user, thunkAPI);
 });
 
 export const updateUserPassword = createAsyncThunk("user/updateUserPassword", async(user, thunkAPI) => {
-    return updateUserPasswordThunk('/users/updateUserPassword', user, thunkAPI)
+  return updateUserPasswordThunk('/users/updateUserPassword', user, thunkAPI)
 });
 
 export const verifyEmail = createAsyncThunk('/user/verify-email', async(user, thunkAPI) => {
-    return verifyUserEmailThunk('/auth/verify-email', user, thunkAPI)
+  return verifyUserEmailThunk('/auth/verify-email', user, thunkAPI)
 });
 
 export const logoutUser = createAsyncThunk('/user/logout', async(thunkAPI) => {
-    return logoutUserThunk('/auth/logout', thunkAPI)
+  return logoutUserThunk('/auth/logout', thunkAPI)
 });
 
 export const forgotPassword = createAsyncThunk('/user/forgotPassword', async (user, thunkAPI) => {
-    return forgotUserPasswordThunk('/auth/forgot-password', user, thunkAPI)
+  return forgotUserPasswordThunk('/auth/forgot-password', user, thunkAPI)
 });
 
 export const resetPassword = createAsyncThunk('/user/resetPassword', async (user, thunkAPI) => {
-    return resetUserPasswordThunk('auth/reset-password', user, thunkAPI)
+  return resetUserPasswordThunk('auth/reset-password', user, thunkAPI)
 });
 
 export const getCurrentUser = createAsyncThunk("/users/getCurrentUser", async(thunkAPI) => {
-    return getCurrentUserThunk("users/showMe", thunkAPI)
+  return getCurrentUserThunk("users/showMe", thunkAPI)
 });
 
+export const getSingleUser = createAsyncThunk("/users/getSingleUser", async(thunkAPI) => {
+  return getSingleUserThunk("/users", thunkAPI);
+});
 
+export const addFriend = createAsyncThunk("/user/addFriend", async (user, thunkAPI) => {
+  return addFriendThunk("/users/addFriend", user, thunkAPI);
+});
+
+export const searchUsers = createAsyncThunk("/user/searchUsers", async(thunkAPI) => {
+  return searchUsersThunk("/users/searchUsers/", thunkAPI);
+});
+
+export const autoLogin = createAsyncThunk("user/autoLogin", async(thunkAPI) => {
+  return persistentLoginThunk("/auth/autoLogin", thunkAPI);
+});
 
 const userSlice = createSlice({
     name:'user',
@@ -75,6 +91,12 @@ const userSlice = createSlice({
         },
         toggleLogout: (state) => {
           state.openLogoutDiv = !state.openLogoutDiv;
+        },
+        openSearchUserModal: (state) => {
+          state.searchUserModal = true;
+        },
+        closeSearchUserModal: (state) => {
+          state.searchUserModal = false;
         },
     },
     extraReducers: (builder) => {
@@ -185,18 +207,66 @@ const userSlice = createSlice({
             state.isLoading = true;
           })
           .addCase(updateUser.fulfilled, (state,{payload}) => {
-            const {user} = payload;
+            const {user, msg} = payload;
             state.isLoading = false;
             state.currentUser = user;
             state.profilePictureImage = "";
+            toast.success(msg);
           })
           .addCase(updateUser.rejected, (state, {payload}) => {
             state.isLoading = false;
             toast.error(payload);
           })
+          .addCase(getSingleUser.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(getSingleUser.fulfilled, (state, {payload}) => {
+            const {user, posts} = payload;
+            state.isLoading = false;
+            state.singleUser = user;
+            state.singleUserPosts = posts;
+          })
+          .addCase(getSingleUser.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            toast.error(payload);
+          })
+          .addCase(addFriend.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(addFriend.fulfilled, (state, {payload}) => {
+            const {user, msg} = payload;
+            state.isLoading = false;
+            state.currentUser = user;
+            toast.success(msg);
+          })
+          .addCase(addFriend.rejected, (state, {payload}) => {
+            state.isLoading = false;
+            toast.error(payload);
+          })
+          .addCase(autoLogin.pending, (state) => {
+            state.isLoading = true;
+          })
+          .addCase(autoLogin.fulfilled, (state) => {
+            state.isLoading = false;
+          })
+          .addCase(autoLogin.rejected, (state) => {
+            state.isLoading = false;
+            state.persistentLogin = false;
+          })
+          .addCase(searchUsers.pending, (state) => {
+            state.isLoadingUsers = true;
+          })
+          .addCase(searchUsers.fulfilled, (state, {payload}) => {
+            state.isLoadingUsers = false;
+            state.searchUsersResult = payload.result;
+          })
+          .addCase(searchUsers.rejected, (state, {payload}) => {
+            state.isLoadingUsers = false;
+            toast.error(payload);
+          });
     },
 })
 
 
-export const { toggleSidebar, toggleOpenModal, toggleLogout } = userSlice.actions;
+export const { toggleSidebar, toggleOpenModal, toggleLogout, openSearchUserModal, closeSearchUserModal} = userSlice.actions;
 export default userSlice.reducer;

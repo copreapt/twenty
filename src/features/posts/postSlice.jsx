@@ -16,16 +16,12 @@ const initialState = {
 };
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (thunkAPI) => {
-    return getAllPostsThunk("/posts", thunkAPI);
-  }
-);
+  return getAllPostsThunk("/posts", thunkAPI);
+});
 
-export const uploadImage = createAsyncThunk(
-  "/posts/uploadImage",
-  async (image, thunkAPI) => {
-    return uploadImageThunk("/posts/uploadImage", image, thunkAPI);
-  }
-);
+export const uploadImage = createAsyncThunk("/posts/uploadImage", async (image, thunkAPI) => {
+  return uploadImageThunk("/posts/uploadImage", image, thunkAPI);
+});
 
 export const createPost = createAsyncThunk("/posts/createPost", async (post, thunkAPI) => {
   return createPostThunk("/posts", post, thunkAPI);
@@ -33,7 +29,7 @@ export const createPost = createAsyncThunk("/posts/createPost", async (post, thu
 
 export const getCurrentPost = createAsyncThunk("/posts/getCurrentPost", async (thunkAPI) => {
   return getCurrentPostThunk("/posts", thunkAPI);
-})
+});
 
 const postsSlice = createSlice({
   name: "posts",
@@ -49,8 +45,9 @@ const postsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getAllPosts.fulfilled, (state, { payload }) => {
+        const { posts } = payload;
         state.isLoading = false;
-        state.posts = payload.posts;
+        state.posts = posts;
       })
       .addCase(getAllPosts.rejected, (state, { payload }) => {
         state.isLoading = false;

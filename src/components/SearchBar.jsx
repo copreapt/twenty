@@ -6,24 +6,51 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../features/user/userSlice";
 import { toggleLogout } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { searchUsers } from "../features/user/userSlice";
+import { openSearchUserModal } from "../features/user/userSlice";
+
+const initialState = {
+  search: "",
+}
 
 const SearchBar = () => {
   const [data, setData] = useState(null);
   const { openLogoutDiv } = useSelector((store) => store.user);
+  const [search, setSearch] = useState(initialState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logoutUserFunction = () => {
     dispatch(logoutUser());
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   };
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("userData"));
     setData(data);
-  }, []);
+  },[]);
 
   const toggleLogoutFunction = () => {
     dispatch(toggleLogout());
   };
+
+  const getSearchValue = (e) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      setSearch({ ...search, [name]: value })
+  }
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      dispatch(searchUsers(search));
+    }, 1000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [search]);
+    
 
   return (
     <section className="w-full">
@@ -38,8 +65,13 @@ const SearchBar = () => {
           <div className="flex items-center justify-center border-2 rounded-md  bg-gray-200">
             <input
               type="text"
+              name="search"
+              autocomplete="off"
+              value={search.search}
               className="focus:shadow-none focus:outline-none focus:ring-transparent px-2 bg-gray-200 placeholder:text-sm"
               placeholder="Search..."
+              onChange={getSearchValue}
+              onClick={(e) => dispatch(openSearchUserModal())}
             />
             <BsSearch className="mx-6 text-sm" />
           </div>
@@ -58,15 +90,15 @@ const SearchBar = () => {
           </div>
           {/* username */}
           <div
-            className="bg-gray-200 px-6 py-1 rounded-md flex items-center gap-4 hover:cursor-pointer"
+            className="bg-gray-200 px-6 py-1 rounded-md flex items-center justify-center gap-4 hover:cursor-pointer w-[150px]"
             onClick={toggleLogoutFunction}
           >
-            <h1>{data?.fullName}</h1>
+            <h1>{data?.username}</h1>
             <IoIosArrowDown />
           </div>
           {/* logout */}
           <div
-            className={`top-12 right-10 bg-cyan-400 px-5 py-1 rounded-md flex hover:cursor-pointer text-white hover:bg-cyan-700 ease-in-out duration-500 ${
+            className={`top-12 right-10 bg-cyan-400 px-5 py-1 w-[150px] items-center justify-center rounded-md flex hover:cursor-pointer text-white hover:bg-cyan-700 ease-in-out duration-500 ${
               openLogoutDiv ? "fixed" : "hidden"
             }`}
             onClick={logoutUserFunction}
@@ -74,6 +106,7 @@ const SearchBar = () => {
             <h1 className="px-5">Logout</h1>
           </div>
         </div>
+        {/* search users result */}
       </div>
     </section>
   );

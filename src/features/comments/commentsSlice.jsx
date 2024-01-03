@@ -12,24 +12,21 @@ const initialState = {
 };
 
 
-export const createComment = createAsyncThunk(
-  "/comments/createComment",
-  async (commentData, thunkAPI) => {
-    return createCommentThunk("/comments", commentData, thunkAPI);
-  }
-);
+export const createComment = createAsyncThunk("/comments/createComment", async (commentData, thunkAPI) => {
+  return createCommentThunk("/comments", commentData, thunkAPI);
+});
 
 export const getCurrentPostComments = createAsyncThunk("/comments/getCurrentPostComments", async ( postId, thunkAPI) => {
   return getCurrentPostCommentsThunk("/comments/getCurrentPostComments", postId, thunkAPI);
-})
+});
 
 export const getCurrentUserComments = createAsyncThunk("/comments/getCurrentUserComments", async(postId, thunkAPI) => {
   return getCurrentUserCommentsThunk("/comments/getCurrentUserComments", postId, thunkAPI);
-})
+});
 
 export const deleteComment = createAsyncThunk("/comments/deleteComment", async (thunkAPI) => {
   return deleteCommentThunk("/comments", thunkAPI);
-})
+});
 
 const commentsSlice = createSlice({
   name: "comments",

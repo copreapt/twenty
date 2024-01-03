@@ -36,10 +36,6 @@ function CreatePost() {
     setValues({ ...values, [name]: value });
   };
 
-  if(isLoading){
-    return <Loading />
-  }
-
   return (
     <div className='bg-white rounded-md py-2 shadow-sm shadow-white px-3"'>
       {/* what's on your mind */}
@@ -48,13 +44,13 @@ function CreatePost() {
           {/* user photo */}
           <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
             <img
-              src="/assets/me2 (1).jpeg"
+              src={currentUser?.profilePicture}
               alt="person image"
-              className="grow"
+              className="flex shrink-0 min-h-full min-w-full"
             />
           </div>
           {/* input */}
-          <div className="flex items-center align-center w-full">
+          <div className="flex items-center align-center grow">
             <input
               type="text"
               name="description"
@@ -76,15 +72,18 @@ function CreatePost() {
           return (
             <div
               key={link.id}
-              className="flex items-center gap-3 cursor-pointer ease-in-out duration-500 hover:text-cyan-300"
+              className="flex items-center cursor-pointer ease-in-out duration-500 hover:text-cyan-300"
             >
               <label htmlFor="uploadImage">
-                <span className="">{link.icon}</span>
+                <span className="flex items-center gap-2 cursor-pointer font-semibold">
+                  {link.icon}
+                  <span>Image</span>
+                </span>
               </label>
               <input
                 type="file"
                 id="uploadImage"
-                className="custom-file-input"
+                className="custom-file-input hidden"
                 accept="image/*"
                 onChange={selectAndUploadImage}
               />
@@ -103,7 +102,9 @@ function CreatePost() {
         </div>
       </form>
       {/* post */}
-      {postImage ? (
+      {isLoading ? (
+        <Loading />
+      ) : postImage ? (
         <div className="px-5 py-5">
           <img src={postImage} alt="post image" />
         </div>

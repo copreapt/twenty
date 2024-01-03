@@ -11,33 +11,21 @@ const initialState = {
   openCurrentPostLikes: false,
 };
 
-export const createLike = createAsyncThunk(
-  "/likes/createLike",
-  async (likeData, thunkAPI) => {
-    return createLikeThunk("/likes", likeData, thunkAPI);
-  }
-);
+export const createLike = createAsyncThunk("/likes/createLike", async (likeData, thunkAPI) => {
+  return createLikeThunk("/likes", likeData, thunkAPI);
+});
 
-export const getLikes = createAsyncThunk(
-  "/likes/getLikes",
-  async (thunkAPI) => {
-    return getLikesThunk("/likes", thunkAPI);
-  }
-);
+export const getLikes = createAsyncThunk("/likes/getLikes", async (thunkAPI) => {
+  return getLikesThunk("/likes", thunkAPI);
+});
 
-export const getCurrentUserLikes = createAsyncThunk(
-  "/likes/getCurrentUserLikes",
-  async (thunkAPI) => {
-    return getCurrentUserLikesThunk("/likes/currentUserLikes", thunkAPI);
-  }
-);
+export const getCurrentUserLikes = createAsyncThunk("/likes/getCurrentUserLikes", async (thunkAPI) => {
+  return getCurrentUserLikesThunk("/likes/currentUserLikes", thunkAPI);
+});
 
-export const getCurrentPostLikes = createAsyncThunk(
-  "/likes/getCurrentPostLikes",
-  async (postId, thunkAPI) => {
-    return getCurrentPostLikesThunk("/likes/currentPostLikes", postId, thunkAPI);
-  }
-);
+export const getCurrentPostLikes = createAsyncThunk("/likes/getCurrentPostLikes", async (postId, thunkAPI) => {
+  return getCurrentPostLikesThunk("/likes/currentPostLikes", postId, thunkAPI);
+});
 
 const likesSlice = createSlice({
   name: "likes",

@@ -5,20 +5,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
 import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments, getCurrentUserComments } from '../features/comments/commentsSlice';
 import { getCurrentPost } from '../features/posts/postSlice';
+import { getSingleUser, addFriend } from '../features/user/userSlice';
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
 const PostCard = () => {
 
-  const  {posts}  = useSelector((store) => store.posts);
+  const {posts}  = useSelector((store) => store.posts);
   const {currentUser} = useSelector((store) => store.user);
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
-
   const [likedPosts, setLikedPosts] = useState(null)
-
   const dispatch = useDispatch();
 
+  // find liked posts
   const findLikedPosts = useCallback(() => {
     const currentUserLikedPosts = currentUserLikes?.map((like) => {
       const { post } = like;
@@ -27,7 +28,7 @@ const PostCard = () => {
     if (currentUserLikedPosts) {
       setLikedPosts(currentUserLikedPosts);
     }
-  }, [currentUserLikes]);
+  },[currentUserLikes]);
 
   const likePostOnClick =(postId) => {
     //  to prevent from spamming like button, we first wait for the request to fulfill then the user can send again
@@ -65,20 +66,24 @@ const PostCard = () => {
     dispatch(toggleOpenCurrentPostComments());
   }
 
+  const fetchSingleUser = (id) => {
+    dispatch(getSingleUser({id: id}))
+  }
+
+  const addUserToFriendList = (name, image, id) => {
+    dispatch(addFriend({fullName: name, profilePicture: image, friendId: id}))
+  }
 
   useEffect(() => {
       findLikedPosts()
   },[currentUserLikes,findLikedPosts])
 
-  useEffect(() => {
-      console.log(likedPosts)
-  },[likedPosts])
 
 
   return (
     <>
       {posts?.map((post) => {
-        const {description, image, name, profilePicture, location, _id} = post;
+        const {description, image, name, profilePicture, location, _id, user} = post;
         return (
           <div
             className="bg-white mb-4 flex flex-col space-y-4 p-3 rounded-md"
@@ -87,12 +92,16 @@ const PostCard = () => {
             {/* top div */}
             <div className="flex justify-between">
               {/* img and name */}
-              <div className="flex gap-2">
+              <Link
+                to={`users/${user}`}
+                className="flex gap-2 cursor-pointer"
+                onClick={(e) => fetchSingleUser(user)}
+              >
                 <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
                   <img
                     src={profilePicture}
                     alt="person image"
-                    className="grow"
+                    className="flex shrink-0 min-h-full min-w-full"
                   />
                 </div>
                 <div className="flex flex-col items-center">
@@ -101,11 +110,24 @@ const PostCard = () => {
                     {location}
                   </span>
                 </div>
-              </div>
+              </Link>
               {/* add friend icon */}
-              <div className="flex items-center text-cyan-700">
-                <HiOutlineUserAdd />
-              </div>
+              {user === currentUser?._id ? (
+                ""
+              ) : currentUser?.friends?.some(
+                  (item) => item.friendId === user
+                ) ? (
+                ""
+              ) : (
+                <div
+                  className="flex items-center text-cyan-700 cursor-pointer"
+                  onClick={(e) =>
+                    addUserToFriendList(name, profilePicture, user)
+                  }
+                >
+                  <HiOutlineUserAdd />
+                </div>
+              )}
             </div>
             {/* img/photo div */}
             <div className="space-y-2">
@@ -114,8 +136,12 @@ const PostCard = () => {
                 <p className="text-sm">{description}</p>
               </div>
               {/* image/photo */}
-              <div>
-                <img src={image} alt="image" className="w-full" />
+              <div onClick={(e) => openCommentsModal(_id)}>
+                <img
+                  src={image}
+                  alt="image"
+                  className="w-full cursor-pointer"
+                />
               </div>
             </div>
             {/* bottom div - like, comment */}

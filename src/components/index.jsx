@@ -8,7 +8,9 @@ import UserInfo from "./UserInfo";
 import CreatePost from "./CreatePost";
 import FriendList from "./FriendList";
 import Loading from "./Loading";
-
+import LikesModal from "./LikesModal";
+import CommentsSection from "./CommentsSection";
+import SearchUserModal from "./SearchUserModal";
 
 export {
     AddsSection,
@@ -21,4 +23,7 @@ export {
     CreatePost,
     FriendList,
     Loading,
+    LikesModal,
+    CommentsSection,
+    SearchUserModal,
 }
