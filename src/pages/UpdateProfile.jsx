@@ -106,9 +106,9 @@ const UpdateProfile = () => {
   }, []);
 
   return (
-    <div className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center">
+    <div className="md:w-full h-screen bg-gray-200 flex flex-col items-center">
       {/* navbar div */}
-      <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
+      <div className="hidden md:flex fixed top-0 left-0 bg-white overflow-hidden w-full">
         <div className="w-full">
           <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
             {/* navbar logo and search */}
