@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react'
-import { CommentsSection, SearchBar } from '../components';
+import React, {useEffect, useState} from 'react'
+import { navbarDesktop } from '../utils/utils';
+import { CommentsSection } from '../components';
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
+import { IoIosArrowDown } from 'react-icons/io';
 import { useSelector, useDispatch } from "react-redux";
 import {
   toggleOpenCurrentPostComments,
@@ -12,12 +14,16 @@ import {
   getCurrentUserComments,
 } from "../features/comments/commentsSlice";
 import { getCurrentPost } from "../features/posts/postSlice";
-import { addFriend } from '../features/user/userSlice';
-import { useNavigate } from 'react-router';
+import { addFriend, getSingleUser } from '../features/user/userSlice';
+import { useNavigate, useParams } from 'react-router';
+import { toggleLogout, logoutUser } from '../features/user/userSlice';
+import { Link } from 'react-router-dom';
 
 const SingleUser = () => {
 
-  const {singleUser, singleUserPosts, currentUser} = useSelector((store) => store.user);
+  const {singleUser, singleUserPosts, currentUser, openLogoutDiv} = useSelector((store) => store.user);
+  const {id} = useParams();
+  const [data, setData] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,6 +33,17 @@ const SingleUser = () => {
     dispatch(getCurrentPostComments({ post: id }));
     dispatch(getCurrentUserComments({ post: id }));
     dispatch(toggleOpenCurrentPostComments());
+  };
+
+  const logoutUserFunction = () => {
+    dispatch(logoutUser());
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  };
+
+  const toggleLogoutFunction = () => {
+    dispatch(toggleLogout());
   };
 
   useEffect(() => {
@@ -43,6 +60,10 @@ const SingleUser = () => {
       }
     }
     autoLogin();
+    dispatch(getSingleUser({id: id}));
+
+    const data = JSON.parse(localStorage.getItem("userData"));
+    setData(data);
   }, []);
 
   return (
@@ -51,7 +72,49 @@ const SingleUser = () => {
       <CommentsSection />
       {/* navbar div */}
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
-        <SearchBar />
+        <div className="w-full">
+          <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
+            {/* navbar logo and search */}
+            <div className="flex gap-4">
+              <div className="">
+                <Link to="/" className="text-3xl text-cyan-500">
+                  Twenty
+                </Link>
+              </div>
+            </div>
+            {/* navbar links */}
+            <div className="flex items-center justify-around">
+              {/* links */}
+              <div className="flex justify-between w-40 px-6">
+                {navbarDesktop.map((link) => {
+                  return (
+                    <span key={link.id} className="text-lg">
+                      {link.icon}
+                    </span>
+                  );
+                })}
+              </div>
+              {/* username */}
+              <div
+                className="bg-gray-200 px-6 py-1 rounded-md flex items-center justify-center gap-4 hover:cursor-pointer w-[150px]"
+                onClick={toggleLogoutFunction}
+              >
+                <h1>{data?.username}</h1>
+                <IoIosArrowDown />
+              </div>
+              {/* logout */}
+              <div
+                className={`top-12 right-10 bg-cyan-400 px-5 py-1 w-[150px] items-center justify-center rounded-md flex hover:cursor-pointer text-white hover:bg-cyan-700 ease-in-out duration-500 ${
+                  openLogoutDiv ? "fixed" : "hidden"
+                }`}
+                onClick={logoutUserFunction}
+              >
+                <h1 className="px-5">Logout</h1>
+              </div>
+            </div>
+            {/* search users result */}
+          </div>
+        </div>
       </div>
       {/* container */}
       <div className="flex flex-col py-12 md:max-w-3xl md:mx-auto lg:max-w-screen-lg lg:gap-20 xl:max-w-screen-lg md:mt-10">
@@ -154,10 +217,16 @@ const SingleUser = () => {
             return (
               <div
                 key={_id}
-                className="flex justify-center items-center h-[50] w-[50] cursor-pointer shadow-md shadow-gray-500 hover:scale-105 ease-in-out duration-700 hover:shadow-lg"
+                className={`${
+                  image ? "flex" : "hidden"
+                } justify-center items-center max-h-[300px] max-w-[300px] overflow-hidden cursor-pointer shadow-md shadow-gray-500 hover:scale-105 ease-in-out duration-700 hover:shadow-lg`}
                 onClick={(e) => openCommentsModal(_id)}
               >
-                <img src={image} alt="person image" className="grow" />
+                <img
+                  src={image}
+                  alt="person image"
+                  className="w-full min-h-full min-w-full cursor-pointer flex shrink-0 mx-auto"
+                />
               </div>
             );
           })}

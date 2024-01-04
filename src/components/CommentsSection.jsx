@@ -29,6 +29,7 @@ const CommentsSection = () => {
     };
 
     const storeMessageInState = (e) => {
+      e.preventDefault();
       const name = e.target.name;
       const value = e.target.value;
       setValues({ ...values, [name]: value });
@@ -55,20 +56,35 @@ const CommentsSection = () => {
   return (
     <div
       className={`fixed top-0 left-0 w-full h-full  bg-black/80  items-center z-20 ${
-        openCurrentPostComments ? "flex" : "hidden" } `}
+        openCurrentPostComments ? "flex" : "hidden"
+      } `}
     >
       {/* container */}
-      <div className="grid grid-cols-12 p-20 max-w-screen-xl mx-auto">
+      <div
+        className={`p-20 max-w-screen-xl mx-auto ${
+          currentPost?.image
+            ? "grid grid-cols-12"
+            : "flex items-center justify-center"
+        }`}
+      >
         {/* image div */}
-        <div className="col-span-7 flex items-center justify-center bg-black">
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <img src={currentPost?.image} alt="user image" className="w-full" />
-          )}
-        </div>
+        {currentPost?.image ? (
+          <div className="col-span-7 flex items-center justify-center bg-black">
+            <img
+              src={currentPost?.image}
+              alt="user image"
+              className="w-full max-h-[655px]"
+            />
+          </div>
+        ) : (
+          ""
+        )}
         {/* comments section div */}
-        <div className="col-span-5 p-5 bg-gray-200 ">
+        <div
+          className={`p-5 bg-gray-200 ${
+            currentPost?.image ? "col-span-5" : ""
+          }`}
+        >
           {/* container */}
           <div className="flex flex-col relative">
             {/* current user profile picture and name */}
@@ -76,12 +92,12 @@ const CommentsSection = () => {
               <IoClose
                 className="text-2xl absolute right-2 top-2 cursor-pointer"
                 onClick={toggleComments}
-            />
+              />
               <div className="rounded-full justify-center overflow-hidden w-[40px] h-[40px] flex items-center">
                 <img
                   src={currentUser?.profilePicture}
                   alt="image"
-                  className="grow"
+                  className="w-full min-h-full min-w-full flex shrink-0 mx-auto"
                 />
               </div>
               <div>

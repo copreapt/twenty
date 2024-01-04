@@ -2,9 +2,9 @@ import customFetch from "../../utils/axios";
 import { imageFetch } from "../../utils/axios";
 
 
-export const getAllPostsThunk = async (url, thunkAPI) => {
+export const getAllPostsThunk = async (url, params, thunkAPI) => {
   try {
-    const resp = await customFetch.get(url);
+    const resp = await customFetch.post(url, params);
     return resp.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data.msg);

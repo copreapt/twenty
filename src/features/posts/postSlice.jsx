@@ -8,15 +8,16 @@ import {
 } from "./postThunk";
 
 const initialState = {
-  isLoading:false,
-  posts:null,
+  isLoadingPosts:false,
+  isLoadingPostsImage:false,
+  posts:[],
   currentUser:null,
   currentPost: null,
   postImage: "",
 };
 
-export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (thunkAPI) => {
-  return getAllPostsThunk("/posts", thunkAPI);
+export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (params, thunkAPI) => {
+  return getAllPostsThunk("/posts/getAllPosts", params, thunkAPI);
 });
 
 export const uploadImage = createAsyncThunk("/posts/uploadImage", async (image, thunkAPI) => {
@@ -42,51 +43,54 @@ const postsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllPosts.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingPosts = true;
       })
       .addCase(getAllPosts.fulfilled, (state, { payload }) => {
         const { posts } = payload;
-        state.isLoading = false;
-        state.posts = posts;
+        state.isLoadingPosts = false;
+        if(!posts){
+          return;
+        }
+        state.posts = [...state.posts, ...posts];
       })
       .addCase(getAllPosts.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingPosts = false;
         toast.error(payload);
       })
       .addCase(uploadImage.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingPostsImage = true;
       })
       .addCase(uploadImage.fulfilled, (state, { payload }) => {
         const { image } = payload;
-        state.isLoading = false;
+        state.isLoadingPostsImage = false;
         state.postImage = image?.src;
       })
       .addCase(uploadImage.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingPosts = false;
         toast.error(payload);
       })
       .addCase(createPost.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingPosts = true;
       })
       .addCase(createPost.fulfilled, (state) => {
-        state.isLoading = false;
+        state.isLoadingPosts = false;
         state.postImage = "";
         toast.success("Post Created");
       })
       .addCase(createPost.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingPosts = false;
         toast.error(payload);
       })
       .addCase(getCurrentPost.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingPosts = true;
       })
       .addCase(getCurrentPost.fulfilled, (state, { payload }) => {
         const { post } = payload;
-        state.isLoading = false;
+        state.isLoadingPosts = false;
         state.currentPost = post;
       })
       .addCase(getCurrentPost.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingPosts = false;
         toast.error(payload);
       });
   },

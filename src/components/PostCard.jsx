@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 const PostCard = () => {
 
   const {posts}  = useSelector((store) => store.posts);
-  const {currentUser} = useSelector((store) => store.user);
+  const {currentUser, isLoading} = useSelector((store) => store.user);
   const {currentUserLikes, isLoadingLikes, likes} = useSelector((store) => store.likes);
   const [likedPosts, setLikedPosts] = useState(null)
   const dispatch = useDispatch();
@@ -71,7 +71,13 @@ const PostCard = () => {
   }
 
   const addUserToFriendList = (name, image, id) => {
-    dispatch(addFriend({fullName: name, profilePicture: image, friendId: id}))
+    if(isLoading){
+      return;
+    } else {
+      dispatch(
+        addFriend({ fullName: name, profilePicture: image, friendId: id })
+      );
+    }
   }
 
   useEffect(() => {
@@ -136,13 +142,16 @@ const PostCard = () => {
                 <p className="text-sm">{description}</p>
               </div>
               {/* image/photo */}
-              <div onClick={(e) => openCommentsModal(_id)}>
+              {image? <div
+                onClick={(e) => openCommentsModal(_id)}
+                className="flex justify-center items-center max-h-[600px] overflow-hidden"
+              >
                 <img
                   src={image}
                   alt="image"
-                  className="w-full cursor-pointer"
+                  className="w-full min-h-full min-w-full cursor-pointer flex shrink-0 mx-auto"
                 />
-              </div>
+              </div> : ""}
             </div>
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">

@@ -18,6 +18,7 @@ const LikesModal = () => {
 
      const fetchSingleUser = (id) => {
        dispatch(getSingleUser({ id: id }));
+       dispatch(toggleCloseCurrentPostLikes());
      };
 
   return (

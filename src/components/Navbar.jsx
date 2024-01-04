@@ -12,8 +12,8 @@ const Navbar = () => {
   }
 
   return (
-    <section className="w-2/4">
-      <div className="flex justify-between">
+    <section className="w-full">
+      <div className="flex justify-center gap-10">
         {navbarLinks.map((link) => {
           return (
             <div key={link.id}>

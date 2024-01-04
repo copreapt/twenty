@@ -3,6 +3,7 @@ import { createPostLinks } from '../utils/utils';
 import {useSelector, useDispatch} from "react-redux";
 import { uploadImage, createPost } from '../features/posts/postSlice';
 import Loading from './Loading';
+import { toast } from 'react-toastify';
 
 
 const initialState = {
@@ -13,7 +14,7 @@ function CreatePost() {
 
   const [values, setValues] = useState(initialState);
   const {currentUser} = useSelector((store) => store.user);
-  const {postImage, isLoading} = useSelector((store) => store.posts);
+  const {postImage, isLoadingPostsImage} = useSelector((store) => store.posts);
   const dispatch = useDispatch()
 
   const selectAndUploadImage = (e) => {
@@ -26,6 +27,9 @@ function CreatePost() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {description} = values
+    if(!description && !postImage){
+      return toast.error('Unable to submit a blank Post');
+    }
     dispatch(createPost({description, image:postImage, profilePicture: currentUser.profilePicture,name: currentUser.fullName}));
     window.location.reload(true);
   }
@@ -64,7 +68,7 @@ function CreatePost() {
       </div>
       {/* load img, clip, attachment */}
       <form
-        className="flex justify-between mx-6 mt-2"
+        className="flex justify-between mx-6 mt-2 mb-5"
         action="submit"
         onSubmit={handleSubmit}
       >
@@ -95,18 +99,22 @@ function CreatePost() {
           <button
             type="submit"
             className="bg-cyan-300 text-gray-700 rounded-full py-2 px-4 ease-in-out duration-500  hover:bg-cyan-700 hover:text-white"
-            disabled={isLoading}
+            disabled={isLoadingPostsImage}
           >
             Post
           </button>
         </div>
       </form>
       {/* post */}
-      {isLoading ? (
+      {isLoadingPostsImage ? (
         <Loading />
       ) : postImage ? (
-        <div className="px-5 py-5">
-          <img src={postImage} alt="post image" />
+        <div className="px-10 mb-5 flex justify-center items-center max-h-[500px] overflow-hidden">
+          <img
+            src={postImage}
+            alt="post image"
+            className="w-full min-h-full min-w-full cursor-pointer flex shrink-0 mx-auto"
+          />
         </div>
       ) : (
         ""

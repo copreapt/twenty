@@ -66,7 +66,7 @@ const SearchBar = () => {
             <input
               type="text"
               name="search"
-              autocomplete="off"
+              autoComplete="off"
               value={search.search}
               className="focus:shadow-none focus:outline-none focus:ring-transparent px-2 bg-gray-200 placeholder:text-sm"
               placeholder="Search..."

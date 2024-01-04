@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { SearchBar, FormRow } from "../components";
+import { FormRow } from "../components";
+import { IoIosArrowDown } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, updateUser, getCurrentUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router";
+import { navbarDesktop } from "../utils/utils";
+import { toggleLogout, logoutUser } from "../features/user/userSlice";
+import { Link } from "react-router-dom";
 
 
 const initialState = {
@@ -18,8 +22,11 @@ const initialState = {
 
 
 const UpdateProfile = () => {
-  const {currentUser, profilePictureImage} = useSelector((store) => store.user);
+  const { currentUser, profilePictureImage, openLogoutDiv } = useSelector(
+    (store) => store.user
+  );
   const [values, setValues] = useState(initialState);
+  const [data, setData] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,6 +76,17 @@ const UpdateProfile = () => {
     setValues({ ...values, [name]: value });
   };
 
+  const logoutUserFunction = () => {
+    dispatch(logoutUser());
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+  };
+
+  const toggleLogoutFunction = () => {
+    dispatch(toggleLogout());
+  };
+
   useEffect(() => {
     async function autoLogin() {
       const response = await fetch(
@@ -83,13 +101,57 @@ const UpdateProfile = () => {
       }
     }
     autoLogin();
+    const data = JSON.parse(localStorage.getItem("userData"));
+    setData(data);
   }, []);
 
   return (
     <div className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col absolute items-center">
       {/* navbar div */}
       <div className="hidden md:flex bg-white overflow-hidden fixed top-0 z-0 w-full">
-        <SearchBar />
+        <div className="w-full">
+          <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
+            {/* navbar logo and search */}
+            <div className="flex gap-4">
+              <div className="">
+                <Link to="/" className="text-3xl text-cyan-500">
+                  Twenty
+                </Link>
+              </div>
+            </div>
+            {/* navbar links */}
+            <div className="flex items-center justify-around">
+              {/* links */}
+              <div className="flex justify-between w-40 px-6">
+                {navbarDesktop.map((link) => {
+                  return (
+                    <span key={link.id} className="text-lg">
+                      {link.icon}
+                    </span>
+                  );
+                })}
+              </div>
+              {/* username */}
+              <div
+                className="bg-gray-200 px-6 py-1 rounded-md flex items-center justify-center gap-4 hover:cursor-pointer w-[150px]"
+                onClick={toggleLogoutFunction}
+              >
+                <h1>{data?.username}</h1>
+                <IoIosArrowDown />
+              </div>
+              {/* logout */}
+              <div
+                className={`top-12 right-10 bg-cyan-400 px-5 py-1 w-[150px] items-center justify-center rounded-md flex hover:cursor-pointer text-white hover:bg-cyan-700 ease-in-out duration-500 ${
+                  openLogoutDiv ? "fixed" : "hidden"
+                }`}
+                onClick={logoutUserFunction}
+              >
+                <h1 className="px-5">Logout</h1>
+              </div>
+            </div>
+            {/* search users result */}
+          </div>
+        </div>
       </div>
       <form
         action="submit"

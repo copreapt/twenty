@@ -1,10 +1,9 @@
 import {FaUserFriends, FaImages} from "react-icons/fa"
-import {BsNewspaper, BsSearch} from "react-icons/bs"
+import { BsSearch} from "react-icons/bs"
 import {CgProfile} from "react-icons/cg"
 import { MdWbSunny } from "react-icons/md";
 import { BiMessageSquareDetail } from "react-icons/bi";
-import { FaBell, FaVideo } from "react-icons/fa";
-import { CgAttachment } from "react-icons/cg";
+import { FaBell } from "react-icons/fa";
 
 
 
@@ -17,23 +16,13 @@ export const navbarLinks = [
   },
   {
     id: 2,
-    icon: <FaImages />,
-    name: "posts",
-  },
-  {
-    id: 3,
     icon: <BsSearch />,
     name: "search",
   },
   {
-    id: 4,
+    id: 3,
     icon: <CgProfile />,
     name: "profile",
-  },
-  {
-    id: 5,
-    icon: <BsNewspaper />,
-    name: "news",
   },
 ];
 
@@ -61,16 +50,6 @@ export const createPostLinks = [
     icon: <FaImages />,
     name: "image",
   },
-  // {
-  //   id: 2,
-  //   icon: <FaVideo />,
-  //   name: "video",
-  // },
-  // {
-  //   id: 3,
-  //   icon: <CgAttachment />,
-  //   name: "attachments",
-  // },
 ];
 
 export const setUserLocalStorage = (user) => {
