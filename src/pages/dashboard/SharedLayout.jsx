@@ -33,7 +33,7 @@ const SharedLayout = () => {
   useEffect(() => {
     async function autoLogin() {
       const response = await fetch(
-        "http://localhost:5000/api/v1/auth/autoLogin",
+        "https://twenty-myserver.onrender.com/api/v1/auth/autoLogin",
         {
           method: "GET",
           credentials: "include",
