@@ -159,7 +159,7 @@ const UpdateProfile = () => {
         onSubmit={onSubmit}
       >
         {/* container */}
-        <div className="grid grid-cols-12 py-14 md:max-w-3xl md:mx-auto lg:max-w-screen-lg lg:gap-20 xl:max-w-screen-xl md:mt-10">
+        <div className="grid grid-cols-12 py-14 max-w-screen-xl md:mx-auto gap-10 mt-[45px] md:mt-[60px]">
           {/* Profile Picture */}
           <div className="flex flex-col items-center space-y-10 col-span-5">
             <div className="flex justify-center items-center h-[400px] w-[400px] rounded-full overflow-hidden border-4 border-white shadow-md shadow-gray-400">
