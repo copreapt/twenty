@@ -106,7 +106,7 @@ const UpdateProfile = () => {
   }, []);
 
   return (
-    <div className="md:w-full h-screen bg-gray-200 flex flex-col items-center">
+    <div className="md:w-full md:mx-auto h-screen bg-gray-200 flex flex-col items-center">
       {/* navbar div */}
       <div className="hidden md:flex fixed top-0 left-0 bg-white overflow-hidden w-full">
         <div className="w-full">
@@ -159,10 +159,10 @@ const UpdateProfile = () => {
         onSubmit={onSubmit}
       >
         {/* container */}
-        <div className="flex py-14 md:mx-auto gap-10 mt-[45px] md:mt-[60px]">
+        <div className="grid grid-cols-12 py-14 md:mx-auto gap-10 mt-[45px] md:mt-[60px]">
           {/* Profile Picture */}
-          <div className="flex flex-col items-center space-y-10 max-w-[500px]">
-            <div className="flex justify-center items-center max-h-[400px] max-w-[400px] rounded-full overflow-hidden border-4 border-white shadow-md shadow-gray-400">
+          <div className="flex flex-col items-center space-y-10 col-span-5">
+            <div className="flex justify-center items-center h-[400px] w-[400px] rounded-full overflow-hidden border-4 border-white shadow-md shadow-gray-400">
               {profilePictureImage ? (
                 <img
                   src={profilePictureImage}
@@ -192,7 +192,7 @@ const UpdateProfile = () => {
             />
           </div>
           {/* container for email, username, name */}
-          <div className="flex max-w-[700px] justify-center items-center gap-10">
+          <div className="col-span-7 grid justify-items-center content-center gap-10">
             {/* sub container */}
             <div className="flex items-center gap-20">
               {/* username and full name */}
