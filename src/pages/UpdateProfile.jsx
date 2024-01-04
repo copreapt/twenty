@@ -90,7 +90,7 @@ const UpdateProfile = () => {
   useEffect(() => {
     async function autoLogin() {
       const response = await fetch(
-        "https://twenty-myserver.onrender.com/api/v1/auth/autoLogin",
+        "/api/v1/auth/autoLogin",
         {
           method: "GET",
           credentials: "include",
