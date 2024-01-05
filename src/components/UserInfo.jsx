@@ -39,7 +39,12 @@ const UserInfo = () => {
                 {currentUser?.fullName}
               </span>
               <span className="text-sm text-gray-300 font-light">
-                {`${currentUser?.friends.length} friend${currentUser?.friends.length > 1? "s": ""}`}
+                {`${currentUser?.friends.length} friend${
+                  currentUser?.friends.length > 1 ||
+                  currentUser?.friends.length === 0
+                    ? "s"
+                    : ""
+                }`}
               </span>
             </div>
           </div>

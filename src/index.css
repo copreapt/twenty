@@ -1,7 +1,22 @@
 @tailwind base;
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   display: none;
+} */
+
+*::-webkit-scrollbar {
+  width: 0.30rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: black;
+  border-radius: 0.1rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 0.1rem;
+  border: 3px solid white;
 }
 
 @layer base {
