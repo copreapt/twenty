@@ -53,13 +53,13 @@ const SearchBar = () => {
     
 
   return (
-    <section className="w-full" id="top">
+    <section className="w-full">
       <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
         {/* navbar logo and search */}
         <div className="flex gap-4">
           <div className="">
             <Link to="/" className="text-3xl text-cyan-500">
-              <a href="#top">Twenty</a>
+              Twenty
             </Link>
           </div>
           <div className="flex items-center justify-center border-2 rounded-md  bg-gray-200">
