@@ -5,17 +5,17 @@
 } */
 
 *::-webkit-scrollbar {
-  width: 0.30rem;
+  width: 0.50rem;
 }
 
 *::-webkit-scrollbar-track {
   background: white;
-  border-radius: 0.2rem;
+  border-radius: 0.1rem;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: black;
-  border-radius: 0.1rem;
+  border-radius: 0.3rem;
   border: 3px solid black;
 }
 
