@@ -95,14 +95,14 @@ const CommentsSection = () => {
               />
               <div className="rounded-full justify-center overflow-hidden w-[40px] h-[40px] flex items-center">
                 <img
-                  src={currentUser?.profilePicture}
+                  src={currentPost?.profilePicture}
                   alt="image"
                   className="w-full min-h-full min-w-full flex shrink-0 mx-auto"
                 />
               </div>
               <div>
                 <h1 className="text-md font-extra-light">
-                  {currentUser?.fullName}
+                  {currentPost?.name}
                 </h1>
               </div>
             </div>
