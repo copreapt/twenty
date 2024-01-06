@@ -107,7 +107,7 @@ const CommentsSection = () => {
               </div>
             </div>
             {/* comments section */}
-            <div className="grow my-5 overflow-y-auto p-2 space-y-3 h-[400px] max-h-[400px]">
+            <div className="grow my-5 overflow-y-auto p-2 space-y-3 h-[400px] max-h-[400px] relative">
               {/* container */}
               <div className="flex gap-5 items-baseline flex-col-reverse">
                 {/* user div */}
@@ -143,7 +143,7 @@ const CommentsSection = () => {
                           return (
                             <div
                               key={comment._id}
-                              className="flex items-center text-md text-black absolute right-2 cursor-pointer"
+                              className="flex items-center text-md text-black  cursor-pointer"
                               onClick={(e) =>
                                 deleteCommentTrigger(
                                   comment._id,
