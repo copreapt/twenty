@@ -209,9 +209,9 @@ const userSlice = createSlice({
           .addCase(updateUser.fulfilled, (state,{payload}) => {
             const {user, msg} = payload;
             state.isLoading = false;
+            toast.success(msg);
             state.currentUser = user;
             state.profilePictureImage = "";
-            toast.success(msg);
           })
           .addCase(updateUser.rejected, (state, {payload}) => {
             state.isLoading = false;
