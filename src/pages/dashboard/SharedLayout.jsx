@@ -47,7 +47,7 @@ const SharedLayout = () => {
   }, []);
 
   return (
-    <main className="bg-gray-200 h-screen flex flex-col md:items-center overflow-y-auto">
+    <main className="bg-gray-200 flex flex-col md:items-center overflow-y-auto">
       <div className="hidden md:flex fixed top-0 left-0 bg-white overflow-hidden w-full">
         <SearchBar />
       </div>
