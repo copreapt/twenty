@@ -7,6 +7,7 @@ const initialState = {
   comment: null,
   currentPostComments: null,
   openCurrentPostComments: false,
+  openPostCommentsMobile:false,
   currentPostId:null,
   currentUserComments: null,
 };
@@ -37,6 +38,12 @@ const commentsSlice = createSlice({
     },
     toggleCloseCurrentPostComments: (state) => {
       state.openCurrentPostComments = false;
+    },
+    openPostCommentsMobile: (state) =>{
+      state.openPostCommentsMobile = true;
+    },
+    closePostCommentsMobile:(state) => {  
+      state.openPostCommentsMobile = false;
     },
     setCurrentPostId : (state, id) => {
         state.currentPostId = id;
@@ -97,6 +104,6 @@ const commentsSlice = createSlice({
   },
 });
 
-export const { toggleOpenCurrentPostComments, toggleCloseCurrentPostComments, setCurrentPostId } =
+export const { toggleOpenCurrentPostComments, toggleCloseCurrentPostComments, openPostCommentsMobile, closePostCommentsMobile, setCurrentPostId } =
   commentsSlice.actions;
 export default commentsSlice.reducer;

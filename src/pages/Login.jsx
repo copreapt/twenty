@@ -58,10 +58,13 @@ useEffect(() => {
 
 useEffect(() => {
   async function autoLogin() {
-    const response = await fetch("/api/v1/auth/autoLogin", {
-      method: "GET",
-      credentials: "include",
-    });
+    const response = await fetch(
+      "/api/v1/auth/autoLogin",
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
     if (response.status === 200) {
       navigate("/");
     } else {

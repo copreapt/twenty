@@ -14,6 +14,7 @@ const initialState = {
   currentUser:null,
   currentPost: null,
   postImage: "",
+  openPostImage:false,
 };
 
 export const getAllPosts = createAsyncThunk("posts/getAllPosts", async (params, thunkAPI) => {
@@ -41,6 +42,12 @@ const postsSlice = createSlice({
     },
     emptyPostsArray: (state) => {
       state.posts = [];
+    },
+    togglePostImage: (state) => {
+      state.openPostImage = true;
+    },
+    closePostImage: (state) => {
+      state.openPostImage = false;
     },
   },
   extraReducers: (builder) => {
@@ -99,6 +106,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { removeCurrentPostFromState, emptyPostsArray } =
+export const { removeCurrentPostFromState, emptyPostsArray, togglePostImage, closePostImage } =
   postsSlice.actions;
 export default postsSlice.reducer;

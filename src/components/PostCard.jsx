@@ -3,8 +3,17 @@ import {AiFillHeart} from 'react-icons/ai'
 import {FaRegCommentDots} from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 import { createLike, getCurrentPostLikes, toggleOpenCurrentPostLikes } from '../features/likes/likesSlice';
-import { toggleOpenCurrentPostComments, setCurrentPostId, getCurrentPostComments, getCurrentUserComments } from '../features/comments/commentsSlice';
-import { getCurrentPost } from '../features/posts/postSlice';
+import {
+  toggleOpenCurrentPostComments,
+  setCurrentPostId,
+  getCurrentPostComments,
+  getCurrentUserComments,
+  openPostCommentsMobile,
+} from "../features/comments/commentsSlice";
+import {
+  getCurrentPost,
+  togglePostImage,
+} from "../features/posts/postSlice";
 import { getSingleUser, addFriend } from '../features/user/userSlice';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -148,7 +157,10 @@ const PostCard = () => {
               {/* image/photo */}
               {image ? (
                 <div
-                  onClick={(e) => openCommentsModal(_id)}
+                  onClick={(e) => {
+                    openCommentsModal(_id);
+                    dispatch(togglePostImage());
+                  }}
                   className="flex justify-center items-center max-h-[600px] overflow-hidden"
                 >
                   <img
@@ -184,24 +196,29 @@ const PostCard = () => {
                 ) : (
                   ""
                 )}
-                <button onClick={(e) => openCommentsModal(_id)}>
+                <button
+                  onClick={(e) => {
+                    openCommentsModal(_id);
+                    dispatch(openPostCommentsMobile());
+                  }}
+                >
                   <FaRegCommentDots />
                 </button>
               </div>
               {/* liked by */}
               {likes?.filter((item) => item.post === _id).length > 0 ? (
                 <div className="flex items-center gap-2 font-semibold">
-                  <span className="text-md md:text-sm dark:text-white">
+                  <span className="text-sm dark:text-white">
                     Liked by
                   </span>
                   <span className="text-sm md:text-md text-cyan-600 dark:text-cyan-500">
                     {likes?.filter((item) => item.post === _id).pop()?.name}
                   </span>
-                  <span className="text-md md:text-sm dark:text-white">
+                  <span className="text-sm dark:text-white">
                     and
                   </span>
                   <span
-                    className="text-md md:text-md text-cyan-600 dark:text-cyan-500 hover:cursor-pointer"
+                    className="text-md text-cyan-600 dark:text-cyan-500 hover:cursor-pointer"
                     onClick={() => fetchCurrentPostLikes(_id)}
                   >
                     Others

@@ -1,73 +1,73 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
-import { useSelector, useDispatch } from 'react-redux';
-import { removeCurrentPostFromState } from "../features/posts/postSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { removeCurrentPostFromState, togglePostImage } from "../features/posts/postSlice";
 import {
   createComment,
-  toggleCloseCurrentPostComments,
   deleteComment,
+  closePostCommentsMobile,
 } from "../features/comments/commentsSlice";
-import { getCurrentUser, getSingleUser } from '../features/user/userSlice';
-import { Link } from 'react-router-dom';
+import { getCurrentUser, getSingleUser } from "../features/user/userSlice";
+import { Link } from "react-router-dom";
 
-const CommentsSection = () => {
-    const [values, setValues] = useState({comment: ""});
-    const { currentUser } = useSelector((store) => store.user);
-    const {
-      currentPostId,
-      currentPostComments,
-      currentUserComments,
-      openCurrentPostComments,
-    } = useSelector((store) => store.comments);
-    const { currentPost } = useSelector((store) => store.posts);
-    const dispatch = useDispatch();
+const CommentsSectionMobile = () => {
+  const [values, setValues] = useState({ comment: "" });
+  const { currentUser } = useSelector((store) => store.user);
+  const {
+    currentPostId,
+    currentPostComments,
+    currentUserComments,
+    openPostCommentsMobile,
+  } = useSelector((store) => store.comments);
+  const { currentPost } = useSelector((store) => store.posts);
+  const dispatch = useDispatch();
 
-    // close comments modal and empty state
-    const toggleComments = () => {
-      dispatch(toggleCloseCurrentPostComments());
-      dispatch(removeCurrentPostFromState());
-    };
+  // close comments modal and empty state
+  const toggleComments = () => {
+    dispatch(closePostCommentsMobile());
+    dispatch(removeCurrentPostFromState());
+  };
 
-    const storeMessageInState = (e) => {
-      e.preventDefault();
-      const name = e.target.name;
-      const value = e.target.value;
-      setValues({ ...values, [name]: value });
-    };
+  const storeMessageInState = (e) => {
+    e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+  };
 
-    const handleCommentSubmit = (e) => {
-      e.preventDefault();
-      dispatch(
-        createComment({
-          name: currentUser?.fullName,
-          profilePicture: currentUser?.profilePicture,
-          comment: values?.comment,
-          post: currentPostId?.payload,
-        })
-      );
-      setValues({ comment: "" });
-    };
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      createComment({
+        name: currentUser?.fullName,
+        profilePicture: currentUser?.profilePicture,
+        comment: values?.comment,
+        post: currentPostId?.payload,
+      })
+    );
+    setValues({ comment: "" });
+  };
 
-    // delete comment
-    const deleteCommentTrigger = (commentId, postId) => {
-      dispatch(deleteComment({ id: commentId, postId: postId }));
-    };
+  // delete comment
+  const deleteCommentTrigger = (commentId, postId) => {
+    dispatch(deleteComment({ id: commentId, postId: postId }));
+  };
 
-    const fetchSingleUser = (id) => {
-      dispatch(getSingleUser({id: id}));
-      dispatch(toggleCloseCurrentPostComments());
-      dispatch(removeCurrentPostFromState());
-    };
+  const fetchSingleUser = (id) => {
+    dispatch(getSingleUser({ id: id }));
+    dispatch(closePostCommentsMobile());
+    dispatch(removeCurrentPostFromState());
+  };
 
-    useEffect(() => {
-      dispatch(getCurrentUser());
-    },[])
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full  bg-black/80  items-center justify-center z-20 ${
-        openCurrentPostComments ? "hidden md:flex" : "hidden"
+      className={`fixed top-0 left-0 w-full h-full  bg-black/80  items-center justify-center z-20 md:hidden ${
+        openPostCommentsMobile ? "flex" : "hidden"
       } `}
     >
       {/* container */}
@@ -78,18 +78,6 @@ const CommentsSection = () => {
             : "items-center justify-center"
         }`}
       >
-        {/* image div */}
-        {currentPost?.image ? (
-          <div className="hidden col-span-7 md:flex items-center justify-center bg-black">
-            <img
-              src={currentPost?.image}
-              alt="user image"
-              className="w-full md:max-h-[655px]"
-            />
-          </div>
-        ) : (
-          ""
-        )}
         {/* comments section div */}
         <div
           className={`p-5 bg-gray-200 ${
@@ -203,6 +191,6 @@ const CommentsSection = () => {
       </div>
     </div>
   );
-}
+};
 
-export default CommentsSection
+export default CommentsSectionMobile;

@@ -13,6 +13,8 @@ import CommentsSection from "./CommentsSection";
 import SearchUserModal from "./SearchUserModal";
 import SearchUserModalMobile from "./SearchUserModalMobile";
 import FriendsModal from "./FriendsModal";
+import PostImageMobile from "./PostImageMobile";
+import CommentsSectionMobile from "./CommentsSectionMobile";
 
 export {
     AddsSection,
@@ -30,4 +32,6 @@ export {
     SearchUserModal,
     SearchUserModalMobile,
     FriendsModal,
+    PostImageMobile,
+    CommentsSectionMobile,
 }

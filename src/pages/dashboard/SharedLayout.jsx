@@ -1,5 +1,5 @@
 import {  useEffect, useState } from "react";
-import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList, LikesModal, CommentsSection, Loading, SearchUserModal, FriendsModal, SearchUserModalMobile } from "../../components"
+import { Navbar, AddsSection, PostsSection, SearchBar, UserInfo, CreatePost, FriendList, LikesModal, CommentsSection, Loading, SearchUserModal, FriendsModal, SearchUserModalMobile, CommentsSectionMobile, PostImageMobile } from "../../components"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../features/posts/postSlice";
 import { getCurrentUser } from "../../features/user/userSlice";
@@ -95,16 +95,20 @@ const SharedLayout = () => {
       <div className="md:hidden flex items-center py-3 bg-white dark:bg-gray-800 rounded-md justify-center border-t border-gray-300 dark:border-gray-600 fixed bottom-0 w-full">
         <Navbar />
       </div>
+      {/* Comment Section */}
+      <CommentsSection />
       {/* Search User Modal */}
       <SearchUserModal />
       {/* Likes Modal */}
       <LikesModal />
       {/* Comments Section Modal */}
-      <CommentsSection />
+      <CommentsSectionMobile />
       {/* Friends Modal for Mobile Version */}
       <FriendsModal />
       {/* Search User Modal */}
       <SearchUserModalMobile />
+      {/* Post Image Mobile */}
+      <PostImageMobile />
     </main>
   );
 }

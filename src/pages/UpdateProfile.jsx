@@ -280,7 +280,7 @@ const UpdateProfile = () => {
                 />
               </div>
               {/* socials */}
-              <div className="flex flex-col space-y-10 mb-10 md:mb-0">
+              <div className="flex flex-col space-y-10 mx-5 md:mx-0 mb-10 md:mb-0">
                 <h1 className="text-cyan-700 dark:text-cyan-500">
                   You can link bellow, your social media accounts.
                 </h1>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { changeTheme, navbarDesktop } from '../utils/utils';
-import { CommentsSection, FriendsModal, SearchUserModalMobile } from '../components';
+import { CommentsSection, FriendsModal, PostImageMobile, SearchUserModalMobile } from '../components';
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -13,7 +13,7 @@ import {
   getCurrentPostComments,
   getCurrentUserComments,
 } from "../features/comments/commentsSlice";
-import { emptyPostsArray, getCurrentPost } from "../features/posts/postSlice";
+import { emptyPostsArray, getCurrentPost, togglePostImage } from "../features/posts/postSlice";
 import {
   addFriend,
   getSingleUser,
@@ -264,8 +264,8 @@ const SingleUser = () => {
                 key={_id}
                 className={`${
                   image ? "flex" : "hidden"
-                } justify-center items-center max-h-[300px] max-w-[300px] overflow-hidden cursor-pointer shadow-md shadow-gray-500 md:shadow-none dark:border-2 dark:border-white hover:scale-105 ease-in-out duration-700 hover:shadow-lg`}
-                onClick={(e) => openCommentsModal(_id)}
+                } justify-center items-center max-h-[300px] max-w-[300px] overflow-hidden cursor-pointer shadow-gray-500 md:shadow-md dark:shadow-none dark:border-2 dark:border-white md:hover:scale-105 ease-in-out duration-700 md:hover:shadow-lg`}
+                onClick={(e) => {openCommentsModal(_id); dispatch(togglePostImage())}}
               >
                 <img
                   src={image}
@@ -287,6 +287,8 @@ const SingleUser = () => {
       <FriendsModal />
       {/* Search User Modal */}
       <SearchUserModalMobile />
+      {/* Post Image Mobile */}
+      <PostImageMobile />
     </div>
   );
 }

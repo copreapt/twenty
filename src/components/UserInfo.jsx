@@ -73,7 +73,7 @@ const UserInfo = () => {
               Click
               <Link
                 to="/updateProfile"
-                className="cursor-pointer font-semibold text-md text-cyan-700 mx-1"
+                className="cursor-pointer font-semibold text-md text-cyan-700 dark:text-cyan-500 mx-1"
               >
                 here
               </Link>
@@ -90,7 +90,7 @@ const UserInfo = () => {
               Click
               <Link
                 to="/updateProfile"
-                className="cursor-pointer font-semibold text-md text-cyan-700 mx-1"
+                className="cursor-pointer font-semibold text-md text-cyan-700 dark:text-cyan-500 mx-1"
               >
                 here
               </Link>
@@ -148,11 +148,11 @@ const UserInfo = () => {
         {!currentUser?.facebook &&
           !currentUser?.instagram &&
           !currentUser?.twitter && (
-            <span className="text-sm">
+            <span className="text-sm dark:text-white">
               Link your social media accounts{" "}
               <Link
                 to="/updateProfile"
-                className="cursor-pointer font-semibold text-md text-cyan-700"
+                className="cursor-pointer font-semibold text-md text-cyan-700 dark:text-cyan-500"
               >
                 here
               </Link>
