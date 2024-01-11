@@ -22,22 +22,21 @@ const SearchUserModal = () => {
 
   return (
     <aside
-      className={`fixed bottom-0 left-0 w-[390px] h-[calc(100vh-60px)] bg-gray-300 z-20 ease-linear duration-700 flex flex-col ${
+      className={`fixed bottom-0 left-0 w-[390px] h-[calc(100vh-60px)] bg-gray-300 dark:bg-gray-700 z-20 ease-linear duration-700 flex flex-col ${
         searchUserModal ? "translate-x-0" : "translate-x-[-100%]"
       }`}
     >
-      <div className="relative p-2 pt-4 text-right flex justify-end w-full text-black mb-10">
+      <div className="relative p-2 pt-4 text-right flex justify-end w-full text-black dark:text-white mb-10">
         <IoClose
           className="text-2xl absolute top-2 hover:cursor-pointer"
           onClick={toggle}
         />
-        <div></div>
       </div>
       {/* users container */}
       {isLoadingUsers ? (
         <Loading />
       ) : (
-        <div className="flex flex-col space-y-5 px-3">
+        <div className="flex flex-col space-y-5 px-3 grow mb-10 overflow-y-auto">
           {/* user div */}
           {searchUsersResult?.map((user) => {
             return (

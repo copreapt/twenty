@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { navbarDesktop } from "../utils/utils";
+import { changeTheme, navbarDesktop } from "../utils/utils";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ const SearchBar = () => {
   const [data, setData] = useState(null);
   const { openLogoutDiv } = useSelector((store) => store.user);
   const [search, setSearch] = useState(initialState);
+  const [theme, setTheme] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,10 +29,26 @@ const SearchBar = () => {
     }, 2000);
   };
 
+  const toggleTheme = () => {
+    if(theme === "white"){
+      setTheme("dark")
+      document.getElementById("darkMode").classList.add("dark");
+    } else {
+      setTheme("white")
+      document.getElementById("darkMode").classList.remove("dark");
+    }
+  };
+
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("userData"));
     setData(data);
+    const theme = localStorage.getItem("theme");
+    setTheme(theme);
   },[]);
+
+  useEffect(() => {
+    changeTheme(theme);
+  },[theme])
 
   const toggleLogoutFunction = () => {
     dispatch(toggleLogout());
@@ -54,7 +71,7 @@ const SearchBar = () => {
 
   return (
     <section className="w-full">
-      <div className="my-3 bg-white shadow-sm shadow-white mx-10 flex justify-between">
+      <div className="my-3 bg-white dark:bg-gray-800 shadow-sm mx-10 flex justify-between ease-in-out duration-700">
         {/* navbar logo and search */}
         <div className="flex gap-4">
           <div className="">
@@ -62,27 +79,31 @@ const SearchBar = () => {
               Twenty
             </Link>
           </div>
-          <div className="flex items-center justify-center border-2 rounded-md  bg-gray-200">
+          <div className="flex items-center justify-center border-2 rounded-md  bg-gray-200 dark:bg-gray-500">
             <input
               type="text"
               name="search"
               autoComplete="off"
               value={search.search}
-              className="focus:shadow-none focus:outline-none focus:ring-transparent px-2 bg-gray-200 placeholder:text-sm"
+              className="focus:shadow-none focus:outline-none focus:ring-transparent px-2 bg-gray-200 dark:text-gray-300 dark:bg-gray-500 dark:placeholder:text-gray-300 placeholder:text-sm"
               placeholder="Search..."
               onChange={getSearchValue}
               onClick={(e) => dispatch(openSearchUserModal())}
             />
-            <BsSearch className="mx-6 text-sm" />
+            <BsSearch className="mx-6 text-sm dark:text-white" />
           </div>
         </div>
         {/* navbar links */}
         <div className="flex items-center justify-around">
           {/* links */}
-          <div className="flex justify-between w-40 px-6">
+          <div className="flex justify-between px-6 dark:text-white">
             {navbarDesktop.map((link) => {
               return (
-                <span key={link.id} className="text-lg">
+                <span
+                  key={link.id}
+                  className="text-lg cursor-pointer"
+                  onClick={link.name === "darkMode" ? toggleTheme : undefined}
+                >
                   {link.icon}
                 </span>
               );
@@ -90,7 +111,7 @@ const SearchBar = () => {
           </div>
           {/* username */}
           <div
-            className="bg-gray-200 px-6 py-1 rounded-md flex items-center justify-center gap-4 hover:cursor-pointer w-[150px]"
+            className="bg-gray-200 dark:bg-gray-500 px-6 py-1 rounded-md flex items-center justify-center gap-4 hover:cursor-pointer w-[150px] dark:text-white"
             onClick={toggleLogoutFunction}
           >
             <h1>{data?.username}</h1>

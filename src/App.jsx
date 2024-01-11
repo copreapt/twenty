@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SharedLayout from './pages/dashboard/SharedLayout'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Error, ForgotPassword, Login, ProtectedRoutes, Register, Verification, ResetPassword, UpdateProfile, SingleUser, PersistentLogin } from './pages'
+import { Error, ForgotPassword, Login, Register, Verification, ResetPassword, UpdateProfile, SingleUser} from './pages'
 
 function App() {
 
@@ -12,9 +12,6 @@ function App() {
         <Route
           path="/"
           element={
-            // <ProtectedRoutes>
-            //   <SharedLayout />
-            // </ProtectedRoutes>
             <SharedLayout />
           }
         />

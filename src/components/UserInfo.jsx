@@ -7,6 +7,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { getSingleUser } from '../features/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { emptyPostsArray } from '../features/posts/postSlice';
 
 const UserInfo = () => {
 
@@ -18,9 +19,9 @@ const UserInfo = () => {
   };
 
   return (
-    <div className="bg-white rounded-md py-2 shadow-sm shadow-white px-3">
+    <div className="bg-white dark:bg-gray-800 rounded-md py-2 px-3 ease-in-out duration-700">
       {/* photo,name and profile*/}
-      <div className="flex justify-between border-b border-gray-300 pb-3">
+      <div className="flex justify-between border-b border-gray-300 pb-3 dark:text-white">
         {/* photo and name */}
         <Link
           to={`users/${currentUser?._id}`}
@@ -34,7 +35,7 @@ const UserInfo = () => {
                 className="flex shrink-0 min-h-full min-w-full"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col dark:text-white">
               <span className="text-md font-light">
                 {currentUser?.fullName}
               </span>
@@ -51,7 +52,10 @@ const UserInfo = () => {
         </Link>
         {/* profile */}
         <div className="text-sm flex items-center">
-          <Link to="/updateProfile">
+          <Link
+            to="/updateProfile"
+            onClick={(e) => dispatch(emptyPostsArray())}
+          >
             <FaUserCog />
           </Link>
         </div>
@@ -59,7 +63,7 @@ const UserInfo = () => {
       {/* location and job */}
       <div className="flex flex-col mt-5 border-b border-gray-300 pb-3">
         <div className="flex gap-3 items-center">
-          <FaLocationDot />
+          <FaLocationDot className="dark:text-white" />
           {currentUser?.location ? (
             <span className="text-sm text-gray-400">
               {currentUser?.location}
@@ -78,7 +82,7 @@ const UserInfo = () => {
           )}
         </div>
         <div className="flex gap-3 items-center">
-          <GiSuitcase />
+          <GiSuitcase className="dark:text-white" />
           {currentUser?.job ? (
             <span className="text-sm text-gray-400">{currentUser?.job}</span>
           ) : (
@@ -97,7 +101,7 @@ const UserInfo = () => {
       </div>
       {/* social profiles */}
       <div className="flex flex-col mt-5 pb-3 space-y-2">
-        <h4 className="text-md font-light">Social Profiles</h4>
+        <h4 className="text-md font-light dark:text-white">Social Profiles</h4>
         {/* for every social, div below */}
         {currentUser?.facebook && (
           <a
@@ -106,9 +110,9 @@ const UserInfo = () => {
             target="_blank"
             no-referrer="true"
           >
-            <FaFacebookF />
+            <FaFacebookF className="dark:text-white" />
             <div>
-              <p className="text-sm">Facebook</p>
+              <p className="text-sm dark:text-white">Facebook</p>
               <p className="text-[0.7rem] text-gray-300">Social Network</p>
             </div>
           </a>
@@ -120,9 +124,9 @@ const UserInfo = () => {
             target="_blank"
             no-referrer="true"
           >
-            <AiFillInstagram />
+            <AiFillInstagram className="dark:text-white" />
             <div>
-              <p className="text-sm">Instagram</p>
+              <p className="text-sm dark:text-white">Instagram</p>
               <p className="text-[0.7rem] text-gray-300">Social Network</p>
             </div>
           </a>
@@ -134,9 +138,9 @@ const UserInfo = () => {
             target="_blank"
             no-referrer="true"
           >
-            <FaXTwitter />
+            <FaXTwitter className="dark:text-white" />
             <div>
-              <p className="text-sm">Twitter</p>
+              <p className="text-sm dark:text-white">Twitter</p>
               <p className="text-[0.7rem] text-gray-300">Social Network</p>
             </div>
           </a>

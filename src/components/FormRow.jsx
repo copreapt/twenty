@@ -1,7 +1,7 @@
 const FormRow = ({type, name, value, handleChange, labelText}) => {
     return (
       <div className="gap-3 flex flex-col">
-        <label htmlFor={name} className="text-lg capitalize">
+        <label htmlFor={name} className="text-lg capitalize dark:text-white">
           {labelText || name}
         </label>
         <input

@@ -11,6 +11,8 @@ import Loading from "./Loading";
 import LikesModal from "./LikesModal";
 import CommentsSection from "./CommentsSection";
 import SearchUserModal from "./SearchUserModal";
+import SearchUserModalMobile from "./SearchUserModalMobile";
+import FriendsModal from "./FriendsModal";
 
 export {
     AddsSection,
@@ -26,4 +28,6 @@ export {
     LikesModal,
     CommentsSection,
     SearchUserModal,
+    SearchUserModalMobile,
+    FriendsModal,
 }

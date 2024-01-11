@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { autoLogin, loginUser} from "../features/user/userSlice";
+import { loginUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
 
-import { setUserLocalStorage } from "../utils/utils";
+import { setThemeLocalStorage, setUserLocalStorage } from "../utils/utils";
+import { emptyPostsArray } from "../features/posts/postSlice";
 
 
 const initialState = {
@@ -36,6 +37,7 @@ const onSubmit = (e) => {
     return;
   }
     dispatch(loginUser({ email: email, password: password }));
+    dispatch(emptyPostsArray());
     return;
 };
 
@@ -49,10 +51,14 @@ useEffect(() => {
   }
 }, [user]);
 
+useEffect(() => {
+  setThemeLocalStorage("white");
+},[])
+
 
 useEffect(() => {
   async function autoLogin() {
-    const response = await fetch("http://localhost:5000/api/v1/auth/autoLogin", {
+    const response = await fetch("/api/v1/auth/autoLogin", {
       method: "GET",
       credentials: "include",
     });

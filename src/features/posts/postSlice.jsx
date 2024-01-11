@@ -39,6 +39,9 @@ const postsSlice = createSlice({
     removeCurrentPostFromState: (state) => {
       state.currentPost = null;
     },
+    emptyPostsArray: (state) => {
+      state.posts = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -96,6 +99,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { removeCurrentPostFromState } =
+export const { removeCurrentPostFromState, emptyPostsArray } =
   postsSlice.actions;
 export default postsSlice.reducer;

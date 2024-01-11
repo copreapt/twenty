@@ -1,8 +1,8 @@
 @tailwind base;
 
-/* *::-webkit-scrollbar {
+.no-scroll::-webkit-scrollbar {
   display: none;
-} */
+}
 
 *::-webkit-scrollbar {
   width: 0.50rem;

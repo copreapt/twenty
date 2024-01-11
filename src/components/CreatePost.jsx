@@ -41,7 +41,7 @@ function CreatePost() {
   };
 
   return (
-    <div className='bg-white rounded-md py-2 shadow-sm shadow-white px-3"'>
+    <div className="bg-white dark:bg-gray-800 rounded-md py-2 px-3 ease-in-out duration-700">
       {/* what's on your mind */}
       <div className="flex flex-col">
         <div className="flex pb-3 gap-6 border-b-2 border-gray-300 mx-4">
@@ -58,7 +58,7 @@ function CreatePost() {
             <input
               type="text"
               name="description"
-              className="w-full py-2 px-4 text-sm placeholder:text-sm rounded-full bg-gray-200 focus:shadow-none focus:outline-none focus:ring-transparent"
+              className="w-full py-2 px-4 text-sm placeholder:text-sm rounded-full bg-gray-200 dark:bg-gray-500 dark:placeholder:text-gray-300 dark:text-gray-300 focus:shadow-none focus:outline-none focus:ring-transparent"
               placeholder="What's on your mind..."
               value={values.name}
               onChange={handleDescription}
@@ -76,7 +76,7 @@ function CreatePost() {
           return (
             <div
               key={link.id}
-              className="flex items-center cursor-pointer ease-in-out duration-500 hover:text-cyan-300"
+              className="flex items-center cursor-pointer ease-in-out duration-500 hover:text-cyan-300 dark:text-gray-300 dark:hover:text-cyan-500"
             >
               <label htmlFor="uploadImage">
                 <span className="flex items-center gap-2 cursor-pointer font-semibold">

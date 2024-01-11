@@ -14,29 +14,29 @@ const FriendList = () => {
   return (
     <>
       {currentUser?.friends?.length > 0 ? (
-        <div className="bg-white rounded-md py-2 shadow-sm shadow-white px-3 space-y-3">
+        <div className="bg-white dark:bg-gray-800 rounded-md py-2 px-3 space-y-3 ease-in-out duration-700">
           {currentUser?.friends.map((friend) => {
-             return (
-               <Link
-                 to={`users/${friend.friendId}`}
-                 className="flex gap-4 cursor-pointer"
-                 onClick={(e) => fetchSingleUser(friend.friendId)}
-                 key={friend.friendId}
-               >
-                 {/* image */}
-                 <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
-                   <img
-                     src={friend.profilePicture}
-                     alt="person image"
-                     className="flex shrink-0 min-h-full min-w-full"
-                   />
-                 </div>
-                 {/* name */}
-                 <div className="flex items-center">
-                   <span className="text-md font-light">{friend.fullName}</span>
-                 </div>
-               </Link>
-             ); 
+            return (
+              <Link
+                to={`users/${friend.friendId}`}
+                className="flex gap-4 cursor-pointer"
+                onClick={(e) => fetchSingleUser(friend.friendId)}
+                key={friend.friendId}
+              >
+                {/* image */}
+                <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
+                  <img
+                    src={friend.profilePicture}
+                    alt="person image"
+                    className="flex shrink-0 min-h-full min-w-full"
+                  />
+                </div>
+                {/* name */}
+                <div className="flex items-center dark:text-white">
+                  <span className="text-md font-light">{friend.fullName}</span>
+                </div>
+              </Link>
+            );
           })}
         </div>
       ) : (

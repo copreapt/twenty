@@ -92,7 +92,7 @@ const PostCard = () => {
         const {description, image, name, profilePicture, location, _id, user} = post;
         return (
           <div
-            className="bg-white mb-4 flex flex-col space-y-4 p-3 rounded-md"
+            className="bg-white dark:bg-gray-800 mb-4 flex flex-col space-y-4 p-3 rounded-md ease-in-out duration-700"
             key={_id}
           >
             {/* top div */}
@@ -103,7 +103,7 @@ const PostCard = () => {
                 className="flex gap-2 cursor-pointer"
                 onClick={(e) => fetchSingleUser(user)}
               >
-                <div className="flex justify-center items-center w-[45px] h-[45px] rounded-full overflow-hidden">
+                <div className="flex justify-center items-center w-[60px] h-[60px] md:w-[45px] md:h-[45px] rounded-full overflow-hidden">
                   <img
                     src={profilePicture}
                     alt="person image"
@@ -111,8 +111,10 @@ const PostCard = () => {
                   />
                 </div>
                 <div className="flex flex-col items-center">
-                  <span className="text-[0.80rem]">{name}</span>
-                  <span className="text-[0.60rem] text-gray-500">
+                  <span className="text-md md:text-[0.80rem] dark:text-white">
+                    {name}
+                  </span>
+                  <span className="text-sm md:text-[0.60rem] text-gray-500 dark:text-gray-300">
                     {location}
                   </span>
                 </div>
@@ -139,32 +141,38 @@ const PostCard = () => {
             <div className="space-y-2">
               {/* description */}
               <div className="px-2">
-                <p className="text-sm">{description}</p>
+                <p className="text-md md:text-sm dark:text-gray-300">
+                  {description}
+                </p>
               </div>
               {/* image/photo */}
-              {image? <div
-                onClick={(e) => openCommentsModal(_id)}
-                className="flex justify-center items-center max-h-[600px] overflow-hidden"
-              >
-                <img
-                  src={image}
-                  alt="image"
-                  className="w-full min-h-full min-w-full cursor-pointer flex shrink-0 mx-auto"
-                />
-              </div> : ""}
+              {image ? (
+                <div
+                  onClick={(e) => openCommentsModal(_id)}
+                  className="flex justify-center items-center max-h-[600px] overflow-hidden"
+                >
+                  <img
+                    src={image}
+                    alt="image"
+                    className="w-full min-h-full min-w-full cursor-pointer flex shrink-0 mx-auto"
+                  />
+                </div>
+              ) : (
+                ""
+              )}
             </div>
             {/* bottom div - like, comment */}
             <div className="flex flex-col gap-1 px-1">
-              <div className="flex gap-5 text-2xl text-cyan-700 items-center">
+              <div className="flex gap-5 text-2xl text-cyan-700 items-center dark:text-cyan-400">
                 <button
                   disabled={isLoadingLikes}
                   onClick={(e) => likePostOnClick(_id)}
                 >
                   <AiFillHeart
-                    className={`ease-in-out duration-800 ${
+                    className={`ease-linear duration-700 ${
                       likedPosts?.includes(_id)
                         ? "text-red-500 text-3xl"
-                        : "text-cyan-700"
+                        : "text-cyan-700 dark:text-cyan-500"
                     }`}
                   />
                 </button>
@@ -183,13 +191,17 @@ const PostCard = () => {
               {/* liked by */}
               {likes?.filter((item) => item.post === _id).length > 0 ? (
                 <div className="flex items-center gap-2 font-semibold">
-                  <span className="text-sm">Liked by</span>
-                  <span className="text-md text-cyan-600">
+                  <span className="text-md md:text-sm dark:text-white">
+                    Liked by
+                  </span>
+                  <span className="text-sm md:text-md text-cyan-600 dark:text-cyan-500">
                     {likes?.filter((item) => item.post === _id).pop()?.name}
                   </span>
-                  <span className="text-sm">and</span>
+                  <span className="text-md md:text-sm dark:text-white">
+                    and
+                  </span>
                   <span
-                    className="text-md text-cyan-600 hover:cursor-pointer"
+                    className="text-md md:text-md text-cyan-600 dark:text-cyan-500 hover:cursor-pointer"
                     onClick={() => fetchCurrentPostLikes(_id)}
                   >
                     Others

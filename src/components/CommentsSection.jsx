@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { IoClose } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,7 +8,8 @@ import {
   toggleCloseCurrentPostComments,
   deleteComment,
 } from "../features/comments/commentsSlice";
-import Loading from './Loading';
+import { getCurrentUser, getSingleUser } from '../features/user/userSlice';
+import { Link } from 'react-router-dom';
 
 const CommentsSection = () => {
     const [values, setValues] = useState({comment: ""});
@@ -19,7 +20,7 @@ const CommentsSection = () => {
       currentUserComments,
       openCurrentPostComments,
     } = useSelector((store) => store.comments);
-    const { currentPost, isLoading  } = useSelector((store) => store.posts);
+    const { currentPost } = useSelector((store) => store.posts);
     const dispatch = useDispatch();
 
     // close comments modal and empty state
@@ -53,27 +54,37 @@ const CommentsSection = () => {
       dispatch(deleteComment({ id: commentId, postId: postId }));
     };
 
+    const fetchSingleUser = (id) => {
+      dispatch(getSingleUser({id: id}));
+      dispatch(toggleCloseCurrentPostComments());
+      dispatch(removeCurrentPostFromState());
+    };
+
+    useEffect(() => {
+      dispatch(getCurrentUser());
+    },[])
+
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full  bg-black/80  items-center z-20 ${
+      className={`fixed top-0 left-0 w-full h-full  bg-black/80  items-center justify-center z-20 ${
         openCurrentPostComments ? "flex" : "hidden"
       } `}
     >
       {/* container */}
       <div
-        className={`p-20 max-w-screen-xl mx-auto ${
+        className={`flex flex-col md:p-20 md:max-w-screen-xl md:mx-auto ${
           currentPost?.image
-            ? "grid grid-cols-12"
-            : "flex items-center justify-center"
+            ? "md:grid grid-cols-12"
+            : "items-center justify-center"
         }`}
       >
         {/* image div */}
         {currentPost?.image ? (
-          <div className="col-span-7 flex items-center justify-center bg-black">
+          <div className="hidden col-span-7 md:flex items-center justify-center bg-black">
             <img
               src={currentPost?.image}
               alt="user image"
-              className="w-full max-h-[655px]"
+              className="w-full md:max-h-[655px]"
             />
           </div>
         ) : (
@@ -120,13 +131,17 @@ const CommentsSection = () => {
                       {/* image and comment */}
                       <div className="flex items-center gap-2">
                         {/* img */}
-                        <div className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none">
+                        <Link
+                          className="flex items-center justify-center overflow-hidden rounded-full w-[40px] h-[40px] flex-none"
+                          onClick={(e) => fetchSingleUser(comment.user)}
+                          to={`users/${comment.user}`}
+                        >
                           <img
                             src={comment.profilePicture}
                             alt="image"
                             className="flex shrink-0 min-h-full min-w-full"
                           />
-                        </div>
+                        </Link>
                         {/* name and comment */}
                         <div className="text-sm">
                           <span className="font-extra-light text-cyan-700 mr-2">
