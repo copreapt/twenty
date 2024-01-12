@@ -62,7 +62,7 @@ const commentsSlice = createSlice({
       })
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getCurrentPostComments.pending, (state) => {
         state.isLoadingComments = true;
@@ -74,7 +74,7 @@ const commentsSlice = createSlice({
       })
       .addCase(getCurrentPostComments.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getCurrentUserComments.pending, (state) => {
         state.isLoadingComments = true;
@@ -86,7 +86,7 @@ const commentsSlice = createSlice({
       })
       .addCase(getCurrentUserComments.rejected, (state, {payload}) => {
         state.isLoadingComments = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(deleteComment.pending, (state) => {
         state.isLoadingComments = true;
@@ -99,7 +99,7 @@ const commentsSlice = createSlice({
       })
       .addCase(deleteComment.rejected, (state, {payload}) => {
         state.isLoadingComments = false;
-        toast.error(payload);
+        console.log(payload);
       });
   },
 });

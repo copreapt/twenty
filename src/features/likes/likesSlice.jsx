@@ -51,7 +51,7 @@ const likesSlice = createSlice({
       })
       .addCase(createLike.rejected, (state, { payload }) => {
         state.isLoadingLikes = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getLikes.pending, (state) => {
         state.isLoadingLikes = true;
@@ -63,7 +63,7 @@ const likesSlice = createSlice({
       })
       .addCase(getLikes.rejected, (state, { payload }) => {
         state.isLoadingLikes = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getCurrentUserLikes.pending, (state) => {
         state.isLoadingLikes = true;
@@ -75,7 +75,7 @@ const likesSlice = createSlice({
       })
       .addCase(getCurrentUserLikes.rejected, (state, { payload }) => {
         state.isLoadingLikes = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getCurrentPostLikes.pending, (state) => {
         state.isLoadingLikes = true;
@@ -87,7 +87,7 @@ const likesSlice = createSlice({
       })
       .addCase(getCurrentPostLikes.rejected, (state, { payload }) => {
         state.isLoadingLikes = false;
-        toast.error(payload);
+        console.log(payload);
       });
   },
 });

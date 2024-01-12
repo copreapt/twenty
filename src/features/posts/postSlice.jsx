@@ -65,7 +65,7 @@ const postsSlice = createSlice({
       })
       .addCase(getAllPosts.rejected, (state, { payload }) => {
         state.isLoadingPosts = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(uploadImage.pending, (state) => {
         state.isLoadingPostsImage = true;
@@ -77,7 +77,7 @@ const postsSlice = createSlice({
       })
       .addCase(uploadImage.rejected, (state, { payload }) => {
         state.isLoadingPosts = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(createPost.pending, (state) => {
         state.isLoadingPosts = true;
@@ -89,7 +89,7 @@ const postsSlice = createSlice({
       })
       .addCase(createPost.rejected, (state, { payload }) => {
         state.isLoadingPosts = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getCurrentPost.pending, (state) => {
         state.isLoadingPosts = true;
@@ -101,7 +101,7 @@ const postsSlice = createSlice({
       })
       .addCase(getCurrentPost.rejected, (state, { payload }) => {
         state.isLoadingPosts = false;
-        toast.error(payload);
+        console.log(payload);
       });
   },
 });
