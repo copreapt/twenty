@@ -125,7 +125,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -138,7 +138,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(updateUserPassword.fulfilled, (state, { payload }) => {
         const { msg } = payload;
@@ -155,7 +155,7 @@ const userSlice = createSlice({
       .addCase(verifyEmail.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
@@ -169,7 +169,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(forgotPassword.pending, (state) => {
         state.isLoading = true;
@@ -216,7 +216,7 @@ const userSlice = createSlice({
       })
       .addCase(uploadImage.rejected, (state, { payload }) => {
         state.isLoadingProfilePicture = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
@@ -230,7 +230,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(getSingleUser.pending, (state) => {
         state.isLoading = true;
@@ -243,7 +243,7 @@ const userSlice = createSlice({
       })
       .addCase(getSingleUser.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(addFriend.pending, (state) => {
         state.isLoading = true;
@@ -256,7 +256,7 @@ const userSlice = createSlice({
       })
       .addCase(addFriend.rejected, (state, { payload }) => {
         state.isLoading = false;
-        toast.error(payload);
+        console.log(payload);
       })
       .addCase(autoLogin.pending, (state) => {
         state.isLoading = true;
@@ -277,7 +277,7 @@ const userSlice = createSlice({
       })
       .addCase(searchUsers.rejected, (state, { payload }) => {
         state.isLoadingUsers = false;
-        toast.error(payload);
+        console.log(payload);
       });
   },
 });
