@@ -14,14 +14,15 @@ const SharedLayout = () => {
   const themeLocalStorage = localStorage.getItem("theme");
   const [theme, setTheme] = useState(themeLocalStorage);
   const { isLoadingPosts } = useSelector((store) => store.posts);
+  const { isLoadingCurrentUser } = useSelector((store) => store.user);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getAllPosts());
     dispatch(getCurrentUser());
+    dispatch(getAllPosts());
     dispatch(getLikes());
     dispatch(getCurrentUserLikes());
   }, []);
@@ -66,7 +67,7 @@ const SharedLayout = () => {
   }, [location]);
 
   return (
-    <main className="bg-gray-200 dark:bg-gray-900 flex flex-col md:items-center overflow-y-auto ease-in-out duration-700">
+    <main className=" flex flex-col md:items-center overflow-y-auto ease-in-out duration-700">
       <div className="hidden md:flex fixed top-0 left-0 bg-white dark:bg-gray-800 overflow-hidden w-full ease-in-out duration-700">
         <SearchBar />
       </div>
@@ -75,22 +76,26 @@ const SharedLayout = () => {
         <h1 className="text-xl font-light">Twenty</h1>
       </div>
       {/* container */}
-      <div className="max-w-screen-xl flex justify-between overflow-auto grow pt-11 md:mb-10 md:grid md:grid-cols-12 gap-10 px-8 mt-[45px] md:mt-[60px] mb-20">
-        {/* user info panel */}
-        <div className="hidden md:grid md:col-span-3 h-fit">
-          <UserInfo />
+      {isLoadingCurrentUser ? (
+        <Loading />
+      ) : (
+        <div className="max-w-screen-xl flex justify-between overflow-auto grow pt-11 md:mb-10 md:grid md:grid-cols-12 gap-10 px-8 mt-[45px] md:mt-[60px] mb-20">
+          {/* user info panel */}
+          <div className="hidden md:grid md:col-span-3 h-fit">
+            <UserInfo />
+          </div>
+          {/* Posts section visible for both desktop and mobile */}
+          <div className="w-full grow md:col-span-6 space-y-10">
+            <CreatePost className="hidden md:grid" />
+            <PostsSection />
+          </div>
+          {/* Adds Section visible only for desktop version */}
+          <div className="hidden md:grid col-span-3 h-fit space-y-10">
+            <AddsSection />
+            <FriendList />
+          </div>
         </div>
-        {/* Posts section visible for both desktop and mobile */}
-        <div className="w-full grow md:col-span-6 space-y-10">
-          <CreatePost className="hidden md:grid" />
-          <PostsSection />
-        </div>
-        {/* Adds Section visible only for desktop version */}
-        <div className="hidden md:grid col-span-3 h-fit space-y-10">
-          <AddsSection />
-          <FriendList />
-        </div>
-      </div>
+      )}
       {/* Navbar for mobile version */}
       <div className="md:hidden flex items-center py-3 bg-white dark:bg-gray-800 rounded-md justify-center border-t border-gray-300 dark:border-gray-600 fixed bottom-0 w-full">
         <Navbar />

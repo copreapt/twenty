@@ -6,6 +6,7 @@ import { registerUserThunk, loginUserThunk, updateUserPasswordThunk, verifyUserE
 const initialState = {
   isLoading: false,
   isLoadingProfilePicture: false,
+  isLoadingCurrentUser:false,
   isLoadingUsers: false,
   isSidebarOpen: false,
   userFromLocalStorage:null,
@@ -195,15 +196,15 @@ const userSlice = createSlice({
         toast.error(payload.msg);
       })
       .addCase(getCurrentUser.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingCurrentUser = true;
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
         const { user } = payload;
-        state.isLoading = false;
+        state.isLoadingCurrentUser = false;
         state.currentUser = user;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingCurrentUser = false;
         state.error = payload;
       })
       .addCase(uploadImage.pending, (state) => {
