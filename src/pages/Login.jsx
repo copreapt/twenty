@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { FormRow } from "../components";
 
 import { setThemeLocalStorage, setUserLocalStorage } from "../utils/utils";
-import { emptyPostsArray } from "../features/posts/postSlice";
+import { emptyPostsArray, getAllPosts } from "../features/posts/postSlice";
 
 
 const initialState = {
@@ -47,7 +47,7 @@ useEffect(() => {
     // console.log(user)
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 3000);
   }
 }, [user]);
 
