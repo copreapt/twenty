@@ -89,7 +89,7 @@ const postsSlice = createSlice({
       })
       .addCase(createPost.rejected, (state, { payload }) => {
         state.isLoadingPosts = false;
-        console.log(payload);
+        toast.error(payload);
       })
       .addCase(getCurrentPost.pending, (state) => {
         state.isLoadingPosts = true;

@@ -63,6 +63,7 @@ const commentsSlice = createSlice({
       .addCase(createComment.rejected, (state, { payload }) => {
         state.isLoadingComments = false;
         console.log(payload);
+        toast.error(payload);
       })
       .addCase(getCurrentPostComments.pending, (state) => {
         state.isLoadingComments = true;
