@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FormRow, FriendsModal, SearchUserModalMobile } from "../components";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaMoon } from "react-icons/fa";
+import { MdWbSunny } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadImage, updateUser, getCurrentUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router";
-import { changeTheme, navbarDesktop } from "../utils/utils";
+import { changeTheme } from "../utils/utils";
 import { toggleLogout, logoutUser } from "../features/user/userSlice";
 import { Link, useLocation } from "react-router-dom";
 import {Navbar} from "../components";
@@ -157,19 +159,9 @@ const UpdateProfile = () => {
             <div className="flex items-center justify-around">
               {/* links */}
               <div className="flex justify-between px-6 dark:text-white cursor-pointer">
-                {navbarDesktop.map((link) => {
-                  return (
-                    <span
-                      key={link.id}
-                      className="text-lg"
-                      onClick={
-                        link.name === "darkMode" ? toggleTheme : undefined
-                      }
-                    >
-                      {link.icon}
-                    </span>
-                  );
-                })}
+                <span className="text-lg cursor-pointer" onClick={toggleTheme}>
+                  {theme === "dark" ? <MdWbSunny /> : <FaMoon />}
+                </span>
               </div>
               {/* username */}
               <div

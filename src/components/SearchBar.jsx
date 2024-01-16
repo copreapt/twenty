@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { changeTheme, navbarDesktop } from "../utils/utils";
+import { changeTheme } from "../utils/utils";
 import { IoIosArrowDown } from "react-icons/io";
+import { FaMoon } from "react-icons/fa";
+import { MdWbSunny } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../features/user/userSlice";
@@ -97,17 +99,12 @@ const SearchBar = () => {
         <div className="flex items-center justify-around">
           {/* links */}
           <div className="flex justify-between px-6 dark:text-white">
-            {navbarDesktop.map((link) => {
-              return (
                 <span
-                  key={link.id}
                   className="text-lg cursor-pointer"
-                  onClick={link.name === "darkMode" ? toggleTheme : undefined}
+                  onClick={toggleTheme}
                 >
-                  {link.icon}
+                  {theme === "dark"? <MdWbSunny /> : <FaMoon />}
                 </span>
-              );
-            })}
           </div>
           {/* username */}
           <div

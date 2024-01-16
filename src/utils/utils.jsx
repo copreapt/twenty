@@ -2,8 +2,7 @@ import {FaUserFriends, FaImages} from "react-icons/fa"
 import { BsSearch} from "react-icons/bs"
 import {CgProfile} from "react-icons/cg"
 import { MdWbSunny } from "react-icons/md";
-import { BiMessageSquareDetail } from "react-icons/bi";
-import { FaBell } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 
 
@@ -34,24 +33,6 @@ export const navbarLinks = [
     name: "profile",
     link: "/updateProfile",
   },
-];
-
-export const navbarDesktop = [
-  {
-    id: 1,
-    icon: <MdWbSunny />,
-    name: "darkMode",
-  },
-  // {
-  //   id: 2,
-  //   icon: <BiMessageSquareDetail />,
-  //   name: "messages",
-  // },
-  // {
-  //   id: 3,
-  //   icon: <FaBell />,
-  //   name: "notifications",
-  // },
 ];
 
 export const createPostLinks = [

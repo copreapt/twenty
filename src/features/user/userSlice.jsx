@@ -7,6 +7,7 @@ const initialState = {
   isLoading: false,
   isLoadingProfilePicture: false,
   isLoadingCurrentUser:false,
+  isLoadingSingleUser:false,
   isLoadingUsers: false,
   isSidebarOpen: false,
   userFromLocalStorage:null,
@@ -234,16 +235,16 @@ const userSlice = createSlice({
         toast.error(payload);
       })
       .addCase(getSingleUser.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingSingleUser = true;
       })
       .addCase(getSingleUser.fulfilled, (state, { payload }) => {
         const { user, posts } = payload;
-        state.isLoading = false;
+        state.isLoadingSingleUser = false;
         state.singleUser = user;
         state.singleUserPosts = posts;
       })
       .addCase(getSingleUser.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isLoadingSingleUser = false;
         console.log(payload);
       })
       .addCase(addFriend.pending, (state) => {
