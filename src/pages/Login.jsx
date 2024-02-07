@@ -101,13 +101,21 @@ useEffect(() => {
                 handleChange={handleChange}
               />
               {/* submit button */}
-              <div className="text-center">
+              <div className="text-center space-y-3">
                 <button
-                  ype="submit"
+                  type="submit"
                   disabled={isLoading}
                   className="bg-cyan-300 w-full rounded-sm p-1 hover:bg-cyan-700 hover:text-white ease-in-out duration-700"
                 >
                   Login
+                </button>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="bg-cyan-300 w-full rounded-sm p-1 hover:bg-cyan-700 hover:text-white ease-in-out duration-700"
+                  onClick={(e) => dispatch(loginUser({email: 'copreaptemerald@gmail.com', password:'secret'}))}
+                >
+                  Demo
                 </button>
               </div>
             </form>
