@@ -89,7 +89,6 @@ useEffect(() => {
             <h1 className="text-2xl text-black text-center">Twenty</h1>
             <form
               className="pt-10 flex flex-col px-10 gap-10"
-              onSubmit={onSubmit}
               action="submit"
             >
               {/* Email */}
@@ -112,6 +111,7 @@ useEffect(() => {
                   type="submit"
                   disabled={isLoading}
                   className="bg-cyan-300 w-full rounded-sm p-1 hover:bg-cyan-700 hover:text-white ease-in-out duration-700"
+                  onClick={onSubmit}
                 >
                   Login
                 </button>
