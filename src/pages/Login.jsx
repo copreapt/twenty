@@ -41,6 +41,12 @@ const onSubmit = (e) => {
     return;
 };
 
+const demoLogin = (e) => {
+  e.preventDefault();
+  dispatch(loginUser({email: "copreaptemerald@gmail.com",password: "secret"})); 
+  dispatch(emptyPostsArray());
+}
+
 useEffect(() => {
   if (user) {
     setUserLocalStorage(user);
@@ -113,14 +119,7 @@ useEffect(() => {
                   type="submit"
                   disabled={isLoading}
                   className="bg-cyan-300 w-full rounded-sm p-1 hover:bg-cyan-700 hover:text-white ease-in-out duration-700"
-                  onClick={(e) =>
-                    {dispatch(
-                      loginUser({
-                        email: "copreaptemerald@gmail.com",
-                        password: "secret",
-                      })
-                    ); dispatch(emptyPostsArray());}
-                  }
+                  onClick={demoLogin}
                 >
                   Demo
                 </button>
