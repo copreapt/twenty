@@ -28,7 +28,6 @@ const handleChange = (e) => {
   const value = e.target.value;
   setValues({ ...values, [name]: value });
 };
-
 const onSubmit = (e) => {
   e.preventDefault();
   const { email, password } = values;
@@ -86,7 +85,7 @@ useEffect(() => {
         {/* container */}
         <div className="center-div border border-gray-400 py-20">
           <div className="flex flex-col align-center items-center">
-            <h1 className="text-2xl text-black text-center">Twenty</h1>
+            <h1 className="text-2xl text-black text-center dark:text-white">Twenty</h1>
             <form
               className="pt-10 flex flex-col px-10 gap-10"
               action="submit"
@@ -130,7 +129,7 @@ useEffect(() => {
           <div className="pt-10 text-center space-y-3">
             {/* register */}
             <div>
-              <span>New to Twenty?</span>{" "}
+              <span className="dark:text-white">New to Twenty?</span>{" "}
               <Link
                 to={"/register"}
                 className="font-medium text-cyan-700 hover:text-cyan-400 ease-in-out duration-700"
@@ -140,7 +139,7 @@ useEffect(() => {
             </div>
             {/* forgot password */}
             <div>
-              <span>Forgot Password?</span>{" "}
+              <span className="dark:text-white">Forgot Password?</span>{" "}
               <Link
                 to={"/forgot-password"}
                 className="font-medium text-cyan-700 hover:text-cyan-400 ease-in-out duration-700"

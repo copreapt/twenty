@@ -1,12 +1,7 @@
 import {FaUserFriends, FaImages} from "react-icons/fa"
 import { BsSearch} from "react-icons/bs"
 import {CgProfile} from "react-icons/cg"
-import { MdWbSunny } from "react-icons/md";
-import { FaMoon } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
-
-
-
 
 export const navbarLinks = [
   {

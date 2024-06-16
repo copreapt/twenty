@@ -84,6 +84,7 @@ export const autoLogin = createAsyncThunk("user/autoLogin", async(thunkAPI) => {
   return persistentLoginThunk("/auth/autoLogin", thunkAPI);
 });
 
+
 const userSlice = createSlice({
   name: "user",
   initialState,

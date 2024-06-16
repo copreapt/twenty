@@ -11,4 +11,5 @@ export const store = configureStore({
         likes: likesSlice,
         comments: commentsSlice,
     }
-})
+});
+

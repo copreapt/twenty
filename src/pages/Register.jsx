@@ -48,7 +48,7 @@ const Register = () => {
           }`}
         >
           <div className="flex flex-col align-center items-center">
-            <h1 className="text-2xl text-black text-center">
+            <h1 className="text-2xl text-black text-center dark:text-white">
               {formSubmitted
                 ? "Account Created! Please check your email to verify the account"
                 : "Register to Twenty"}
@@ -109,7 +109,7 @@ const Register = () => {
           >
             {/* Login */}
             <div>
-              <span>Already have an account?</span>{" "}
+              <span className='dark:text-white'>Already have an account?</span>{" "}
               <Link
                 to={"/login"}
                 className="font-medium text-cyan-700 hover:text-cyan-400 ease-in-out duration-700"
