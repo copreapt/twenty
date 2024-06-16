@@ -83,13 +83,12 @@ useEffect(() => {
     <>
       <main>
         {/* container */}
-        <div className="center-div border border-gray-400 py-20">
+        <div className="center-div border border-gray-400 py-20 dark:bg-gray-800">
           <div className="flex flex-col align-center items-center">
-            <h1 className="text-2xl text-black text-center dark:text-white">Twenty</h1>
-            <form
-              className="pt-10 flex flex-col px-10 gap-10"
-              action="submit"
-            >
+            <h1 className="text-2xl text-black text-center dark:text-white">
+              Twenty
+            </h1>
+            <form className="pt-10 flex flex-col px-10 gap-10" action="submit">
               {/* Email */}
               <FormRow
                 type="email"

@@ -44,7 +44,9 @@ const Register = () => {
         {/* container */}
         <div
           className={`${
-            formSubmitted ? "center-div py-20" : "center-div border border-gray-400 py-20"
+            formSubmitted
+              ? "center-div py-20"
+              : "center-div border border-gray-400 py-20 dark:bg-gray-800"
           }`}
         >
           <div className="flex flex-col align-center items-center">
@@ -109,7 +111,7 @@ const Register = () => {
           >
             {/* Login */}
             <div>
-              <span className='dark:text-white'>Already have an account?</span>{" "}
+              <span className="dark:text-white">Already have an account?</span>{" "}
               <Link
                 to={"/login"}
                 className="font-medium text-cyan-700 hover:text-cyan-400 ease-in-out duration-700"
